@@ -1,1 +1,2 @@
-# hogenttin-linux-2526-LarsGeirnaert
+# Linux for Data Scientists 2025-2026
+Proof of concept geautomatiseerde data workflow.
