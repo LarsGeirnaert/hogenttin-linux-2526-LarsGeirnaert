@@ -52,7 +52,7 @@ De workflow kan automatisch elk uur draaien met cron. Voeg dit toe aan je cronta
 
 ### 4.3 Resultaten bekijken
 
-Ruwe data: raw_data/
+- **Ruwe data**: raw_data/
 
 Verwerkte CSV: transformed_data/combined.csv
 
