@@ -4,6 +4,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+import numpy as np
 
 # Paden
 base_dir = Path.home() / "projects" / "data-workflow"
@@ -26,13 +29,26 @@ print(f"Gemiddelde temperatuur: {mean_temp:.2f} °C")
 print(f"Gemiddeld aantal vrije fietsen: {mean_bikes:.2f}")
 print(f"Correlatie tussen temperatuur en vrije fietsen: {corr:.2f}")
 
-# Grafiek maken (y-as als percentage)
+# Lineaire regressie
+X = df["temperature"].values.reshape(-1, 1)
+y = df["avg_free_bikes"].values
+model = LinearRegression()
+model.fit(X, y)
+y_pred = model.predict(X)
+mse = mean_squared_error(y, y_pred)
+
+print(f"Mean Squared Error (MSE): {mse:.4f}")
+
+# Grafiek maken
 plt.figure(figsize=(8,5))
-plt.scatter(df["temperature"], df["avg_free_bikes"] * 100, color="blue")  # *100 voor %
+plt.scatter(df["temperature"], df["avg_free_bikes"], color="blue", label="Data punten")
+plt.plot(df["temperature"], y_pred, color="red", linewidth=2, label="Trendlijn (linear regression)")
 plt.title("Relatie tussen temperatuur en beschikbaarheid van deelfietsen (Gent)")
 plt.xlabel("Temperatuur (°C)")
-plt.ylabel("Gemiddeld aantal vrije fietsen (%)")
+plt.ylabel("Gemiddeld aantal vrije fietsen")
 plt.grid(True)
+plt.legend()
+plt.text(min(df["temperature"]), max(df["avg_free_bikes"])*0.9, f"MSE: {mse:.4f}", color="black")
 
 # Opslaan
 plot_path = report_dir / "fiets_vs_temp.png"

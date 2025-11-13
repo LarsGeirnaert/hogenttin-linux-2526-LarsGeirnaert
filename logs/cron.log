@@ -1,0 +1,557 @@
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/cron_test.log
+	modified:   scripts/analyze_data.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/cron.log
+	venv/lib/python3.12/site-packages/__pycache__/threadpoolctl.cpython-312.pyc
+	venv/lib/python3.12/site-packages/joblib-1.5.2.dist-info/
+	venv/lib/python3.12/site-packages/joblib/
+	venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info/
+	venv/lib/python3.12/site-packages/scikit_learn.libs/
+	venv/lib/python3.12/site-packages/scipy-1.16.3.dist-info/
+	venv/lib/python3.12/site-packages/scipy.libs/
+	venv/lib/python3.12/site-packages/scipy/
+	venv/lib/python3.12/site-packages/sklearn/
+	venv/lib/python3.12/site-packages/threadpoolctl-3.6.0.dist-info/
+	venv/lib/python3.12/site-packages/threadpoolctl.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/cron_test.log
+	modified:   scripts/analyze_data.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/cron.log
+	venv/lib/python3.12/site-packages/__pycache__/threadpoolctl.cpython-312.pyc
+	venv/lib/python3.12/site-packages/joblib-1.5.2.dist-info/
+	venv/lib/python3.12/site-packages/joblib/
+	venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info/
+	venv/lib/python3.12/site-packages/scikit_learn.libs/
+	venv/lib/python3.12/site-packages/scipy-1.16.3.dist-info/
+	venv/lib/python3.12/site-packages/scipy.libs/
+	venv/lib/python3.12/site-packages/scipy/
+	venv/lib/python3.12/site-packages/sklearn/
+	venv/lib/python3.12/site-packages/threadpoolctl-3.6.0.dist-info/
+	venv/lib/python3.12/site-packages/threadpoolctl.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/cron_test.log
+	modified:   scripts/analyze_data.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/cron.log
+	venv/lib/python3.12/site-packages/__pycache__/threadpoolctl.cpython-312.pyc
+	venv/lib/python3.12/site-packages/joblib-1.5.2.dist-info/
+	venv/lib/python3.12/site-packages/joblib/
+	venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info/
+	venv/lib/python3.12/site-packages/scikit_learn.libs/
+	venv/lib/python3.12/site-packages/scipy-1.16.3.dist-info/
+	venv/lib/python3.12/site-packages/scipy.libs/
+	venv/lib/python3.12/site-packages/scipy/
+	venv/lib/python3.12/site-packages/sklearn/
+	venv/lib/python3.12/site-packages/threadpoolctl-3.6.0.dist-info/
+	venv/lib/python3.12/site-packages/threadpoolctl.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/cron_test.log
+	modified:   scripts/analyze_data.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/cron.log
+	venv/lib/python3.12/site-packages/__pycache__/threadpoolctl.cpython-312.pyc
+	venv/lib/python3.12/site-packages/joblib-1.5.2.dist-info/
+	venv/lib/python3.12/site-packages/joblib/
+	venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info/
+	venv/lib/python3.12/site-packages/scikit_learn.libs/
+	venv/lib/python3.12/site-packages/scipy-1.16.3.dist-info/
+	venv/lib/python3.12/site-packages/scipy.libs/
+	venv/lib/python3.12/site-packages/scipy/
+	venv/lib/python3.12/site-packages/sklearn/
+	venv/lib/python3.12/site-packages/threadpoolctl-3.6.0.dist-info/
+	venv/lib/python3.12/site-packages/threadpoolctl.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/cron_test.log
+	modified:   scripts/analyze_data.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/cron.log
+	venv/lib/python3.12/site-packages/__pycache__/threadpoolctl.cpython-312.pyc
+	venv/lib/python3.12/site-packages/joblib-1.5.2.dist-info/
+	venv/lib/python3.12/site-packages/joblib/
+	venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info/
+	venv/lib/python3.12/site-packages/scikit_learn.libs/
+	venv/lib/python3.12/site-packages/scipy-1.16.3.dist-info/
+	venv/lib/python3.12/site-packages/scipy.libs/
+	venv/lib/python3.12/site-packages/scipy/
+	venv/lib/python3.12/site-packages/sklearn/
+	venv/lib/python3.12/site-packages/threadpoolctl-3.6.0.dist-info/
+	venv/lib/python3.12/site-packages/threadpoolctl.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/cron_test.log
+	modified:   scripts/analyze_data.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/cron.log
+	venv/lib/python3.12/site-packages/__pycache__/threadpoolctl.cpython-312.pyc
+	venv/lib/python3.12/site-packages/joblib-1.5.2.dist-info/
+	venv/lib/python3.12/site-packages/joblib/
+	venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info/
+	venv/lib/python3.12/site-packages/scikit_learn.libs/
+	venv/lib/python3.12/site-packages/scipy-1.16.3.dist-info/
+	venv/lib/python3.12/site-packages/scipy.libs/
+	venv/lib/python3.12/site-packages/scipy/
+	venv/lib/python3.12/site-packages/sklearn/
+	venv/lib/python3.12/site-packages/threadpoolctl-3.6.0.dist-info/
+	venv/lib/python3.12/site-packages/threadpoolctl.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/cron_test.log
+	modified:   scripts/analyze_data.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/cron.log
+	venv/lib/python3.12/site-packages/__pycache__/threadpoolctl.cpython-312.pyc
+	venv/lib/python3.12/site-packages/joblib-1.5.2.dist-info/
+	venv/lib/python3.12/site-packages/joblib/
+	venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info/
+	venv/lib/python3.12/site-packages/scikit_learn.libs/
+	venv/lib/python3.12/site-packages/scipy-1.16.3.dist-info/
+	venv/lib/python3.12/site-packages/scipy.libs/
+	venv/lib/python3.12/site-packages/scipy/
+	venv/lib/python3.12/site-packages/sklearn/
+	venv/lib/python3.12/site-packages/threadpoolctl-3.6.0.dist-info/
+	venv/lib/python3.12/site-packages/threadpoolctl.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/cron_test.log
+	modified:   scripts/analyze_data.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/cron.log
+	venv/lib/python3.12/site-packages/__pycache__/threadpoolctl.cpython-312.pyc
+	venv/lib/python3.12/site-packages/joblib-1.5.2.dist-info/
+	venv/lib/python3.12/site-packages/joblib/
+	venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info/
+	venv/lib/python3.12/site-packages/scikit_learn.libs/
+	venv/lib/python3.12/site-packages/scipy-1.16.3.dist-info/
+	venv/lib/python3.12/site-packages/scipy.libs/
+	venv/lib/python3.12/site-packages/scipy/
+	venv/lib/python3.12/site-packages/sklearn/
+	venv/lib/python3.12/site-packages/threadpoolctl-3.6.0.dist-info/
+	venv/lib/python3.12/site-packages/threadpoolctl.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/cron_test.log
+	modified:   scripts/analyze_data.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/cron.log
+	venv/lib/python3.12/site-packages/__pycache__/threadpoolctl.cpython-312.pyc
+	venv/lib/python3.12/site-packages/joblib-1.5.2.dist-info/
+	venv/lib/python3.12/site-packages/joblib/
+	venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info/
+	venv/lib/python3.12/site-packages/scikit_learn.libs/
+	venv/lib/python3.12/site-packages/scipy-1.16.3.dist-info/
+	venv/lib/python3.12/site-packages/scipy.libs/
+	venv/lib/python3.12/site-packages/scipy/
+	venv/lib/python3.12/site-packages/sklearn/
+	venv/lib/python3.12/site-packages/threadpoolctl-3.6.0.dist-info/
+	venv/lib/python3.12/site-packages/threadpoolctl.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/cron_test.log
+	modified:   scripts/analyze_data.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/cron.log
+	venv/lib/python3.12/site-packages/__pycache__/threadpoolctl.cpython-312.pyc
+	venv/lib/python3.12/site-packages/joblib-1.5.2.dist-info/
+	venv/lib/python3.12/site-packages/joblib/
+	venv/lib/python3.12/site-packages/scikit_learn-1.7.2.dist-info/
+	venv/lib/python3.12/site-packages/scikit_learn.libs/
+	venv/lib/python3.12/site-packages/scipy-1.16.3.dist-info/
+	venv/lib/python3.12/site-packages/scipy.libs/
+	venv/lib/python3.12/site-packages/scipy/
+	venv/lib/python3.12/site-packages/sklearn/
+	venv/lib/python3.12/site-packages/threadpoolctl-3.6.0.dist-info/
+	venv/lib/python3.12/site-packages/threadpoolctl.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+4  2025-11-13T15:49:51+01:00         14.9        0.974638
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.38 °C
+Gemiddeld aantal vrije fietsen: 0.97
+Correlatie tussen temperatuur en vrije fietsen: 0.75
+Mean Squared Error (MSE): 0.0000
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+[main 45b1476] Automatische update 2025-11-13 15:50:04
+ 5 files changed, 6 insertions(+), 3 deletions(-)
+ create mode 100644 raw_data/bikes-20251113-155001.json
+ create mode 100644 raw_data/weather-20251113-155001.json
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   8fe6ad7..45b1476  main -> main
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+4  2025-11-13T15:49:51+01:00         14.9        0.974638
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.46 °C
+Gemiddeld aantal vrije fietsen: 0.97
+Correlatie tussen temperatuur en vrije fietsen: 0.78
+Mean Squared Error (MSE): 0.0000
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+[main cd0d390] Automatische update 2025-11-13 15:52:06
+ 5 files changed, 6 insertions(+), 3 deletions(-)
+ create mode 100644 raw_data/bikes-20251113-155201.json
+ create mode 100644 raw_data/weather-20251113-155201.json
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+4  2025-11-13T15:49:51+01:00         14.9        0.974638
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.51 °C
+Gemiddeld aantal vrije fietsen: 0.97
+Correlatie tussen temperatuur en vrije fietsen: 0.80
+Mean Squared Error (MSE): 0.0000
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+[main 1623ca7] Automatische update 2025-11-13 15:54:05
+ 5 files changed, 6 insertions(+), 3 deletions(-)
+ create mode 100644 raw_data/bikes-20251113-155401.json
+ create mode 100644 raw_data/weather-20251113-155401.json
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+4  2025-11-13T15:49:51+01:00         14.9        0.974638
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.59 °C
+Gemiddeld aantal vrije fietsen: 0.97
+Correlatie tussen temperatuur en vrije fietsen: 0.82
+Mean Squared Error (MSE): 0.0000
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+[main 417be5c] Automatische update 2025-11-13 15:56:05
+ 5 files changed, 6 insertions(+), 3 deletions(-)
+ create mode 100644 raw_data/bikes-20251113-155601.json
+ create mode 100644 raw_data/weather-20251113-155601.json
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.12 °C
+Gemiddeld aantal vrije fietsen: 0.96
+Correlatie tussen temperatuur en vrije fietsen: 0.54
+Mean Squared Error (MSE): 0.0000
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+[main 17b8d46] Automatische update 2025-11-13 16:00:03
+ 15 files changed, 4 insertions(+), 22 deletions(-)
+ delete mode 100644 raw_data/bikes-20251113-154951.json
+ delete mode 100644 raw_data/bikes-20251113-155001.json
+ delete mode 100644 raw_data/bikes-20251113-155201.json
+ delete mode 100644 raw_data/bikes-20251113-155401.json
+ delete mode 100644 raw_data/bikes-20251113-155447.json
+ delete mode 100644 raw_data/bikes-20251113-155601.json
+ delete mode 100644 raw_data/weather-20251113-154951.json
+ delete mode 100644 raw_data/weather-20251113-155001.json
+ delete mode 100644 raw_data/weather-20251113-155201.json
+ delete mode 100644 raw_data/weather-20251113-155401.json
+ delete mode 100644 raw_data/weather-20251113-155447.json
+ delete mode 100644 raw_data/weather-20251113-155601.json
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.12 °C
+Gemiddeld aantal vrije fietsen: 0.96
+Correlatie tussen temperatuur en vrije fietsen: 0.54
+Mean Squared Error (MSE): 0.0000
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+[main a35ee2c] Automatische update 2025-11-13 16:04:04
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   540aa53..a35ee2c  main -> main
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.12 °C
+Gemiddeld aantal vrije fietsen: 0.96
+Correlatie tussen temperatuur en vrije fietsen: 0.54
+Mean Squared Error (MSE): 0.0000
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+[main 3bf6dde] Automatische update 2025-11-13 16:05:04
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   a35ee2c..3bf6dde  main -> main
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.12 °C
+Gemiddeld aantal vrije fietsen: 0.96
+Correlatie tussen temperatuur en vrije fietsen: 0.54
+Mean Squared Error (MSE): 0.0000
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+[main cd531ba] Automatische update 2025-11-13 16:06:04
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   3bf6dde..cd531ba  main -> main
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.12 °C
+Gemiddeld aantal vrije fietsen: 0.96
+Correlatie tussen temperatuur en vrije fietsen: 0.54
+Mean Squared Error (MSE): 0.0000
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+[main 7815ed8] Automatische update 2025-11-13 16:07:04
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   cd531ba..7815ed8  main -> main
