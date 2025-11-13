@@ -26,12 +26,12 @@ print(f"Gemiddelde temperatuur: {mean_temp:.2f} °C")
 print(f"Gemiddeld aantal vrije fietsen: {mean_bikes:.2f}")
 print(f"Correlatie tussen temperatuur en vrije fietsen: {corr:.2f}")
 
-# Grafiek maken
+# Grafiek maken (y-as als percentage)
 plt.figure(figsize=(8,5))
-plt.scatter(df["temperature"], df["avg_free_bikes"], color="blue")
+plt.scatter(df["temperature"], df["avg_free_bikes"] * 100, color="blue")  # *100 voor %
 plt.title("Relatie tussen temperatuur en beschikbaarheid van deelfietsen (Gent)")
 plt.xlabel("Temperatuur (°C)")
-plt.ylabel("Gemiddeld aantal vrije fietsen")
+plt.ylabel("Gemiddeld aantal vrije fietsen (%)")
 plt.grid(True)
 
 # Opslaan

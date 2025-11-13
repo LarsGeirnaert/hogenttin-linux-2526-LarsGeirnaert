@@ -1,9 +1,6 @@
 #!/bin/bash
 cd /home/larsg/projects/data-workflow
 
-# Fetch data
-./scripts/fetch_data.sh
-
 # Transform data
 ./scripts/transform_data.sh
 

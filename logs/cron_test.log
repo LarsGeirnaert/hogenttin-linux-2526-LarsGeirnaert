@@ -1,0 +1,30 @@
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+[main 358e8ff] Automatische update 2025-11-13 14:15:03
+ 4 files changed, 3 insertions(+)
+ create mode 100644 raw_data/bikes-20251113-141501.json
+ create mode 100644 raw_data/weather-20251113-141501.json
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   804fc3f..358e8ff  main -> main
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 1, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+[main 8ce57c3] Automatische update 2025-11-13 14:20:23
+ 3 files changed, 3 insertions(+)
+ create mode 100644 raw_data/bikes-20251113-142001.json
+ create mode 100644 raw_data/weather-20251113-142001.json
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   f0cd56d..8ce57c3  main -> main
