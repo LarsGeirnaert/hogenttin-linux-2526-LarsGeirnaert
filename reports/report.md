@@ -1,6 +1,6 @@
 # Data workflow rapport
 
-Datum gegenereerd: 2025-11-13 16:04:04.820183
+Datum gegenereerd: 2025-11-13 16:05:04.089294
 
 ## Grafiek: Vrije fietsen vs Temperatuur
 
