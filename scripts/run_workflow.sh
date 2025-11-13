@@ -1,16 +1,13 @@
 #!/bin/bash
+# activeer de virtuele omgeving
+source /home/larsg/projects/data-workflow/venv/bin/activate
+
+# ga naar projectmap
 cd /home/larsg/projects/data-workflow
 
-# Transform data
-./scripts/transform_data.sh
+# voer workflow uit
+bash scripts/fetch_data.sh
+bash scripts/transform_data.sh
+python scripts/analyze_data.py
+python scripts/generate_report.py
 
-# Analyse data (grafiek)
-python3 scripts/analyze_data.py
-
-# Genereer rapport
-python3 scripts/generate_report.py
-
-# Voeg nieuwe bestanden toe en push naar GitHub
-git add raw_data/ transformed_data/ reports/
-git commit -m "Automatische update $(date +'%Y-%m-%d %H:%M:%S')"
-git push origin main

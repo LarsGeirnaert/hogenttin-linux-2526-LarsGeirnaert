@@ -21,13 +21,14 @@ print(df.head())
 
 # Statistieken
 mean_temp = df["temperature"].mean()
-mean_bikes = df["avg_free_bikes"].mean()
+mean_bikes = df["avg_free_bikes"].mean() * 100  # nu in %
 corr = df["temperature"].corr(df["avg_free_bikes"])
 
 print("\n📈 Statistieken:")
 print(f"Gemiddelde temperatuur: {mean_temp:.2f} °C")
-print(f"Gemiddeld aantal vrije fietsen: {mean_bikes:.2f}")
+print(f"Gemiddeld aantal vrije fietsen: {mean_bikes:.1f}%")  # afgerond op 1 decimaal
 print(f"Correlatie tussen temperatuur en vrije fietsen: {corr:.2f}")
+
 
 # Lineaire regressie
 X = df["temperature"].values.reshape(-1, 1)
@@ -45,7 +46,7 @@ plt.scatter(df["temperature"], df["avg_free_bikes"], color="blue", label="Data p
 plt.plot(df["temperature"], y_pred, color="red", linewidth=2, label="Trendlijn (linear regression)")
 plt.title("Relatie tussen temperatuur en beschikbaarheid van deelfietsen (Gent)")
 plt.xlabel("Temperatuur (°C)")
-plt.ylabel("Gemiddeld aantal vrije fietsen")
+plt.ylabel("Gemiddeld aantal vrije fietsen (%)")
 plt.grid(True)
 plt.legend()
 plt.text(min(df["temperature"]), max(df["avg_free_bikes"])*0.9, f"MSE: {mse:.4f}", color="black")

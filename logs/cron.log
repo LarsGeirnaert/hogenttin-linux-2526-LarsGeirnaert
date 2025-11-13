@@ -555,3 +555,69 @@ Mean Squared Error (MSE): 0.0000
  1 file changed, 1 insertion(+), 1 deletion(-)
 To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
    cd531ba..7815ed8  main -> main
+/home/larsg/projects/data-workflow/venv/bin/python: can't open file '/home/larsg/projects/data-workflow/scripts/run_workflow.py': [Errno 2] No such file or directory
+/home/larsg/projects/data-workflow/venv/bin/python: can't open file '/home/larsg/projects/data-workflow/scripts/run_workflow.py': [Errno 2] No such file or directory
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+4  2025-11-13T16:30:02+01:00         14.6        0.990942
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.22 °C
+Gemiddeld aantal vrije fietsen: 0.97
+Correlatie tussen temperatuur en vrije fietsen: 0.66
+Mean Squared Error (MSE): 0.0001
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+4  2025-11-13T16:30:02+01:00         14.6        0.990942
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.28 °C
+Gemiddeld aantal vrije fietsen: 0.97
+Correlatie tussen temperatuur en vrije fietsen: 0.71
+Mean Squared Error (MSE): 0.0001
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+4  2025-11-13T16:30:02+01:00         14.6        0.990942
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.33 °C
+Gemiddeld aantal vrije fietsen: 0.97
+Correlatie tussen temperatuur en vrije fietsen: 0.74
+Mean Squared Error (MSE): 0.0001
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+4  2025-11-13T17:00:01+01:00         14.7        0.996377
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.24 °C
+Gemiddeld aantal vrije fietsen: 0.97
+Correlatie tussen temperatuur en vrije fietsen: 0.70
+Mean Squared Error (MSE): 0.0001
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
