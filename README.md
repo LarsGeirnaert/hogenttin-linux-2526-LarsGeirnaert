@@ -45,7 +45,7 @@ Om de volledige workflow handmatig uit te voeren:
 ```bash
 cd ~/projects/data-workflow
 ./scripts/run_workflow.sh
-
+```
 ### 4.2 Automatische uitvoering via cron
 De workflow kan automatisch elk uur draaien met cron. Voeg dit toe aan je crontab:
 0 * * * * cd /home/larsg/projects/data-workflow && ./scripts/run_workflow.sh
