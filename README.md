@@ -25,7 +25,7 @@ Deze workflow verzamelt automatisch gegevens over het weer (temperatuur) en het 
 
 ## 3. Directorystructuur
 Dit is de aanbevolen structuur van het project:
-data-workflow/
+```data-workflow/
 ├─ scripts/ # Scripts voor alle fases
 │ ├─ fetch_data.sh # haalt JSON op en slaat op in raw_data/
 │ ├─ transform_data.sh # zet raw JSON om naar transformed_data/combined.csv
@@ -37,3 +37,4 @@ data-workflow/
 ├─ reports/ # Grafieken en Markdown-rapport
 ├─ logs/ # Logbestanden van fetches
 └─ README.md
+```
