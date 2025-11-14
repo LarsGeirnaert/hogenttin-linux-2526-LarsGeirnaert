@@ -1765,3 +1765,31 @@ Mean Squared Error (MSE): 35.5233
 📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
 📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
 📁 PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
+[main 108e716] Automatische update 2025-11-14 21:15:08
+ 6 files changed, 53 insertions(+), 24 deletions(-)
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   2f854c4..108e716  main -> main
+📥 Data ophalen...
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Laatste 10 datapunten:
+                    timestamp  temperature  total_free_bikes
+26  2025-11-14T19:15:03+01:00         14.4               535
+27  2025-11-14T19:30:02+01:00         14.9               542
+28  2025-11-14T19:45:02+01:00         14.9               546
+29  2025-11-14T20:00:03+01:00         14.9               542
+30  2025-11-14T20:15:03+01:00         15.0               542
+31  2025-11-14T20:30:03+01:00         14.6               542
+32  2025-11-14T20:45:02+01:00         14.5               543
+33  2025-11-14T21:00:02+01:00         14.4               544
+34  2025-11-14T21:15:01+01:00         14.4               540
+35  2025-11-14T21:30:01+01:00         14.8               545
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.46 °C
+Gemiddeld aantal vrije fietsen: 543
+Correlatie tussen temperatuur en vrije fietsen: 0.46
+Mean Squared Error (MSE): 34.5611
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
