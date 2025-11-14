@@ -1,27 +1,34 @@
 #!/bin/bash
-set -e
-set -o pipefail
-trap 'echo "❌ Fout in run_workflow.sh"; exit 1' ERR
+# run_workflow.sh
 
+LOGFILE="/home/larsg/projects/data-workflow/logs/cron.log"
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Run start" >> "$LOGFILE"
+
+# activeer virtuele omgeving
 source /home/larsg/projects/data-workflow/venv/bin/activate
-cd /home/larsg/projects/data-workflow
 
+# ga naar projectmap
+cd /home/larsg/projects/data-workflow || exit 1
+
+# Check parameter: als "--no-fetch" meegegeven, sla fetch over
 if [[ "$1" != "--no-fetch" ]]; then
-    echo "📥 Data ophalen..."
-    bash scripts/fetch_data.sh
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Data ophalen..." >> "$LOGFILE"
+    bash /home/larsg/projects/data-workflow/scripts/fetch_data.sh >> "$LOGFILE" 2>&1
 else
-    echo "⚠️ Fetch overgeslagen, gebruik bestaande data"
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Fetch overgeslagen" >> "$LOGFILE"
 fi
 
-# Transformeren, analyseren, rapport
-bash scripts/transform_data.sh
-python scripts/analyze_data.py
-python scripts/plot_bikes_vs_time.py
-python scripts/generate_report.py
-python scripts/generate_pdf_report.py
+# transformeren, analyseren en rapport genereren
+bash /home/larsg/projects/data-workflow/scripts/transform_data.sh >> "$LOGFILE" 2>&1
+python /home/larsg/projects/data-workflow/scripts/analyze_data.py >> "$LOGFILE" 2>&1
+python /home/larsg/projects/data-workflow/scripts/plot_bikes_vs_time.py >> "$LOGFILE" 2>&1
+python /home/larsg/projects/data-workflow/scripts/generate_report.py >> "$LOGFILE" 2>&1
+python /home/larsg/projects/data-workflow/scripts/generate_pdf_report.py >> "$LOGFILE" 2>&1
 
-# Git push met check
-cd /home/larsg/projects/data-workflow || exit 1
-git add -A
-git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>/dev/null || true
-git push origin main || { echo "❌ Git push mislukt"; exit 1; }
+# automatisch commit & push
+git add -A >> "$LOGFILE" 2>&1
+git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>> "$LOGFILE" || true
+git push origin main >> "$LOGFILE" 2>&1
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Run eind" >> "$LOGFILE"
