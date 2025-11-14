@@ -114,4 +114,3 @@ elements.append(table)
 # ---------- BUILD PDF ----------
 doc.build(elements)
 print(f"📁 Professioneel PDF-rapport opgeslagen in: {pdf_file}")
-
