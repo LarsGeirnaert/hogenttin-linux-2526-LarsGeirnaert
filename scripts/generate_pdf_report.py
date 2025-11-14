@@ -17,7 +17,7 @@ pdf_file = report_dir / "report.pdf"
 
 # Data
 df = pd.read_csv(data_file)
-weekday_stats = pd.read_csv(weekday_file)
+weekday_stats = pd.read_csv(weekday_file).astype({"Min": int, "Max": int, "Gemiddelde": int})
 
 mean_temp = df["temperature"].mean()
 mean_bikes = round(df["total_free_bikes"].mean())
