@@ -22,11 +22,8 @@ X = df['hour'].values.reshape(-1, 1)
 y = df['total_free_bikes'].values
 model = LinearRegression()
 model.fit(X, y)
-X_full = np.linspace(0, 24, 100).reshape(-1, 1)
-y_pred_full = model.predict(X_full)
-
-# MSE berekenen op de originele data
-mse = mean_squared_error(y, model.predict(X))
+y_pred = model.predict(X)
+mse = mean_squared_error(y, y_pred)
 
 # Grafiek maken (punten, geen lijnen)
 plt.figure(figsize=(10,5))
