@@ -16,6 +16,10 @@ report_dir.mkdir(exist_ok=True)
 
 # Data inlezen
 df = pd.read_csv(data_file)
+
+# Temperatuur afronden op 2 cijfers na de komma
+df['temperature'] = df['temperature'].round(2)
+
 print("📊 Gegevens ingelezen:")
 print(df.head())
 
@@ -24,16 +28,14 @@ mean_temp = df["temperature"].mean()
 mean_bikes = df["total_free_bikes"].mean()
 corr = df["temperature"].corr(df["total_free_bikes"])
 
-
 print("\n📈 Statistieken:")
 print(f"Gemiddelde temperatuur: {mean_temp:.2f} °C")
-print(f"Gemiddeld aantal vrije fietsen: {mean_bikes:.1f}%")  # afgerond op 1 decimaal
+print(f"Gemiddeld aantal vrije fietsen: {mean_bikes:.1f}")  # afgerond op 1 decimaal
 print(f"Correlatie tussen temperatuur en vrije fietsen: {corr:.2f}")
 
-
-# Lineaire regressie
+# Lineaire regressie 
 X = df["temperature"].values.reshape(-1, 1)
-y = df["total_free_bikes"].values  # aangepast van avg_free_bikes naar total_free_bikes
+y = df["total_free_bikes"].values
 model = LinearRegression()
 model.fit(X, y)
 y_pred = model.predict(X)
@@ -43,14 +45,14 @@ print(f"Mean Squared Error (MSE): {mse:.4f}")
 
 # Grafiek maken
 plt.figure(figsize=(8,5))
-plt.scatter(df["temperature"], df["total_free_bikes"], color="blue", label="Data punten")  # aangepast
+plt.scatter(df["temperature"], df["total_free_bikes"], color="blue", label="Data punten")
 plt.plot(df["temperature"], y_pred, color="red", linewidth=2, label="Trendlijn (linear regression)")
 plt.title("Relatie tussen temperatuur en beschikbaarheid van deelfietsen (Gent)")
 plt.xlabel("Temperatuur (°C)")
-plt.ylabel("Aantal vrije fietsen")  # aangepast label
+plt.ylabel("Aantal vrije fietsen")
 plt.grid(True)
 plt.legend()
-plt.text(min(df["temperature"]), max(df["total_free_bikes"])*0.9, f"MSE: {mse:.4f}", color="black")  # aangepast
+plt.text(min(df["temperature"]), max(df["total_free_bikes"])*0.9, f"MSE: {mse:.4f}", color="black")
 
 # Opslaan
 plot_path = report_dir / "fiets_vs_temp.png"
