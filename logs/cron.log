@@ -1230,3 +1230,7 @@ Traceback (most recent call last):
   File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/reportlab/pdfbase/pdfdoc.py", line 210, in SaveToFile
     raise TypeError('Cannot use %s as a filename or file' % repr(filename))
 TypeError: Cannot use PosixPath('/home/larsg/projects/data-workflow/reports/report.pdf') as a filename or file
+[main bd651e5] Automatische update 2025-11-14 16:00:07
+ 5 files changed, 37 insertions(+), 3 deletions(-)
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   e226e8b..bd651e5  main -> main

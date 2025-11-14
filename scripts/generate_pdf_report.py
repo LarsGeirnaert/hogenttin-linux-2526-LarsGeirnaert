@@ -19,8 +19,8 @@ mean_temp = df["temperature"].mean()
 mean_bikes = df["total_free_bikes"].mean()
 corr = df["temperature"].corr(df["total_free_bikes"])
 
-# PDF aanmaken
-doc = SimpleDocTemplate(pdf_file, pagesize=A4)
+# PDF aanmaken (string pad nodig!)
+doc = SimpleDocTemplate(str(pdf_file), pagesize=A4)
 styles = getSampleStyleSheet()
 elements = []
 
