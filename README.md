@@ -1,19 +1,26 @@
-Data Workflow: Temperatuur vs. Aantal Vrije Fietsen in Gent
-1. Beschrijving van de workflow
+# Data Workflow: Temperatuur vs. Aantal Vrije Fietsen in Gent
+
+## 1. Beschrijving van de workflow
 
 Deze workflow verzamelt automatisch gegevens over het weer (temperatuur) en het aantal beschikbare deelfietsen in Gent. De data wordt verwerkt, geanalyseerd en gevisualiseerd, waarna de resultaten automatisch naar GitHub worden gepusht.
 
-Fasen van de workflow:
+### Fasen van de workflow
 
-Data ophalen: JSON-bestanden van de Gentse weer-API en CityBikes API.
+1. **Data ophalen**  
+   JSON-bestanden van de Gentse weer-API en CityBikes API.
 
-Data transformeren: JSON → CSV (combined.csv) met relevante kolommen.
+2. **Data transformeren**  
+   Omzetten van JSON naar CSV (`combined.csv`) met relevante kolommen.
 
-Data analyseren: grafiek van vrije fietsen vs. temperatuur.
+3. **Data analyseren**  
+   Genereren van een grafiek van vrije fietsen versus temperatuur.
 
-Rapport genereren: Markdown-rapport (report.md) met grafieken en statistieken.
+4. **Rapport genereren**  
+   Aanmaken van een Markdown-rapport (`report.md`) met grafieken en statistieken.
 
-Automatisering: alles kan automatisch draaien via een cron-job en wordt gepusht naar GitHub.
+5. **Automatisering**  
+   Alles kan automatisch draaien via een cron-job en wordt naar GitHub gepusht.
+
 
 2. Data
 
