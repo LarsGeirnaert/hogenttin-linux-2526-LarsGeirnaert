@@ -81,7 +81,7 @@ In tegenstelling tot de vorige grafiek wordt hier niet naar temperatuur gekeken,
 maar uitsluitend naar tijdstip versus beschikbaarheid.""", styles['Normal']))
 elements.append(Spacer(1, 12))
 
-graph_path_2 = report_dir / "bikes_vs_hour.png"
+graph_path_2 = report_dir / "fiets_vs_uur.png"
 elements.append(Image(str(graph_path_2), width=400, height=300))
 elements.append(Spacer(1, 24))
 
