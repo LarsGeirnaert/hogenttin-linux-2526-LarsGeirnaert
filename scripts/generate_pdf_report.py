@@ -65,11 +65,12 @@ elements.append(PageBreak())
 # ---------- STATISTIEKEN ----------
 elements.append(Paragraph("Statistische Samenvatting", header_style))
 elements.append(Spacer(1, 12))
-elements.append(Paragraph(f"Gemiddelde temperatuur: {mean_temp:.2f} °C", normal_style))
+elements.append(Paragraph(f"Gemiddeld totaal aantal vrije fietsen: {mean_bikes}", normal_style))
 elements.append(Paragraph(f"Gemiddeld aantal fietsen overdag (07-19u): {day_avg_bikes}", normal_style))
 elements.append(Paragraph(f"Gemiddeld aantal fietsen ’s nachts (19-07u): {night_avg_bikes}", normal_style))
 elements.append(Paragraph(f"Correlatie tussen temperatuur en aantal vrije fietsen: {corr:.2f}", normal_style))
 elements.append(PageBreak())
+
 
 # ---------- GRAFIEK 1 ----------
 elements.append(Paragraph("Grafiek 1: Temperatuur vs Vrije Fietsen", header_style))
