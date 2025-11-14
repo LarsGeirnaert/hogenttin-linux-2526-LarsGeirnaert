@@ -16,8 +16,6 @@ report_dir.mkdir(exist_ok=True)
 
 # Data inlezen
 df = pd.read_csv(data_file)
-print("📊 Gegevens ingelezen:")
-
 print("📊 Laatste 10 datapunten:")
 print(df.tail(10))
 # Temperatuur afronden op 2 decimalen + kleine random jitter toevoegen
