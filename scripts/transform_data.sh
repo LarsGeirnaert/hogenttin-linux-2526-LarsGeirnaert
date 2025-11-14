@@ -19,7 +19,9 @@ for weather_file in "$RAW_DIR"/weather-*.json; do
     # Controleer of bijhorende bikes-file bestaat
     if [[ -f "$bikes_file" ]]; then
         # 1️⃣ temperatuur ophalen uit JSON
-        temp=$(jq -r '.current.temperature_2m' "$weather_file")
+	temp=$(jq -r '.current.temperature_2m' "$weather_file")
+	temp=$(printf "%.2f" "$temp")  # afronden op 2 decimalen
+
 
         # 2️⃣ totaal aantal vrije fietsen berekenen
 	total_free=$(jq '[.network.stations[].free_bikes] | add' "$bikes_file")
