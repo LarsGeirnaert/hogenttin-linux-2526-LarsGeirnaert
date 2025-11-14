@@ -1,6 +1,6 @@
 # Data Workflow Rapport
 
-**Gegenereerd op:** 2025-11-14 23:06:36.776716
+**Gegenereerd op:** 2025-11-14 23:09:47.220511
 
 ## Grafiek: Vrije fietsen vs Temperatuur
 ![Fietsen vs Temp](reports/fiets_vs_temp.png)
@@ -16,14 +16,3 @@
 
 | Weekdag | Min | Max | Gemiddelde |
 |---------|-----|-----|------------|
-| Maandag | nan | nan | nan |
-| Dinsdag | nan | nan | nan |
-| Woensdag | nan | nan | nan |
-| Donderdag | 525.0 | 550.0 | 535.0 |
-| Vrijdag | 535.0 | 557.0 | 544.0 |
-| Zaterdag | nan | nan | nan |
-| Zondag | nan | nan | nan |
-
----
-## Grafiek: Vrije fietsen per uur
-![Fiets vs Uur](reports/fiets_vs_uur.png)

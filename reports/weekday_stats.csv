@@ -1,8 +1,8 @@
-weekday,Min,Max,Gemiddelde
-Monday,,,
-Tuesday,,,
-Wednesday,,,
-Thursday,525.0,550.0,535.0
-Friday,535.0,557.0,544.0
-Saturday,,,
-Sunday,,,
+weekday,Min,Max,Gemiddelde_fietsen,Gemiddelde_temp
+Monday,,,,
+Tuesday,,,,
+Wednesday,,,,
+Thursday,525.0,550.0,535.0,14.246238509834162
+Friday,535.0,557.0,544.0,14.552853823531407
+Saturday,,,,
+Sunday,,,,
