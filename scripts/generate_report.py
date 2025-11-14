@@ -47,7 +47,7 @@ with open(report_file, 'w') as f:
     f.write("| Weekdag | Min | Max | Gemiddelde |\n")
     f.write("|---------|-----|-----|------------|\n")
     for _, row in weekday_stats.iterrows():
-        f.write(f"| {row['weekday']} | {row['Min']} | {row['Max']} | {row['Gemiddelde']} |\n")
+        f.write(f"| {row['weekday']} | {row['Min']} | {row['Max']} | {row['Gemiddelde_fietsen']} |\n")
 
     f.write("\n---\n")
 
