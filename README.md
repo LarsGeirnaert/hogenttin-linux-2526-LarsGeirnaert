@@ -115,17 +115,12 @@ Naast het Markdown-rapport wordt er automatisch ook een PDF-bestand gegenereerd:
 Dit PDF-rapport bevat:
 
 - een overzicht van de workflow
-
 - de statistieken van de dataset
-
 - de twee grafieken:
-
-- Temperatuur vs. aantal vrije fietsen
-
-- Aantal vrije fietsen per uur
-
+    - Temperatuur vs. aantal vrije fietsen
+    - Aantal vrije fietsen per uur
 - begeleidende uitleg bij elke visualisatie
-
 - automatische titelpagina, consistente layout en uniforme opmaak
+
 
 Het PDF-bestand wordt automatisch vernieuwd bij elk run van de workflow (behalve wanneer --no-fetch wordt gebruikt).
