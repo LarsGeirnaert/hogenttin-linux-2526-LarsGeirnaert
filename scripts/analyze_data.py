@@ -29,7 +29,8 @@ corr = df["temperature"].corr(df["total_free_bikes"])
 
 print("\n📈 Statistieken:")
 print(f"Gemiddelde temperatuur: {mean_temp:.2f} °C")
-print(f"Gemiddeld aantal vrije fietsen: {mean_bikes.0f}")
+mean_bikes = round(df["total_free_bikes"].mean())
+print(f"Gemiddeld aantal vrije fietsen: {mean_bikes}")
 print(f"Correlatie tussen temperatuur en vrije fietsen: {corr:.2f}")
 
 # Lineaire regressie
