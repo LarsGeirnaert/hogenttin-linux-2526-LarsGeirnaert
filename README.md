@@ -23,24 +23,25 @@ Deze workflow verzamelt automatisch gegevens over het weer (temperatuur) en het 
 
 
 
-2. Data
+## 2. Data
 
-Bronnen:
+### Bronnen
+- **Weer**: publieke weer-API voor Gent  
+- **Fietsen**: CityBikes API (Donkey Republic / Gent netwerk)  
 
-Weer: publieke weer-API voor Gent
+### Periode
+Vanaf 13 november 2025, met een interval van 15 minuten (automatisch).
 
-Fietsen: CityBikes API (Donkey Republic / Gent netwerk)
+### Bestandsindeling
+- **Ruwe data**: JSON-bestanden in `raw_data/`  
+- **Verwerkte data**: CSV-bestanden in `transformed_data/combined.csv`  
 
-Periode: vanaf 13 november 2025, interval: elk 15 minuten (automatisch)
+---
 
-Bestandsindeling:
+## 3. Directorystructuur
 
-Ruwe data: JSON-bestanden in raw_data/
-
-Verwerkte data: CSV in transformed_data/combined.csv
-
-3. Directorystructuur
-```data-workflow/
+```text
+data-workflow/
 ├─ scripts/              # Scripts voor alle fases
 │  ├─ fetch_data.sh      # Haalt JSON-data op
 │  ├─ transform_data.sh  # Zet raw JSON om naar CSV
