@@ -93,27 +93,3 @@ plot_path_hour = report_dir / "fiets_vs_uur.png"
 plt.savefig(plot_path_hour)
 print(f"📁 Grafiek opgeslagen in: {plot_path_hour}")
 
-# ---------- HEATMAP ---------- 
-import seaborn as sns
-
-pivot = df.pivot_table(index='weekday', columns='hour', values='total_free_bikes', aggfunc='mean')
-plt.figure(figsize=(12,6))
-sns.heatmap(pivot, cmap='YlGnBu')
-plt.title('Heatmap: Vrije fietsen per uur per weekdag')
-plt.savefig(report_dir / 'fiets_heatmap.png')
-plt.close()
-
-# ---------- ROLLING AVERAGE ---------- 
-df['rolling_mean'] = df['total_free_bikes'].rolling(window=4).mean()  # 1 uur
-plt.figure(figsize=(10,5))
-plt.plot(df['timestamp'], df['rolling_mean'])
-plt.title('1-uur Rolling Average van Vrije Fietsen')
-plt.savefig(report_dir / 'rolling_avg.png')
-plt.close()
-
-# ---------- BOX PLOT PER WEEKDAG ---------- 
-plt.figure(figsize=(10,5))
-sns.boxplot(x='weekday', y='total_free_bikes', data=df)
-plt.title('Boxplot Vrije Fietsen per Weekdag')
-plt.savefig(report_dir / 'boxplot_weekday.png')
-plt.close()
