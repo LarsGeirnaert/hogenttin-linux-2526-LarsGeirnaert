@@ -33,7 +33,7 @@ print(f"Correlatie tussen temperatuur en vrije fietsen: {corr:.2f}")
 
 # Lineaire regressie
 X = df["temperature"].values.reshape(-1, 1)
-y = df["avg_free_bikes"].values
+y = df["total_free_bikes"].values  # aangepast van avg_free_bikes naar total_free_bikes
 model = LinearRegression()
 model.fit(X, y)
 y_pred = model.predict(X)
@@ -43,14 +43,14 @@ print(f"Mean Squared Error (MSE): {mse:.4f}")
 
 # Grafiek maken
 plt.figure(figsize=(8,5))
-plt.scatter(df["temperature"], df["avg_free_bikes"], color="blue", label="Data punten")
+plt.scatter(df["temperature"], df["total_free_bikes"], color="blue", label="Data punten")  # aangepast
 plt.plot(df["temperature"], y_pred, color="red", linewidth=2, label="Trendlijn (linear regression)")
 plt.title("Relatie tussen temperatuur en beschikbaarheid van deelfietsen (Gent)")
 plt.xlabel("Temperatuur (°C)")
-plt.ylabel("Gemiddeld aantal vrije fietsen (%)")
+plt.ylabel("Aantal vrije fietsen")  # aangepast label
 plt.grid(True)
 plt.legend()
-plt.text(min(df["temperature"]), max(df["avg_free_bikes"])*0.9, f"MSE: {mse:.4f}", color="black")
+plt.text(min(df["temperature"]), max(df["total_free_bikes"])*0.9, f"MSE: {mse:.4f}", color="black")  # aangepast
 
 # Opslaan
 plot_path = report_dir / "fiets_vs_temp.png"

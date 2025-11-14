@@ -1047,3 +1047,9 @@ Traceback (most recent call last):
   File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
     raise KeyError(key) from err
 KeyError: 'avg_free_bikes'
+[main 93ea45b] Automatische update 2025-11-14 14:34:06
+ 4 files changed, 39 insertions(+), 3 deletions(-)
+ create mode 100644 scripts/.analyze_data.py.swp
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   116bf8e..93ea45b  main -> main
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
