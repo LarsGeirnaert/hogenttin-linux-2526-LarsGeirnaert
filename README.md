@@ -32,7 +32,7 @@ Ruwe data: JSON-bestanden in raw_data/
 Verwerkte data: CSV in transformed_data/combined.csv
 
 3. Directorystructuur
-data-workflow/
+```data-workflow/
 ├─ scripts/              # Scripts voor alle fases
 │  ├─ fetch_data.sh      # Haalt JSON-data op
 │  ├─ transform_data.sh  # Zet raw JSON om naar CSV
@@ -44,7 +44,7 @@ data-workflow/
 ├─ reports/              # Grafieken en Markdown-rapport
 ├─ logs/                 # Logbestanden van fetches
 └─ README.md
-
+```
 4. Gebruiksaanwijzing
 4.1 Automatisch uitvoeren (elk kwartier)
 
