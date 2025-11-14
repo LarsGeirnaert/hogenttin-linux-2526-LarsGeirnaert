@@ -1990,3 +1990,56 @@ Correlatie: 0.50
  6 files changed, 59 insertions(+), 31 deletions(-)
 To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
    7f4cc23..dfc9bde  main -> main
+📥 Data ophalen...
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Laatste 10 datapunten:
+                   timestamp  temperature  total_free_bikes
+33 2025-11-14 21:00:02+01:00         14.4               544
+34 2025-11-14 21:15:01+01:00         14.4               540
+35 2025-11-14 21:30:01+01:00         14.8               545
+36 2025-11-14 21:45:01+01:00         14.9               543
+37 2025-11-14 22:00:01+01:00         14.9               548
+38 2025-11-14 22:15:01+01:00         14.9               547
+39 2025-11-14 22:30:01+01:00         14.8               547
+40 2025-11-14 22:45:01+01:00         14.9               544
+41 2025-11-14 23:00:01+01:00         14.9               551
+42 2025-11-14 23:15:01+01:00         14.9               544
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.52 °C
+Gemiddeld aantal vrije fietsen: 543
+Gemiddeld aantal fietsen overdag (7-19u): 543
+Gemiddeld aantal fietsen ’s nachts (19-7u): 543
+Correlatie: 0.50
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Gemiddelde'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 50, in <module>
+    f.write(f"| {row['weekday']} | {row['Min']} | {row['Max']} | {row['Gemiddelde']} |\n")
+                                                                  ~~~^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/series.py", line 1133, in __getitem__
+    return self._get_value(key)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/series.py", line 1249, in _get_value
+    loc = self.index.get_loc(label)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Gemiddelde'
+📁 Professioneel PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
