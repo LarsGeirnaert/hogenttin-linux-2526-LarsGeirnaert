@@ -17,6 +17,9 @@ report_dir.mkdir(exist_ok=True)
 # Data inlezen
 df = pd.read_csv(data_file)
 
+# Temperatuur afronden op 2 cijfers en kleine jitter toevoegen
+df['temperature'] = df['temperature'].round(2) + np.random.uniform(-0.05, 0.05, size=len(df))
+
 # Temperatuur afronden op 2 cijfers na de komma
 df['temperature'] = df['temperature'].round(2)
 
