@@ -65,14 +65,31 @@ data-workflow/
 ├─ logs/                 # Logbestanden van fetches
 └─ README.md
 ```
-## 4. Gebruiksaanwijzing
-### 4.1 Automatisch uitvoeren (elk kwartier)
+
+## 4. Dependencies
+
+- Python 3.11
+
+- pandas
+
+- matplotlib
+
+- scikit-learn
+
+- reportlab
+
+- jq (voor JSON parsing in bash)
+
+- curl (voor data ophalen via API)
+
+## 5. Gebruiksaanwijzing
+### 5.1 Automatisch uitvoeren (elk kwartier)
 
 De workflow kan automatisch elk kwartier draaien via een cron-job. Hierbij wordt nieuwe data opgehaald, en worden alle documenten, grafieken en het CSV-bestand bijgewerkt. Voeg bijvoorbeeld deze regel toe aan je crontab:
 
 ``` */15 * * * * cd /home/larsg/projects/data-workflow && ./scripts/run_workflow.sh ```
 
-### 4.2 Handmatig testen
+### 5.2 Handmatig testen
 
 Wanneer je de workflow handmatig start met:
 ```
@@ -83,7 +100,7 @@ bash /home/larsg/projects/data-workflow/scripts/run_workflow.sh --no-fetch
 
 wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en rapporten worden bijgewerkt op basis van de reeds aanwezige ruwe data. Dit is handig om snel te testen of de analyse en visualisaties correct werken.
 
-## 5. Resultaten bekijken
+## 6. Resultaten bekijken
 
 - **Ruwe data**: raw_data/
 
@@ -95,11 +112,11 @@ wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en ra
 
 Opmerking: de workflow pusht automatisch nieuwe gegevens en rapporten naar GitHub, zodat alles online up-to-date blijft.
 
-## 6. Extra visualisaties en PDF-rapport
+## 7. Extra visualisaties en PDF-rapport
 
 Naast de basisgrafiek (vrije fietsen vs. temperatuur) bevat de workflow een tweede grafiek die een ander aspect van de dataset verduidelijkt.
 
-### 6.1 Extra grafiek: aantal vrije fietsen per uur
+### 7.1 Extra grafiek: aantal vrije fietsen per uur
 
 Een bijkomende visualisatie werd toegevoegd:
 fietsen vs. uur van de dag → reports/fiets_vs_uur.png
@@ -117,7 +134,7 @@ Ze geeft inzichten zoals:
 
 Deze grafiek is aanvullend op de temperatuur-analyse en helpt om te bepalen of variaties te wijten zijn aan dagelijks ritme in plaats van aan weersomstandigheden.
 
-### 6.2 PDF-rapport met beide grafieken
+### 7.2 PDF-rapport met beide grafieken
 
 Naast het Markdown-rapport wordt er automatisch ook een PDF-bestand gegenereerd:
 
