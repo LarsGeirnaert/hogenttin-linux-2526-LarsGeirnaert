@@ -74,3 +74,49 @@ Grafiek: reports/fiets_vs_temp.png
 Markdown-rapport: reports/report.md
 
 Opmerking: de workflow pusht automatisch nieuwe gegevens en rapporten naar GitHub, zodat alles online up-to-date blijft.
+
+6. Extra visualisaties en PDF-rapport
+
+Naast de basisgrafiek (vrije fietsen vs. temperatuur) bevat de workflow een tweede grafiek die een ander aspect van de dataset verduidelijkt.
+
+6.1 Extra grafiek: aantal vrije fietsen per uur
+
+Een bijkomende visualisatie werd toegevoegd:
+fietsen vs. uur van de dag → reports/fiets_vs_uur.png
+
+Deze grafiek toont hoe het totaal aantal vrije fietsen in Gent varieert per uur van de dag.
+Ze geeft inzichten zoals:
+
+op welke momenten er typisch meer of minder fietsen beschikbaar zijn
+
+piekmomenten rond ochtend- en avondspits
+
+eventuele trends in gebruiksdrukte tijdens weekends of koude dagen
+
+hoe de beschikbaarheid doorheen de dag evolueert
+
+Deze grafiek is aanvullend op de temperatuur-analyse en helpt om te bepalen of variaties te wijten zijn aan dagelijks ritme in plaats van aan weersomstandigheden.
+
+6.2 PDF-rapport met beide grafieken
+
+Naast het Markdown-rapport wordt er automatisch ook een PDF-bestand gegenereerd:
+
+📄 reports/report.pdf
+
+Dit PDF-rapport bevat:
+
+een overzicht van de workflow
+
+de statistieken van de dataset
+
+de twee grafieken:
+
+Temperatuur vs. aantal vrije fietsen
+
+Aantal vrije fietsen per uur
+
+begeleidende uitleg bij elke visualisatie
+
+automatische titelpagina, consistente layout en uniforme opmaak
+
+Het PDF-bestand wordt automatisch vernieuwd bij elk run van de workflow (behalve wanneer --no-fetch wordt gebruikt).
