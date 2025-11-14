@@ -2,9 +2,13 @@
 import pandas as pd
 from pathlib import Path
 from reportlab.lib.pagesizes import A4
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, Table, TableStyle
-from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import (
+    SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, Table, TableStyle
+)
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
+from reportlab.lib.units import cm
+from reportlab.pdfgen import canvas
 
 # Paden
 base_dir = Path.home() / "projects/data-workflow"
@@ -19,16 +23,9 @@ weekday_stats = pd.read_csv(weekday_file)
 
 mean_temp = df["temperature"].mean()
 mean_bikes = round(df["total_free_bikes"].mean())
-
-# Dag/nacht gemiddeld
-df["timestamp"] = pd.to_datetime(df["timestamp"])
-df["hour"] = df["timestamp"].dt.hour
-daytime_avg = round(df[(df["hour"] >= 7) & (df["hour"] < 19)]["total_free_bikes"].mean())
-nighttime_avg = round(pd.concat([df[df["hour"] >= 19]["total_free_bikes"], df[df["hour"] < 7]["total_free_bikes"]]).mean())
-
 corr = df["temperature"].corr(df["total_free_bikes"])
 
-# Engelse → Nederlandse dagen
+# Nederlandse weekdagen
 day_map = {
     "Monday": "Maandag", "Tuesday": "Dinsdag", "Wednesday": "Woensdag",
     "Thursday": "Donderdag", "Friday": "Vrijdag", "Saturday": "Zaterdag", "Sunday": "Zondag"
@@ -36,50 +33,74 @@ day_map = {
 weekday_stats["weekday"] = weekday_stats["weekday"].map(day_map)
 
 # PDF setup
-doc = SimpleDocTemplate(str(pdf_file), pagesize=A4)
+doc = SimpleDocTemplate(str(pdf_file), pagesize=A4,
+                        rightMargin=2*cm, leftMargin=2*cm,
+                        topMargin=2*cm, bottomMargin=2*cm)
+
+# Styles
 styles = getSampleStyleSheet()
+title_style = ParagraphStyle(
+    'TitleStyle', parent=styles['Title'], fontSize=24, alignment=1, spaceAfter=20)
+header_style = ParagraphStyle(
+    'HeaderStyle', parent=styles['Heading2'], fontSize=16, spaceAfter=12)
+normal_style = ParagraphStyle(
+    'NormalStyle', parent=styles['Normal'], fontSize=12, leading=16)
+footer_style = ParagraphStyle('FooterStyle', alignment=1, fontSize=10, textColor=colors.grey)
+
 elements = []
 
-# Titelpagina + statistieken
-elements.append(Paragraph("Data Workflow Rapport: Temperatuur vs Aantal Vrije Fietsen in Gent", styles['Title']))
-elements.append(Spacer(1, 20))
-elements.append(Paragraph("<b>Statistische Samenvatting</b>", styles['Heading2']))
-elements.append(Spacer(1, 8))
-elements.append(Paragraph(f"Gemiddelde temperatuur: {mean_temp:.2f} °C", styles['Normal']))
-elements.append(Paragraph(f"Gemiddeld aantal vrije fietsen: {mean_bikes}", styles['Normal']))
-elements.append(Paragraph(f"Gemiddeld aantal fietsen overdag (7-19u): {daytime_avg}", styles['Normal']))
-elements.append(Paragraph(f"Gemiddeld aantal fietsen ’s nachts (19-7u): {nighttime_avg}", styles['Normal']))
-elements.append(Paragraph(f"Correlatie: {corr:.2f}", styles['Normal']))
-elements.append(PageBreak())
-
-# Grafiek 1
-elements.append(Paragraph("<b>Grafiek 1: Temperatuur vs vrije fietsen</b>", styles['Heading2']))
+# ---------- TITELPAGINA ----------
+elements.append(Paragraph("Data Workflow Rapport", title_style))
+elements.append(Paragraph("Temperatuur vs Aantal Vrije Fietsen in Gent", header_style))
 elements.append(Spacer(1, 12))
-elements.append(Image(str(report_dir / "fiets_vs_temp.png"), width=400, height=300))
+elements.append(Paragraph(f"Gegenereerd op: {pd.Timestamp.now().strftime('%d-%m-%Y %H:%M')}", normal_style))
 elements.append(PageBreak())
 
-# Grafiek 2
-elements.append(Paragraph("<b>Grafiek 2: Aantal fietsen per uur</b>", styles['Heading2']))
+# ---------- STATISTIEKEN ----------
+elements.append(Paragraph("Statistische Samenvatting", header_style))
 elements.append(Spacer(1, 12))
-elements.append(Image(str(report_dir / "fiets_vs_uur.png"), width=400, height=300))
+elements.append(Paragraph(f"Gemiddelde temperatuur: {mean_temp:.2f} °C", normal_style))
+elements.append(Paragraph(f"Gemiddeld aantal vrije fietsen: {mean_bikes}", normal_style))
+elements.append(Paragraph(f"Correlatie tussen temperatuur en aantal vrije fietsen: {corr:.2f}", normal_style))
 elements.append(PageBreak())
 
-# Weekdag tabel
-elements.append(Paragraph("<b>Tabel: Vrije fietsen per weekdag</b>", styles['Heading2']))
+# ---------- GRAFIEK 1 ----------
+elements.append(Paragraph("Grafiek 1: Temperatuur vs Vrije Fietsen", header_style))
+elements.append(Spacer(1, 12))
+graph_path_1 = report_dir / "fiets_vs_temp.png"
+elements.append(Image(str(graph_path_1), width=16*cm, height=10*cm))
+elements.append(Spacer(1, 6))
+elements.append(Paragraph("Deze grafiek toont het verband tussen de temperatuur in Gent en het aantal beschikbare deelfietsen.", normal_style))
+elements.append(PageBreak())
+
+# ---------- GRAFIEK 2 ----------
+elements.append(Paragraph("Grafiek 2: Aantal Fietsen per Uur", header_style))
+elements.append(Spacer(1, 12))
+graph_path_2 = report_dir / "fiets_vs_uur.png"
+elements.append(Image(str(graph_path_2), width=16*cm, height=10*cm))
+elements.append(Spacer(1, 6))
+elements.append(Paragraph("Deze grafiek toont de verdeling van vrije fietsen per uur van de dag.", normal_style))
+elements.append(PageBreak())
+
+# ---------- WEEKDAG TABEL ----------
+elements.append(Paragraph("Tabel: Vrije Fietsen per Weekdag", header_style))
 elements.append(Spacer(1, 12))
 table_data = [["Weekdag", "Min", "Max", "Gemiddelde"]]
 for _, row in weekday_stats.iterrows():
-    table_data.append([row["weekday"], row["Min"], row["Max"], row["Gemiddelde"]])
+    table_data.append([row["weekday"], int(row["Min"]), int(row["Max"]), int(row["Gemiddelde"])])
 
-table = Table(table_data)
+table = Table(table_data, hAlign='CENTER')
 table.setStyle(TableStyle([
-    ("BACKGROUND", (0,0), (-1,0), colors.lightgrey),
-    ("GRID", (0,0), (-1,-1), 0.5, colors.grey),
+    ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#d9d9d9")),
+    ("TEXTCOLOR", (0,0), (-1,0), colors.black),
     ("ALIGN", (1,1), (-1,-1), "CENTER"),
-    ("FONTNAME", (0,0), (-1,0), "Helvetica-Bold")
+    ("FONTNAME", (0,0), (-1,0), "Helvetica-Bold"),
+    ("FONTSIZE", (0,0), (-1,-1), 11),
+    ("INNERGRID", (0,0), (-1,-1), 0.5, colors.grey),
+    ("BOX", (0,0), (-1,-1), 1, colors.grey)
 ]))
 elements.append(table)
 
-# PDF bouwen
+# ---------- BUILD PDF ----------
 doc.build(elements)
-print(f"📁 PDF gegenereerd: {pdf_file}")
+print(f"📁 Professioneel PDF-rapport opgeslagen in: {pdf_file}")
