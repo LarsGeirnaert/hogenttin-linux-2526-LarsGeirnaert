@@ -6,7 +6,7 @@ source /home/larsg/projects/data-workflow/venv/bin/activate
 cd /home/larsg/projects/data-workflow
 
 # voer workflow uit
-bash scripts/fetch_data.sh
+# bash scripts/fetch_data.sh   # ✅ tijdelijk uitgeschakeld zodat geen nieuwe data wordt opgehaald
 bash scripts/transform_data.sh
 python scripts/analyze_data.py
 python scripts/generate_report.py
