@@ -757,3 +757,23 @@ Correlatie tussen temperatuur en vrije fietsen: 0.39
 Mean Squared Error (MSE): 0.0002
 
 📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+[main ad4051f] Automatische update 2025-11-14 14:10:08
+ 4 files changed, 20 insertions(+), 4 deletions(-)
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   96435ba..ad4051f  main -> main
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  avg_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6        0.956443
+1  2025-11-13T12:00:03+01:00         14.1        0.952813
+2  2025-11-13T14:00:01+01:00         14.1        0.972777
+3  2025-11-13T15:00:02+01:00         14.7        0.969203
+4  2025-11-13T17:00:01+01:00         14.7        0.996377
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.11 °C
+Gemiddeld aantal vrije fietsen: 97.6%
+Correlatie tussen temperatuur en vrije fietsen: 0.28
+Mean Squared Error (MSE): 0.0002
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
