@@ -8,6 +8,10 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import numpy as np
 
+np.random.seed(42)  # kies een getal om de random waarden reproduceerbaar te maken
+df['temperature'] = df['temperature'].round(2) + np.random.uniform(-0.05, 0.05, size=len(df))
+
+
 # Paden
 base_dir = Path.home() / "projects" / "data-workflow"
 data_file = base_dir / "transformed_data" / "combined.csv"
@@ -16,9 +20,6 @@ report_dir.mkdir(exist_ok=True)
 
 # Data inlezen
 df = pd.read_csv(data_file)
-
-# Temperatuur afronden op 2 cijfers en kleine jitter toevoegen
-df['temperature'] = df['temperature'].round(2) + np.random.uniform(-0.05, 0.05, size=len(df))
 
 # Temperatuur afronden op 2 cijfers na de komma
 df['temperature'] = df['temperature'].round(2)
