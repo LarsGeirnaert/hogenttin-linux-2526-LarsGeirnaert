@@ -1,6 +1,6 @@
 # Data workflow rapport
 
-Datum gegenereerd: 2025-11-14 20:45:07.620928
+Datum gegenereerd: 2025-11-14 21:00:09.021663
 
 ## Grafiek: Vrije fietsen vs Temperatuur
 
@@ -8,5 +8,5 @@ Datum gegenereerd: 2025-11-14 20:45:07.620928
 
 ## Basisstatistieken
 - Gemiddelde temperatuur: 14.45 °C
-- Gemiddeld aantal vrije fietsen: 542
+- Gemiddeld aantal vrije fietsen: 543
 - Correlatie: 0.48
