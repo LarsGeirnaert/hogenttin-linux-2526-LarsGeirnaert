@@ -3,6 +3,3 @@ raw_data/
 
 # Logs
 logs/
-
-# Grafieken en rapporten (optioneel, alleen png's)
-reports/*.png
