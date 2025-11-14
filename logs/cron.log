@@ -2249,3 +2249,35 @@ Correlatie: 0.53
 📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
 📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
 📁 Professioneel PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   9f8cfaa..6e7b6df  main -> main
+[2025-11-15 00:19:27] Run eind
+[2025-11-15 00:20:01] Run start
+[2025-11-15 00:20:01] Data ophalen...
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Laatste 10 datapunten:
+                   timestamp  temperature  total_free_bikes
+35 2025-11-14 21:30:01+01:00         14.8               545
+36 2025-11-14 21:45:01+01:00         14.9               543
+37 2025-11-14 22:00:01+01:00         14.9               548
+38 2025-11-14 22:15:01+01:00         14.9               547
+39 2025-11-14 22:30:01+01:00         14.8               547
+40 2025-11-14 22:45:01+01:00         14.9               544
+41 2025-11-14 23:00:01+01:00         14.9               551
+42 2025-11-14 23:15:01+01:00         14.9               544
+43 2025-11-14 23:30:01+01:00         15.0               550
+44 2025-11-14 23:45:01+01:00         14.9               554
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.54 °C
+Gemiddeld aantal vrije fietsen: 544
+Gemiddeld aantal fietsen overdag (7-19u): 543
+Gemiddeld aantal fietsen ’s nachts (19-7u): 544
+Correlatie: 0.53
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Professioneel PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
