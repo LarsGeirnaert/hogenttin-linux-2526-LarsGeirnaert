@@ -1954,3 +1954,8 @@ Traceback (most recent call last):
   File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/indexes/accessors.py", line 643, in __new__
     raise AttributeError("Can only use .dt accessor with datetimelike values")
 AttributeError: Can only use .dt accessor with datetimelike values. Did you mean: 'at'?
+[main 16e1890] Automatische update 2025-11-14 22:45:08
+ 7 files changed, 49 insertions(+), 3 deletions(-)
+ create mode 100644 scripts/.generate_pdf_report.py.swp
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   8c25463..16e1890  main -> main
