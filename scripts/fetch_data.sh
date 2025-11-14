@@ -1,7 +1,8 @@
 #!/bin/bash
-# fetch_data.sh — haalt weer- en fietsdata op en slaat ze op met timestamp in aparte mappen
+set -e
+set -o pipefail
+trap 'echo "❌ Fout bij fetch_data.sh"; exit 1' ERR
 
-# === Instellingen ===
 RAWDIR="$HOME/projects/data-workflow/raw_data"
 WEATHER_DIR="$RAWDIR/weather"
 BIKES_DIR="$RAWDIR/bikes"
@@ -9,29 +10,28 @@ LOGDIR="$HOME/projects/data-workflow/logs"
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 LOGFILE="$LOGDIR/fetch-$TIMESTAMP.log"
 
-# === Locatie Gent ===
-LAT="51.05"
-LON="3.72"
-
-# === Outputbestanden ===
-WEATHER_FILE="$WEATHER_DIR/weather-$TIMESTAMP.json"
-BIKES_FILE="$BIKES_DIR/bikes-$TIMESTAMP.json"
-
-# Maak directories aan als ze nog niet bestaan
 mkdir -p "$WEATHER_DIR" "$BIKES_DIR" "$LOGDIR"
 
 {
-  echo "[$(date)] Start data ophalen..."
+    echo "[$(date)] Start data ophalen..."
 
-  # 🌡️ Weerdata via Open-Meteo
-  curl -s "https://api.open-meteo.com/v1/forecast?latitude=$LAT&longitude=$LON&current=temperature_2m" \
-    -o "$WEATHER_FILE"
-  echo "Weerdata opgeslagen in $WEATHER_FILE"
+    # Weerdata
+    if ! curl -s "https://api.open-meteo.com/v1/forecast?latitude=$LAT&longitude=$LON&current=temperature_2m" \
+        -o "$WEATHER_FILE"; then
+        echo "❌ Fout bij ophalen weerdata" >&2
+        exit 1
+    fi
 
-  # 🚲 Deelfietsdata via CityBikes API (Donkey Republic Gent)
-  curl -s "https://api.citybik.es/v2/networks/donkey-gh" \
-    -o "$BIKES_FILE"
-  echo "Fietsdata opgeslagen in $BIKES_FILE"
+    # Fietsdata
+    if ! curl -s "https://api.citybik.es/v2/networks/donkey-gh" \
+        -o "$BIKES_FILE"; then
+        echo "❌ Fout bij ophalen fietsdata" >&2
+        exit 1
+    fi
 
-  echo "[$(date)] Klaar!"
+    # Check of bestanden bestaan
+    [[ -f "$WEATHER_FILE" ]] || { echo "❌ Weather file ontbreekt!"; exit 1; }
+    [[ -f "$BIKES_FILE" ]] || { echo "❌ Bikes file ontbreekt!"; exit 1; }
+
+    echo "[$(date)] Klaar!"
 } >> "$LOGFILE" 2>&1

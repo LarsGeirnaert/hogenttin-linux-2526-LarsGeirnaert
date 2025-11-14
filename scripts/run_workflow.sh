@@ -1,13 +1,11 @@
 #!/bin/bash
-# run_workflow.sh
+set -e
+set -o pipefail
+trap 'echo "❌ Fout in run_workflow.sh"; exit 1' ERR
 
-# activeer virtuele omgeving
 source /home/larsg/projects/data-workflow/venv/bin/activate
-
-# ga naar projectmap
 cd /home/larsg/projects/data-workflow
 
-# Check parameter: als "--no-fetch" meegegeven, sla fetch over
 if [[ "$1" != "--no-fetch" ]]; then
     echo "📥 Data ophalen..."
     bash scripts/fetch_data.sh
@@ -15,15 +13,15 @@ else
     echo "⚠️ Fetch overgeslagen, gebruik bestaande data"
 fi
 
-# transformeren, analyseren en rapport genereren
+# Transformeren, analyseren, rapport
 bash scripts/transform_data.sh
 python scripts/analyze_data.py
 python scripts/plot_bikes_vs_time.py
 python scripts/generate_report.py
 python scripts/generate_pdf_report.py
 
-# automatisch commit & push
+# Git push met check
 cd /home/larsg/projects/data-workflow || exit 1
 git add -A
 git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>/dev/null || true
-git push origin main
+git push origin main || { echo "❌ Git push mislukt"; exit 1; }
