@@ -12,6 +12,18 @@ grafiek_file_2 = 'reports/fiets_vs_uur.png'
 df = pd.read_csv(csv_file)
 weekday_stats = pd.read_csv(weekday_file)
 
+# Engelse → Nederlandse dagen
+day_map = {
+    "Monday": "Maandag",
+    "Tuesday": "Dinsdag",
+    "Wednesday": "Woensdag",
+    "Thursday": "Donderdag",
+    "Friday": "Vrijdag",
+    "Saturday": "Zaterdag",
+    "Sunday": "Zondag"
+}
+weekday_stats["weekday"] = weekday_stats["weekday"].map(day_map)
+
 avg_temp = df['temperature'].mean()
 avg_bikes = round(df["total_free_bikes"].mean())
 correlatie = df['temperature'].corr(df['total_free_bikes'])
