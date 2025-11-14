@@ -1133,3 +1133,20 @@ Mean Squared Error (MSE): 49.0153
  4 files changed, 21 insertions(+), 3 deletions(-)
 To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
    64594a6..2fd7cff  main -> main
+📥 Data ophalen...
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  total_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6               527
+1  2025-11-13T12:00:03+01:00         14.1               525
+2  2025-11-13T14:00:01+01:00         14.1               536
+3  2025-11-13T15:00:02+01:00         14.7               535
+4  2025-11-13T17:00:01+01:00         14.7               550
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.10 °C
+Gemiddeld aantal vrije fietsen: 538.2
+Correlatie tussen temperatuur en vrije fietsen: 0.26
+Mean Squared Error (MSE): 47.0308
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
