@@ -1,27 +1,35 @@
 #!/bin/bash
-# run_workflow.sh
+# run_workflow.sh — volledige workflow
 
-# log bestand
-LOG="/home/larsg/projects/data-workflow/logs/cron.log"
+set -e
+set -o pipefail
+trap 'echo "❌ Fout bij run_workflow.sh"; exit 1' ERR
+
+# Log bestand
+LOG="$HOME/projects/data-workflow/logs/cron.log"
 echo "Run start: $(date)" >> "$LOG"
 
-# activeer virtuele omgeving
-source /home/larsg/projects/data-workflow/venv/bin/activate
+# Environment paths
+export PATH=$HOME/projects/data-workflow/venv/bin:$PATH
+export HOME=/home/larsg
 
-# ga naar projectmap
-cd /home/larsg/projects/data-workflow || exit 1
+# Activeer virtuele omgeving
+source "$HOME/projects/data-workflow/venv/bin/activate"
 
-# fetch data
+# Ga naar projectmap
+cd "$HOME/projects/data-workflow" || exit 1
+
+# Data ophalen
 bash scripts/fetch_data.sh >> "$LOG" 2>&1
 
-# transformeren, analyseren en rapport genereren
+# Transformeren, analyseren en rapport genereren
 bash scripts/transform_data.sh >> "$LOG" 2>&1
 python scripts/analyze_data.py >> "$LOG" 2>&1
 python scripts/plot_bikes_vs_time.py >> "$LOG" 2>&1
 python scripts/generate_report.py >> "$LOG" 2>&1
 python scripts/generate_pdf_report.py >> "$LOG" 2>&1
 
-# commit & push
+# Automatisch commit & push
 git add -A >> "$LOG" 2>&1
 git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>> "$LOG" || true
 git push origin main >> "$LOG" 2>&1
