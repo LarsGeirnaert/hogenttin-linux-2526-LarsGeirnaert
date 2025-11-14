@@ -21,15 +21,8 @@ for weather_file in "$RAW_DIR"/weather-*.json; do
         # 1️⃣ temperatuur ophalen uit JSON
         temp=$(jq -r '.current.temperature_2m' "$weather_file")
 
-        # 2️⃣ gemiddelde vrije fietsen berekenen (in procenten)
-        total_free=$(jq '[.network.stations[].free_bikes] | add' "$bikes_file")
-        total_capacity=$(jq '[.network.stations[].capacity] | add' "$bikes_file")
-
-        if [ "$total_capacity" == "0" ] || [ -z "$total_capacity" ]; then
-            avg_bikes=0
-        else
-            avg_bikes=$(echo "scale=2; ($total_free / $total_capacity) * 100" | bc -l)
-        fi
+        # 2️⃣ gemiddelde vrije fietsen berekenen (fractie 0–1)
+        avg_bikes=$(jq '[.network.stations[].free_bikes] | add / length' "$bikes_file")
 
         # 3️⃣ timestamp uit filename
         timestamp=$(date -d "${base:0:8} ${base:9:2}:${base:11:2}:${base:13:2}" --iso-8601=seconds 2>/dev/null || echo "$base")
