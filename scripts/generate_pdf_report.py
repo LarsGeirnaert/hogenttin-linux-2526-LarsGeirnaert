@@ -2,12 +2,12 @@
 import pandas as pd
 from pathlib import Path
 from reportlab.lib.pagesizes import A4
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet
 
 # Paden
 base_dir = Path.home() / "projects/data-workflow"
-data_file = base_dir / "transformed_data/combined.csv"
+data_file = base_dir / "transformed_data" / "combined.csv"
 report_dir = base_dir / "reports"
 pdf_file = report_dir / "report.pdf"
 
@@ -19,7 +19,7 @@ mean_temp = df["temperature"].mean()
 mean_bikes = df["total_free_bikes"].mean()
 corr = df["temperature"].corr(df["total_free_bikes"])
 
-# PDF instellen (POSIX→string!)
+# PDF instellen
 doc = SimpleDocTemplate(str(pdf_file), pagesize=A4)
 styles = getSampleStyleSheet()
 elements = []
@@ -61,12 +61,16 @@ elements.append(Paragraph("""
 Deze grafiek toont het verband tussen de temperatuur in Gent en het aantal beschikbare 
 deelfietsen. Elke punt vertegenwoordigt een meetmoment. Een lineaire regressielijn wordt 
 toegevoegd om de trend visueel weer te geven. Een positieve correlatie betekent dat hogere 
-temperaturen gemiddeld samengaan met meer beschikbare fietsen.""", styles['Normal']))
+temperaturen gemiddeld samengaan met meer beschikbare fietsen.
+""", styles['Normal']))
 elements.append(Spacer(1, 12))
 
 graph_path_1 = report_dir / "fiets_vs_temp.png"
 elements.append(Image(str(graph_path_1), width=400, height=300))
 elements.append(Spacer(1, 24))
+
+# --- NIEUWE PAGINA ---
+elements.append(PageBreak())
 
 # ------------------------------------
 # GRAFIEK 2 – Bikes per Hour
@@ -78,7 +82,8 @@ elements.append(Paragraph("""
 Deze grafiek toont hoe het aantal beschikbare fietsen varieert doorheen de dag. 
 Hiermee krijg je een beter beeld op piekmomenten en rustige momenten. 
 In tegenstelling tot de vorige grafiek wordt hier niet naar temperatuur gekeken, 
-maar uitsluitend naar tijdstip versus beschikbaarheid.""", styles['Normal']))
+maar uitsluitend naar tijdstip versus beschikbaarheid.
+""", styles['Normal']))
 elements.append(Spacer(1, 12))
 
 graph_path_2 = report_dir / "fiets_vs_uur.png"
