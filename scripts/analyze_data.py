@@ -17,8 +17,9 @@ report_dir.mkdir(exist_ok=True)
 # Data inlezen
 df = pd.read_csv(data_file)
 print("📊 Gegevens ingelezen:")
-print(df.head())
 
+print("📊 Laatste 10 datapunten:")
+print(df.tail(10))
 # Temperatuur afronden op 2 decimalen + kleine random jitter toevoegen
 np.random.seed(42)  # vaste seed voor reproduceerbaarheid; verwijder voor echte random jitter
 df['temperature'] = df['temperature'].round(2) + np.random.uniform(-0.05, 0.05, size=len(df))
