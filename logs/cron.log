@@ -1197,3 +1197,36 @@ Mean Squared Error (MSE): 39.8379
  5 files changed, 23 insertions(+), 4 deletions(-)
 To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
    0320cae..92c1e4a  main -> main
+📥 Data ophalen...
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  total_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6               527
+1  2025-11-13T12:00:03+01:00         14.1               525
+2  2025-11-13T14:00:01+01:00         14.1               536
+3  2025-11-13T15:00:02+01:00         14.7               535
+4  2025-11-13T17:00:01+01:00         14.7               550
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.17 °C
+Gemiddeld aantal vrije fietsen: 538.6
+Correlatie tussen temperatuur en vrije fietsen: 0.29
+Mean Squared Error (MSE): 36.9934
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_pdf_report.py", line 42, in <module>
+    doc.build(elements)
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/reportlab/platypus/doctemplate.py", line 1322, in build
+    BaseDocTemplate.build(self,flowables, canvasmaker=canvasmaker)
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/reportlab/platypus/doctemplate.py", line 1109, in build
+    self._endBuild()
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/reportlab/platypus/doctemplate.py", line 1044, in _endBuild
+    if getattr(self,'_doSave',1): self.canv.save()
+                                  ^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/reportlab/pdfgen/canvas.py", line 1301, in save
+    self._doc.SaveToFile(self._filename, self)
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/reportlab/pdfbase/pdfdoc.py", line 210, in SaveToFile
+    raise TypeError('Cannot use %s as a filename or file' % repr(filename))
+TypeError: Cannot use PosixPath('/home/larsg/projects/data-workflow/reports/report.pdf') as a filename or file
