@@ -91,12 +91,23 @@ De workflow kan automatisch elk kwartier draaien via een cron-job. Hierbij wordt
 
 ### 5.2 Handmatig testen
 
-Wanneer je de workflow handmatig start met:
+Om de workflow handmatig uit te voeren zonder nieuwe data op te halen:
+
 ```
-cd ~/projects/data-workflow 
-bash /home/larsg/projects/data-workflow/scripts/run_workflow.sh --no-fetch
+cd ~/projects/data-workflow
+bash scripts/run_workflow.sh --no-fetch
 ```
 
+Om enkel de CSV bij te werken (transformatie van ruwe data):
+```
+bash scripts/transform_data.sh
+```
+
+Om alleen analyse en grafieken te genereren:
+```
+python scripts/analyze_data.py
+python scripts/plot_bikes_vs_time.py
+```
 
 wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en rapporten worden bijgewerkt op basis van de reeds aanwezige ruwe data. Dit is handig om snel te testen of de analyse en visualisaties correct werken.
 
