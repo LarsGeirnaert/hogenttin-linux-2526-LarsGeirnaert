@@ -21,9 +21,15 @@ pdf_file = report_dir / "report.pdf"
 df = pd.read_csv(data_file)
 weekday_stats = pd.read_csv(weekday_file)
 
+# Algemene statistieken
 mean_temp = df["temperature"].mean()
 mean_bikes = round(df["total_free_bikes"].mean())
 corr = df["temperature"].corr(df["total_free_bikes"])
+
+# Gemiddeld aantal fietsen overdag/nacht
+day_avg_bikes = round(df[(df['timestamp'].dt.hour >= 7) & (df['timestamp'].dt.hour < 19)]['total_free_bikes'].mean())
+night_avg_bikes = round(df[(df['timestamp'].dt.hour < 7) | (df['timestamp'].dt.hour >= 19)]['total_free_bikes'].mean())
+
 
 # Nederlandse weekdagen
 day_map = {

@@ -1915,3 +1915,42 @@ Correlatie: 0.49
  6 files changed, 60 insertions(+), 32 deletions(-)
 To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
    250da3f..ebaab51  main -> main
+📥 Data ophalen...
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Laatste 10 datapunten:
+                   timestamp  temperature  total_free_bikes
+31 2025-11-14 20:30:03+01:00         14.6               542
+32 2025-11-14 20:45:02+01:00         14.5               543
+33 2025-11-14 21:00:02+01:00         14.4               544
+34 2025-11-14 21:15:01+01:00         14.4               540
+35 2025-11-14 21:30:01+01:00         14.8               545
+36 2025-11-14 21:45:01+01:00         14.9               543
+37 2025-11-14 22:00:01+01:00         14.9               548
+38 2025-11-14 22:15:01+01:00         14.9               547
+39 2025-11-14 22:30:01+01:00         14.8               547
+40 2025-11-14 22:45:01+01:00         14.9               544
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.51 °C
+Gemiddeld aantal vrije fietsen: 543
+Gemiddeld aantal fietsen overdag (7-19u): 543
+Gemiddeld aantal fietsen ’s nachts (19-7u): 543
+Correlatie: 0.48
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_pdf_report.py", line 30, in <module>
+    day_avg_bikes = round(df[(df['timestamp'].dt.hour >= 7) & (df['timestamp'].dt.hour < 19)]['total_free_bikes'].mean())
+                              ^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6321, in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/accessor.py", line 224, in __get__
+    accessor_obj = self._accessor(obj)
+                   ^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/indexes/accessors.py", line 643, in __new__
+    raise AttributeError("Can only use .dt accessor with datetimelike values")
+AttributeError: Can only use .dt accessor with datetimelike values. Did you mean: 'at'?
