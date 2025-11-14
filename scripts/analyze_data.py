@@ -21,8 +21,9 @@ print(df.head())
 
 # Statistieken
 mean_temp = df["temperature"].mean()
-mean_bikes = df["avg_free_bikes"].mean() * 100  # nu in %
+mean_bikes = df["total_free_bikes"].mean()
 corr = df["temperature"].corr(df["total_free_bikes"])
+
 
 print("\n📈 Statistieken:")
 print(f"Gemiddelde temperatuur: {mean_temp:.2f} °C")
