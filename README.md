@@ -1,5 +1,11 @@
 # Data Workflow: Temperatuur vs. Aantal Vrije Fietsen in Gent
 
+## 0. Relevante links
+- GitHub repository: https://github.com/hogenttin/linux-2526-LARS
+- Panopto demo opname: [link hier]
+
+---
+
 ## 1. Beschrijving van de workflow
 
 Deze workflow verzamelt automatisch gegevens over het weer (temperatuur) en het aantal beschikbare deelfietsen in Gent. De data wordt verwerkt, geanalyseerd en gevisualiseerd, waarna de resultaten automatisch naar GitHub worden gepusht.
@@ -7,21 +13,21 @@ Deze workflow verzamelt automatisch gegevens over het weer (temperatuur) en het 
 ### Fasen van de workflow
 
 1. **Data ophalen**  
-   JSON-bestanden van de Gentse weer-API en CityBikes API.
+   JSON-bestanden van de Gentse weer-API en CityBikes API worden opgehaald op regelmatige tijdstippen.
 
 2. **Data transformeren**  
-   Omzetten van JSON naar CSV (`combined.csv`) met relevante kolommen.
+   Omzetten van JSON naar CSV (`combined.csv`) met relevante kolommen en timestamps.
 
 3. **Data analyseren**  
-   Genereren van een grafiek van vrije fietsen versus temperatuur.
+   Berekenen van statistieken, correlaties en genereren van grafieken (temperatuur vs vrije fietsen, fietsen per uur).
 
 4. **Rapport genereren**  
-   Aanmaken van een Markdown-rapport (`report.md`) met grafieken en statistieken.
+   Aanmaken van Markdown-rapport (`report.md`) en professioneel PDF-rapport (`report.pdf`) met grafieken en tabellen.
 
 5. **Automatisering**  
-   Alles kan automatisch draaien via een cron-job en wordt naar GitHub gepusht.
+   Alles kan automatisch draaien via een cron-job of GitHub Actions en wordt naar GitHub gepusht.
 
-
+---
 
 ## 2. Data
 
@@ -34,7 +40,12 @@ Vanaf 13 november 2025, met een interval van 15 minuten (automatisch).
 
 ### Bestandsindeling
 - **Ruwe data**: JSON-bestanden in `raw_data/`  
-- **Verwerkte data**: CSV-bestanden in `transformed_data/combined.csv`  
+- **Verwerkte data**: CSV-bestand `transformed_data/combined.csv`  
+
+### CSV-header
+- `timestamp`: ISO 8601 datum/tijd van de meting  
+- `temperature`: temperatuur in graden Celsius  
+- `total_free_bikes`: totaal aantal vrije fietsen in Gent  
 
 ---
 
