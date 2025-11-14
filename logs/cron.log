@@ -889,3 +889,59 @@ Traceback (most recent call last):
   File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
     raise KeyError(key) from err
 KeyError: 'avg_free_bikes'
+[main f538d7e] Automatische update 2025-11-14 14:28:08
+ 2 files changed, 57 insertions(+)
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   27fb3e1..f538d7e  main -> main
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  total_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6               527
+1  2025-11-13T12:00:03+01:00         14.1               525
+2  2025-11-13T14:00:01+01:00         14.1               536
+3  2025-11-13T15:00:02+01:00         14.7               535
+4  2025-11-13T17:00:01+01:00         14.7               550
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'avg_free_bikes'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 24, in <module>
+    mean_bikes = df["avg_free_bikes"].mean() * 100  # nu in %
+                 ~~^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4113, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'avg_free_bikes'
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'avg_free_bikes'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/generate_report.py", line 13, in <module>
+    avg_bikes = df['avg_free_bikes'].mean()
+                ~~^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4113, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'avg_free_bikes'
