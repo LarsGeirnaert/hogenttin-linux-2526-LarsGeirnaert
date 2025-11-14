@@ -1293,3 +1293,27 @@ Mean Squared Error (MSE): 39.4106
 📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
 📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
 📁 PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
+📥 Data ophalen...
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Laatste 10 datapunten:
+                    timestamp  temperature  total_free_bikes
+9   2025-11-14T15:00:01+01:00         14.1               540
+10  2025-11-14T15:15:08+01:00         14.1               538
+11  2025-11-14T15:30:02+01:00         14.4               541
+12  2025-11-14T15:45:01+01:00         14.4               540
+13  2025-11-14T16:00:01+01:00         14.4               540
+14  2025-11-14T16:15:01+01:00         14.4               545
+15  2025-11-14T16:30:02+01:00         14.6               552
+16  2025-11-14T16:45:01+01:00         14.7               551
+17  2025-11-14T17:00:01+01:00         14.7               553
+18  2025-11-14T17:15:02+01:00         14.5               557
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.27 °C
+Gemiddeld aantal vrije fietsen: 542
+Correlatie tussen temperatuur en vrije fietsen: 0.56
+Mean Squared Error (MSE): 45.6261
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
