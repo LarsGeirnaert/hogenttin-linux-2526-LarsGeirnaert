@@ -1053,3 +1053,18 @@ KeyError: 'avg_free_bikes'
 To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
    116bf8e..93ea45b  main -> main
 ✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Gegevens ingelezen:
+                   timestamp  temperature  total_free_bikes
+0  2025-11-13T11:00:02+01:00         13.6               527
+1  2025-11-13T12:00:03+01:00         14.1               525
+2  2025-11-13T14:00:01+01:00         14.1               536
+3  2025-11-13T15:00:02+01:00         14.7               535
+4  2025-11-13T17:00:01+01:00         14.7               550
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.01 °C
+Gemiddeld aantal vrije fietsen: 539.9%
+Correlatie tussen temperatuur en vrije fietsen: 0.15
+Mean Squared Error (MSE): 39.4375
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
