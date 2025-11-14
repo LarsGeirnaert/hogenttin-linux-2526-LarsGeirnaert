@@ -2,86 +2,74 @@
 import pandas as pd
 from pathlib import Path
 from reportlab.lib.pagesizes import A4
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak
+from reportlab.platypus import (
+    SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, Table, TableStyle
+)
 from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib import colors
 
 # Paden
 base_dir = Path.home() / "projects/data-workflow"
 data_file = base_dir / "transformed_data" / "combined.csv"
+weekday_file = base_dir / "reports" / "weekday_stats.csv"
 report_dir = base_dir / "reports"
 pdf_file = report_dir / "report.pdf"
 
-# Data inlezen
+# Data
 df = pd.read_csv(data_file)
+weekday_stats = pd.read_csv(weekday_file)
 
-# Statistieken
 mean_temp = df["temperature"].mean()
-mean_bikes = round(df["total_free_bikes"].mean())  # afgerond
+mean_bikes = round(df["total_free_bikes"].mean())
 corr = df["temperature"].corr(df["total_free_bikes"])
 
-# PDF instellen
+# PDF setup
 doc = SimpleDocTemplate(str(pdf_file), pagesize=A4)
 styles = getSampleStyleSheet()
 elements = []
 
-# ------------------------------------
-# TITEL
-# ------------------------------------
+# Titel
 elements.append(Paragraph(
-    "Data Workflow Rapport: Temperatuur vs. Aantal Vrije Fietsen in Gent",
+    "Data Workflow Rapport: Temperatuur vs Aantal Vrije Fietsen in Gent",
     styles['Title']
 ))
 elements.append(Spacer(1, 16))
-# Statistieken sectie
+
+# Statistieken
 elements.append(Paragraph("<b>Statistische Samenvatting</b>", styles['Heading2']))
-elements.append(Spacer(1, 8))
 elements.append(Paragraph(f"Gemiddelde temperatuur: {mean_temp:.2f} °C", styles['Normal']))
-elements.append(Paragraph(f"Gemiddeld aantal vrije fietsen: {mean_bikes}", styles['Normal']))  # afgerond
-elements.append(Paragraph(f"Correlatie tussen temperatuur en aantal vrije fietsen: {corr:.2f}", styles['Normal']))
+elements.append(Paragraph(f"Gemiddeld aantal vrije fietsen: {mean_bikes}", styles['Normal']))
+elements.append(Paragraph(f"Correlatie: {corr:.2f}", styles['Normal']))
 elements.append(Spacer(1, 16))
 
-
-# ------------------------------------
-# GRAFIEK 1 – Temp vs Free Bikes
-# ------------------------------------
-elements.append(Paragraph("<b>Grafiek 1: Relatie tussen temperatuur en vrije fietsen</b>", styles['Heading2']))
+# Weekdag tabel
+elements.append(Paragraph("<b>Vrije fietsen per weekdag</b>", styles['Heading2']))
 elements.append(Spacer(1, 8))
 
-elements.append(Paragraph("""
-Deze grafiek toont het verband tussen de temperatuur in Gent en het aantal beschikbare 
-deelfietsen. Elke punt vertegenwoordigt een meetmoment. Een lineaire regressielijn wordt 
-toegevoegd om de trend visueel weer te geven. Een positieve correlatie betekent dat hogere 
-temperaturen gemiddeld samengaan met meer beschikbare fietsen.
-""", styles['Normal']))
-elements.append(Spacer(1, 12))
+table_data = [["Weekdag", "Min", "Max", "Gemiddelde"]]
+for _, row in weekday_stats.iterrows():
+    table_data.append([
+        row["weekday"], row["Min"], row["Max"], row["Gemiddelde"]
+    ])
 
-graph_path_1 = report_dir / "fiets_vs_temp.png"
-elements.append(Image(str(graph_path_1), width=400, height=300))
-elements.append(Spacer(1, 24))
+table = Table(table_data)
+table.setStyle(TableStyle([
+    ("BACKGROUND", (0,0), (-1,0), colors.lightgrey),
+    ("GRID", (0,0), (-1,-1), 0.5, colors.grey),
+    ("ALIGN", (1,1), (-1,-1), "CENTER")
+]))
+elements.append(table)
+elements.append(Spacer(1, 16))
 
-# --- NIEUWE PAGINA ---
+# Grafiek 1
+elements.append(Paragraph("<b>Grafiek 1: Temperatuur vs vrije fietsen</b>", styles['Heading2']))
+elements.append(Image(str(report_dir / "fiets_vs_temp.png"), width=400, height=300))
 elements.append(PageBreak())
 
-# ------------------------------------
-# GRAFIEK 2 – Bikes per Hour
-# ------------------------------------
-elements.append(Paragraph("<b>Grafiek 2: Aantal vrije fietsen per tijdstip van de dag</b>", styles['Heading2']))
-elements.append(Spacer(1, 8))
+# Grafiek 2
+elements.append(Paragraph("<b>Grafiek 2: Fietsen per uur</b>", styles['Heading2']))
+elements.append(Image(str(report_dir / "fiets_vs_uur.png"), width=400, height=300))
 
-elements.append(Paragraph("""
-Deze grafiek toont hoe het aantal beschikbare fietsen varieert doorheen de dag. 
-Hiermee krijg je een beter beeld op piekmomenten en rustige momenten. 
-In tegenstelling tot de vorige grafiek wordt hier niet naar temperatuur gekeken, 
-maar uitsluitend naar tijdstip versus beschikbaarheid.
-""", styles['Normal']))
-elements.append(Spacer(1, 12))
-
-graph_path_2 = report_dir / "fiets_vs_uur.png"
-elements.append(Image(str(graph_path_2), width=400, height=300))
-elements.append(Spacer(1, 24))
-
-# ------------------------------------
-# PDF genereren
-# ------------------------------------
+# PDF bouwen
 doc.build(elements)
-print(f"📁 PDF-rapport opgeslagen in: {pdf_file}")
+print(f"📁 PDF gegenereerd: {pdf_file}")
