@@ -50,14 +50,14 @@ Verwerkte data: CSV in transformed_data/combined.csv
 
 De workflow kan automatisch elk kwartier draaien via een cron-job. Hierbij wordt nieuwe data opgehaald, en worden alle documenten, grafieken en het CSV-bestand bijgewerkt. Voeg bijvoorbeeld deze regel toe aan je crontab:
 
-*/15 * * * * cd /home/larsg/projects/data-workflow && ./scripts/run_workflow.sh
+``` */15 * * * * cd /home/larsg/projects/data-workflow && ./scripts/run_workflow.sh ```
 
 4.2 Handmatig testen
 
 Wanneer je de workflow handmatig start met:
 
-cd ~/projects/data-workflow
-./scripts/run_workflow.sh
+``` cd ~/projects/data-workflow
+./scripts/run_workflow.sh ```
 
 
 wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en rapporten worden bijgewerkt op basis van de reeds aanwezige ruwe data. Dit is handig om snel te testen of de analyse en visualisaties correct werken.
