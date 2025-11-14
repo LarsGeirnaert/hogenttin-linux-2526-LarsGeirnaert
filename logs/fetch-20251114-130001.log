@@ -1,0 +1,4 @@
+[Fri Nov 14 13:00:01 CET 2025] Start data ophalen...
+Weerdata opgeslagen in /home/larsg/projects/data-workflow/raw_data/weather-20251114-130001.json
+Fietsdata opgeslagen in /home/larsg/projects/data-workflow/raw_data/bikes-20251114-130001.json
+[Fri Nov 14 13:00:06 CET 2025] Klaar!
