@@ -16,7 +16,7 @@ df = pd.read_csv(data_file)
 
 # Statistieken
 mean_temp = df["temperature"].mean()
-mean_bikes = df["total_free_bikes"].mean()
+mean_bikes = round(df["total_free_bikes"].mean())  # afgerond
 corr = df["temperature"].corr(df["total_free_bikes"])
 
 # PDF instellen
@@ -32,24 +32,14 @@ elements.append(Paragraph(
     styles['Title']
 ))
 elements.append(Spacer(1, 16))
-
-# ------------------------------------
-# STATISTIEKEN
-# ------------------------------------
+# Statistieken sectie
 elements.append(Paragraph("<b>Statistische Samenvatting</b>", styles['Heading2']))
 elements.append(Spacer(1, 8))
-
-elements.append(Paragraph(
-    f"Gemiddelde temperatuur: {mean_temp:.2f} °C", styles['Normal']
-))
-elements.append(Paragraph(
-    f"Gemiddeld aantal vrije fietsen: {mean_bikes:.1f}", styles['Normal']
-))
-elements.append(Paragraph(
-    f"Correlatie tussen temperatuur en aantal vrije fietsen: {corr:.2f}",
-    styles['Normal']
-))
+elements.append(Paragraph(f"Gemiddelde temperatuur: {mean_temp:.2f} °C", styles['Normal']))
+elements.append(Paragraph(f"Gemiddeld aantal vrije fietsen: {mean_bikes}", styles['Normal']))  # afgerond
+elements.append(Paragraph(f"Correlatie tussen temperatuur en aantal vrije fietsen: {corr:.2f}", styles['Normal']))
 elements.append(Spacer(1, 16))
+
 
 # ------------------------------------
 # GRAFIEK 1 – Temp vs Free Bikes
