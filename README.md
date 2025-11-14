@@ -54,14 +54,14 @@ data-workflow/
 ├─ logs/                 # Logbestanden van fetches
 └─ README.md
 ```
-4. Gebruiksaanwijzing
-4.1 Automatisch uitvoeren (elk kwartier)
+## 4. Gebruiksaanwijzing
+### 4.1 Automatisch uitvoeren (elk kwartier)
 
 De workflow kan automatisch elk kwartier draaien via een cron-job. Hierbij wordt nieuwe data opgehaald, en worden alle documenten, grafieken en het CSV-bestand bijgewerkt. Voeg bijvoorbeeld deze regel toe aan je crontab:
 
 ``` */15 * * * * cd /home/larsg/projects/data-workflow && ./scripts/run_workflow.sh ```
 
-4.2 Handmatig testen
+### 4.2 Handmatig testen
 
 Wanneer je de workflow handmatig start met:
 ```
