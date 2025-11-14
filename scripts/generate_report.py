@@ -10,7 +10,7 @@ grafiek_file = 'reports/fiets_vs_temp.png'
 # Lees CSV
 df = pd.read_csv(csv_file)
 avg_temp = df['temperature'].mean()
-avg_bikes = df['avg_free_bikes'].mean()
+avg_bikes = df["total_free_bikes"].mean()
 correlatie = df['temperature'].corr(df['total_free_bikes'])
 
 # Markdown genereren
