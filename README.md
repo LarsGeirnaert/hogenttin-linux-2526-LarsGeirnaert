@@ -55,8 +55,10 @@ De workflow kan automatisch elk kwartier draaien via een cron-job. Hierbij wordt
 4.2 Handmatig testen
 
 Wanneer je de workflow handmatig start met:
-
-``` cd ~/projects/data-workflow ./scripts/run_workflow.sh ```
+```
+cd ~/projects/data-workflow 
+./scripts/run_workflow.sh
+```
 
 
 wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en rapporten worden bijgewerkt op basis van de reeds aanwezige ruwe data. Dit is handig om snel te testen of de analyse en visualisaties correct werken.
