@@ -23,28 +23,57 @@ mean_temp = df["temperature"].mean()
 mean_bikes = round(df["total_free_bikes"].mean())
 corr = df["temperature"].corr(df["total_free_bikes"])
 
+# Engelse → Nederlandse dagen
+day_map = {
+    "Monday": "Maandag",
+    "Tuesday": "Dinsdag",
+    "Wednesday": "Woensdag",
+    "Thursday": "Donderdag",
+    "Friday": "Vrijdag",
+    "Saturday": "Zaterdag",
+    "Sunday": "Zondag"
+}
+weekday_stats["weekday"] = weekday_stats["weekday"].map(day_map)
+
 # PDF setup
 doc = SimpleDocTemplate(str(pdf_file), pagesize=A4)
 styles = getSampleStyleSheet()
 elements = []
 
-# Titel
+# Titelpagina
 elements.append(Paragraph(
     "Data Workflow Rapport: Temperatuur vs Aantal Vrije Fietsen in Gent",
     styles['Title']
 ))
-elements.append(Spacer(1, 16))
-
-# Statistieken
+elements.append(Spacer(1, 20))
 elements.append(Paragraph("<b>Statistische Samenvatting</b>", styles['Heading2']))
+elements.append(Spacer(1, 8))
 elements.append(Paragraph(f"Gemiddelde temperatuur: {mean_temp:.2f} °C", styles['Normal']))
 elements.append(Paragraph(f"Gemiddeld aantal vrije fietsen: {mean_bikes}", styles['Normal']))
 elements.append(Paragraph(f"Correlatie: {corr:.2f}", styles['Normal']))
-elements.append(Spacer(1, 16))
+elements.append(PageBreak())
 
-# Weekdag tabel
-elements.append(Paragraph("<b>Vrije fietsen per weekdag</b>", styles['Heading2']))
-elements.append(Spacer(1, 8))
+# -----------------------------------------
+# PAGINA 1 — Grafiek 1
+# -----------------------------------------
+elements.append(Paragraph("<b>Grafiek 1: Temperatuur vs vrije fietsen</b>", styles['Heading2']))
+elements.append(Spacer(1, 12))
+elements.append(Image(str(report_dir / "fiets_vs_temp.png"), width=400, height=300))
+elements.append(PageBreak())
+
+# -----------------------------------------
+# PAGINA 2 — Grafiek 2
+# -----------------------------------------
+elements.append(Paragraph("<b>Grafiek 2: Aantal fietsen per uur</b>", styles['Heading2']))
+elements.append(Spacer(1, 12))
+elements.append(Image(str(report_dir / "fiets_vs_uur.png"), width=400, height=300))
+elements.append(PageBreak())
+
+# -----------------------------------------
+# PAGINA 3 — Tabel
+# -----------------------------------------
+elements.append(Paragraph("<b>Tabel: Vrije fietsen per weekdag</b>", styles['Heading2']))
+elements.append(Spacer(1, 12))
 
 table_data = [["Weekdag", "Min", "Max", "Gemiddelde"]]
 for _, row in weekday_stats.iterrows():
@@ -56,19 +85,10 @@ table = Table(table_data)
 table.setStyle(TableStyle([
     ("BACKGROUND", (0,0), (-1,0), colors.lightgrey),
     ("GRID", (0,0), (-1,-1), 0.5, colors.grey),
-    ("ALIGN", (1,1), (-1,-1), "CENTER")
+    ("ALIGN", (1,1), (-1,-1), "CENTER"),
+    ("FONTNAME", (0,0), (-1,0), "Helvetica-Bold")
 ]))
 elements.append(table)
-elements.append(Spacer(1, 16))
-
-# Grafiek 1
-elements.append(Paragraph("<b>Grafiek 1: Temperatuur vs vrije fietsen</b>", styles['Heading2']))
-elements.append(Image(str(report_dir / "fiets_vs_temp.png"), width=400, height=300))
-elements.append(PageBreak())
-
-# Grafiek 2
-elements.append(Paragraph("<b>Grafiek 2: Fietsen per uur</b>", styles['Heading2']))
-elements.append(Image(str(report_dir / "fiets_vs_uur.png"), width=400, height=300))
 
 # PDF bouwen
 doc.build(elements)
