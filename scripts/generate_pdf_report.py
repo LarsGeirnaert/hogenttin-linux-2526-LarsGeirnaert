@@ -87,7 +87,13 @@ elements.append(Paragraph("Tabel: Vrije Fietsen per Weekdag", header_style))
 elements.append(Spacer(1, 12))
 table_data = [["Weekdag", "Min", "Max", "Gemiddelde"]]
 for _, row in weekday_stats.iterrows():
-    table_data.append([row["weekday"], int(row["Min"]), int(row["Max"]), int(row["Gemiddelde"])])
+    table_data.append([
+    row["weekday"],
+    int(row["Min"]) if not pd.isna(row["Min"]) else 0,
+    int(row["Max"]) if not pd.isna(row["Max"]) else 0,
+    int(row["Gemiddelde"]) if not pd.isna(row["Gemiddelde"]) else 0
+])
+
 
 table = Table(table_data, hAlign='CENTER')
 table.setStyle(TableStyle([
