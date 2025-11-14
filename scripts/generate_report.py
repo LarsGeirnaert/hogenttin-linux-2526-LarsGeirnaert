@@ -53,3 +53,12 @@ with open(report_file, 'w') as f:
 
     f.write("## Grafiek: Vrije fietsen per uur\n")
     f.write(f"![Fiets vs Uur]({grafiek_file_2})\n")
+
+	f.write("### Heatmap: Vrije Fietsen per Uur per Weekdag\n")
+	f.write("![Heatmap](reports/fiets_heatmap.png)\n\n")
+
+	f.write("### Rolling Average Vrije Fietsen\n")
+	f.write("![Rolling Average](reports/rolling_avg.png)\n\n")
+
+	f.write("### Boxplot Vrije Fietsen per Weekdag\n")
+	f.write("![Boxplot](reports/boxplot_weekday.png)\n\n")

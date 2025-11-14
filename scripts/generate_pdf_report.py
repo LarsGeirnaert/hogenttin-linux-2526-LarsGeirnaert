@@ -114,3 +114,16 @@ elements.append(table)
 # ---------- BUILD PDF ----------
 doc.build(elements)
 print(f"📁 Professioneel PDF-rapport opgeslagen in: {pdf_file}")
+
+
+elements.append(Paragraph("Heatmap: Vrije Fietsen per Uur per Weekdag", header_style))
+elements.append(Image(str(report_dir / "fiets_heatmap.png"), width=16*cm, height=10*cm))
+elements.append(PageBreak())
+
+elements.append(Paragraph("Rolling Average van Vrije Fietsen", header_style))
+elements.append(Image(str(report_dir / "rolling_avg.png"), width=16*cm, height=10*cm))
+elements.append(PageBreak())
+
+elements.append(Paragraph("Boxplot Vrije Fietsen per Weekdag", header_style))
+elements.append(Image(str(report_dir / "boxplot_weekday.png"), width=16*cm, height=10*cm))
+elements.append(PageBreak())
