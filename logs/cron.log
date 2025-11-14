@@ -1959,3 +1959,30 @@ AttributeError: Can only use .dt accessor with datetimelike values. Did you mean
  create mode 100644 scripts/.generate_pdf_report.py.swp
 To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
    8c25463..16e1890  main -> main
+📥 Data ophalen...
+✅ CSV-bestand gegenereerd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+📊 Laatste 10 datapunten:
+                   timestamp  temperature  total_free_bikes
+32 2025-11-14 20:45:02+01:00         14.5               543
+33 2025-11-14 21:00:02+01:00         14.4               544
+34 2025-11-14 21:15:01+01:00         14.4               540
+35 2025-11-14 21:30:01+01:00         14.8               545
+36 2025-11-14 21:45:01+01:00         14.9               543
+37 2025-11-14 22:00:01+01:00         14.9               548
+38 2025-11-14 22:15:01+01:00         14.9               547
+39 2025-11-14 22:30:01+01:00         14.8               547
+40 2025-11-14 22:45:01+01:00         14.9               544
+41 2025-11-14 23:00:01+01:00         14.9               551
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.52 °C
+Gemiddeld aantal vrije fietsen: 543
+Gemiddeld aantal fietsen overdag (7-19u): 543
+Gemiddeld aantal fietsen ’s nachts (19-7u): 543
+Correlatie: 0.50
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Professioneel PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
