@@ -22,6 +22,7 @@ Deze workflow verzamelt automatisch gegevens over het weer (temperatuur) en het 
    Alles kan automatisch draaien via een cron-job en wordt naar GitHub gepusht.
 
 
+
 2. Data
 
 Bronnen:
