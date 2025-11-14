@@ -1,8 +1,10 @@
 #!/bin/bash
-# fetch_data.sh — haalt weer- en fietsdata op en slaat ze op met timestamp
+# fetch_data.sh — haalt weer- en fietsdata op en slaat ze op met timestamp in aparte mappen
 
 # === Instellingen ===
-OUTDIR="$HOME/projects/data-workflow/raw_data"
+RAWDIR="$HOME/projects/data-workflow/raw_data"
+WEATHER_DIR="$RAWDIR/weather"
+BIKES_DIR="$RAWDIR/bikes"
 LOGDIR="$HOME/projects/data-workflow/logs"
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 LOGFILE="$LOGDIR/fetch-$TIMESTAMP.log"
@@ -12,10 +14,11 @@ LAT="51.05"
 LON="3.72"
 
 # === Outputbestanden ===
-WEATHER_FILE="$OUTDIR/weather-$TIMESTAMP.json"
-BIKES_FILE="$OUTDIR/bikes-$TIMESTAMP.json"
+WEATHER_FILE="$WEATHER_DIR/weather-$TIMESTAMP.json"
+BIKES_FILE="$BIKES_DIR/bikes-$TIMESTAMP.json"
 
-mkdir -p "$OUTDIR" "$LOGDIR"
+# Maak directories aan als ze nog niet bestaan
+mkdir -p "$WEATHER_DIR" "$BIKES_DIR" "$LOGDIR"
 
 {
   echo "[$(date)] Start data ophalen..."
@@ -29,7 +32,6 @@ mkdir -p "$OUTDIR" "$LOGDIR"
   curl -s "https://api.citybik.es/v2/networks/donkey-gh" \
     -o "$BIKES_FILE"
   echo "Fietsdata opgeslagen in $BIKES_FILE"
-
 
   echo "[$(date)] Klaar!"
 } >> "$LOGFILE" 2>&1
