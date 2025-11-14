@@ -8,7 +8,6 @@ from reportlab.platypus import (
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.units import cm
-from reportlab.pdfgen import canvas
 
 # Paden
 base_dir = Path.home() / "projects/data-workflow"
@@ -17,9 +16,12 @@ weekday_file = base_dir / "reports/weekday_stats.csv"
 report_dir = base_dir / "reports"
 pdf_file = report_dir / "report.pdf"
 
-# Data
+# Data inlezen
 df = pd.read_csv(data_file)
 weekday_stats = pd.read_csv(weekday_file)
+
+# Zet timestamp om naar datetime
+df['timestamp'] = pd.to_datetime(df['timestamp'])
 
 # Algemene statistieken
 mean_temp = df["temperature"].mean()
@@ -29,7 +31,6 @@ corr = df["temperature"].corr(df["total_free_bikes"])
 # Gemiddeld aantal fietsen overdag/nacht
 day_avg_bikes = round(df[(df['timestamp'].dt.hour >= 7) & (df['timestamp'].dt.hour < 19)]['total_free_bikes'].mean())
 night_avg_bikes = round(df[(df['timestamp'].dt.hour < 7) | (df['timestamp'].dt.hour >= 19)]['total_free_bikes'].mean())
-
 
 # Nederlandse weekdagen
 day_map = {
@@ -51,7 +52,6 @@ header_style = ParagraphStyle(
     'HeaderStyle', parent=styles['Heading2'], fontSize=16, spaceAfter=12)
 normal_style = ParagraphStyle(
     'NormalStyle', parent=styles['Normal'], fontSize=12, leading=16)
-footer_style = ParagraphStyle('FooterStyle', alignment=1, fontSize=10, textColor=colors.grey)
 
 elements = []
 
@@ -66,8 +66,8 @@ elements.append(PageBreak())
 elements.append(Paragraph("Statistische Samenvatting", header_style))
 elements.append(Spacer(1, 12))
 elements.append(Paragraph(f"Gemiddelde temperatuur: {mean_temp:.2f} °C", normal_style))
-elements.append(Paragraph(f"Gemiddeld aantal fietsen overdag (07-19u): {day_avg_bikes}", styles['Normal']))
-elements.append(Paragraph(f"Gemiddeld aantal fietsen ’s nachts (19-07u): {night_avg_bikes}", styles['Normal']))
+elements.append(Paragraph(f"Gemiddeld aantal fietsen overdag (07-19u): {day_avg_bikes}", normal_style))
+elements.append(Paragraph(f"Gemiddeld aantal fietsen ’s nachts (19-07u): {night_avg_bikes}", normal_style))
 elements.append(Paragraph(f"Correlatie tussen temperatuur en aantal vrije fietsen: {corr:.2f}", normal_style))
 elements.append(PageBreak())
 
@@ -95,12 +95,11 @@ elements.append(Spacer(1, 12))
 table_data = [["Weekdag", "Min", "Max", "Gemiddelde"]]
 for _, row in weekday_stats.iterrows():
     table_data.append([
-    row["weekday"],
-    int(row["Min"]) if not pd.isna(row["Min"]) else 0,
-    int(row["Max"]) if not pd.isna(row["Max"]) else 0,
-    int(row["Gemiddelde"]) if not pd.isna(row["Gemiddelde"]) else 0
-])
-
+        row["weekday"],
+        int(row["Min"]) if not pd.isna(row["Min"]) else 0,
+        int(row["Max"]) if not pd.isna(row["Max"]) else 0,
+        int(row["Gemiddelde"]) if not pd.isna(row["Gemiddelde"]) else 0
+    ])
 
 table = Table(table_data, hAlign='CENTER')
 table.setStyle(TableStyle([
