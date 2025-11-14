@@ -18,6 +18,7 @@ fi
 # transformeren, analyseren en rapport genereren
 bash scripts/transform_data.sh
 python scripts/analyze_data.py
+python scripts/plot_bikes_vs_time.py
 python scripts/generate_report.py
 
 # automatisch commit & push
