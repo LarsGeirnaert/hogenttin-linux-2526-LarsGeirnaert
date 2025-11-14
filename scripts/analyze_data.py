@@ -8,10 +8,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import numpy as np
 
-np.random.seed(42)  # kies een getal om de random waarden reproduceerbaar te maken
-df['temperature'] = df['temperature'].round(2) + np.random.uniform(-0.05, 0.05, size=len(df))
-
-
 # Paden
 base_dir = Path.home() / "projects" / "data-workflow"
 data_file = base_dir / "transformed_data" / "combined.csv"
@@ -20,12 +16,12 @@ report_dir.mkdir(exist_ok=True)
 
 # Data inlezen
 df = pd.read_csv(data_file)
-
-# Temperatuur afronden op 2 cijfers na de komma
-df['temperature'] = df['temperature'].round(2)
-
 print("📊 Gegevens ingelezen:")
 print(df.head())
+
+# Temperatuur afronden op 2 decimalen + kleine random jitter toevoegen
+np.random.seed(42)  # vaste seed voor reproduceerbaarheid; verwijder voor echte random jitter
+df['temperature'] = df['temperature'].round(2) + np.random.uniform(-0.05, 0.05, size=len(df))
 
 # Statistieken
 mean_temp = df["temperature"].mean()
@@ -34,10 +30,10 @@ corr = df["temperature"].corr(df["total_free_bikes"])
 
 print("\n📈 Statistieken:")
 print(f"Gemiddelde temperatuur: {mean_temp:.2f} °C")
-print(f"Gemiddeld aantal vrije fietsen: {mean_bikes:.1f}")  # afgerond op 1 decimaal
+print(f"Gemiddeld aantal vrije fietsen: {mean_bikes:.1f}")
 print(f"Correlatie tussen temperatuur en vrije fietsen: {corr:.2f}")
 
-# Lineaire regressie 
+# Lineaire regressie
 X = df["temperature"].values.reshape(-1, 1)
 y = df["total_free_bikes"].values
 model = LinearRegression()
