@@ -72,23 +72,23 @@ bash /home/larsg/projects/data-workflow/scripts/run_workflow.sh --no-fetch
 
 wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en rapporten worden bijgewerkt op basis van de reeds aanwezige ruwe data. Dit is handig om snel te testen of de analyse en visualisaties correct werken.
 
-5. Resultaten bekijken
+## 5. Resultaten bekijken
 
-Ruwe data: raw_data/
+- **Ruwe data**: raw_data/
 
-Verwerkte CSV: transformed_data/combined.csv
+- **Verwerkte CSV**: transformed_data/combined.csv
 
-Grafiek: reports/fiets_vs_temp.png
+- **Grafiek**: reports/fiets_vs_temp.png
 
-Markdown-rapport: reports/report.md
+- **Markdown-rapport**: reports/report.md
 
 Opmerking: de workflow pusht automatisch nieuwe gegevens en rapporten naar GitHub, zodat alles online up-to-date blijft.
 
-6. Extra visualisaties en PDF-rapport
+## 6. Extra visualisaties en PDF-rapport
 
 Naast de basisgrafiek (vrije fietsen vs. temperatuur) bevat de workflow een tweede grafiek die een ander aspect van de dataset verduidelijkt.
 
-6.1 Extra grafiek: aantal vrije fietsen per uur
+### 6.1 Extra grafiek: aantal vrije fietsen per uur
 
 Een bijkomende visualisatie werd toegevoegd:
 fietsen vs. uur van de dag → reports/fiets_vs_uur.png
@@ -96,17 +96,17 @@ fietsen vs. uur van de dag → reports/fiets_vs_uur.png
 Deze grafiek toont hoe het totaal aantal vrije fietsen in Gent varieert per uur van de dag.
 Ze geeft inzichten zoals:
 
-op welke momenten er typisch meer of minder fietsen beschikbaar zijn
+- op welke momenten er typisch meer of minder fietsen beschikbaar zijn
 
-piekmomenten rond ochtend- en avondspits
+- piekmomenten rond ochtend- en avondspits
 
-eventuele trends in gebruiksdrukte tijdens weekends of koude dagen
+- eventuele trends in gebruiksdrukte tijdens weekends of koude dagen
 
-hoe de beschikbaarheid doorheen de dag evolueert
+- hoe de beschikbaarheid doorheen de dag evolueert
 
 Deze grafiek is aanvullend op de temperatuur-analyse en helpt om te bepalen of variaties te wijten zijn aan dagelijks ritme in plaats van aan weersomstandigheden.
 
-6.2 PDF-rapport met beide grafieken
+### 6.2 PDF-rapport met beide grafieken
 
 Naast het Markdown-rapport wordt er automatisch ook een PDF-bestand gegenereerd:
 
@@ -114,18 +114,18 @@ Naast het Markdown-rapport wordt er automatisch ook een PDF-bestand gegenereerd:
 
 Dit PDF-rapport bevat:
 
-een overzicht van de workflow
+- een overzicht van de workflow
 
-de statistieken van de dataset
+- de statistieken van de dataset
 
-de twee grafieken:
+- de twee grafieken:
 
-Temperatuur vs. aantal vrije fietsen
+- Temperatuur vs. aantal vrije fietsen
 
-Aantal vrije fietsen per uur
+- Aantal vrije fietsen per uur
 
-begeleidende uitleg bij elke visualisatie
+- begeleidende uitleg bij elke visualisatie
 
-automatische titelpagina, consistente layout en uniforme opmaak
+- automatische titelpagina, consistente layout en uniforme opmaak
 
 Het PDF-bestand wordt automatisch vernieuwd bij elk run van de workflow (behalve wanneer --no-fetch wordt gebruikt).
