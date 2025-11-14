@@ -57,7 +57,7 @@ De workflow kan automatisch elk kwartier draaien via een cron-job. Hierbij wordt
 Wanneer je de workflow handmatig start met:
 ```
 cd ~/projects/data-workflow 
-./scripts/run_workflow.sh
+bash /home/larsg/projects/data-workflow/scripts/run_workflow.sh --no-fetch
 ```
 
 
