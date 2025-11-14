@@ -120,7 +120,7 @@ Dit PDF-rapport bevat:
 
 - de twee grafieken:
 
--- Temperatuur vs. aantal vrije fietsen
+- Temperatuur vs. aantal vrije fietsen
 
 - Aantal vrije fietsen per uur
 
