@@ -1,6 +1,6 @@
 # Data Workflow Rapport
 
-**Gegenereerd op:** 2025-11-15 10:55:06.097953
+**Gegenereerd op:** 2025-11-15 10:56:06.096019
 
 ## Grafiek: Vrije fietsen vs Temperatuur
 ![Fietsen vs Temp](/home/larsg/projects/data-workflow/reports/fiets_vs_temp.png)
@@ -10,7 +10,7 @@
 - Gemiddeld aantal vrije fietsen: 556
 - Gemiddeld aantal fietsen overdag (07-19u): 556
 - Gemiddeld aantal fietsen ’s nachts (19-07u): 557
-- Correlatie: 0.34
+- Correlatie: 0.31
 
 ## Vrije fietsen per weekdag
 
