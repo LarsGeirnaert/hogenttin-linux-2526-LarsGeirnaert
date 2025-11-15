@@ -4086,3 +4086,58 @@ Correlatie: 0.00
   c /= stddev[None, :]
 📁 Professioneel PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
 🔹 Git commit & push...
+[main d23f747] Automatische update 2025-11-15 10:59:06
+ 9 files changed, 146 insertions(+), 88 deletions(-)
+ delete mode 100644 scripts/.transform_data.sh.swp
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   d329aff..d23f747  main -> main
+Run eind: Sat Nov 15 10:59:09 CET 2025
+============================
+============================
+Run start: Sat Nov 15 11:00:01 CET 2025
+🔹 Data ophalen...
+🔹 CSV heropbouwen...
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+🔢 Samenvatting: totale weather-bestanden gevonden: 51; verwerkt: 51; overgeslagen (ongeldige temp): 0
+🔹 Analyses en grafieken...
+/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+📊 Laatste 10 datapunten:
+             timestamp  temperature  total_free_bikes
+41 2025-11-15 10:51:01         14.1                 0
+42 2025-11-15 10:52:01         14.1                 0
+43 2025-11-15 10:53:01         14.1                 0
+44 2025-11-15 10:54:01         14.1                 0
+45 2025-11-15 10:55:01         14.1                 0
+46 2025-11-15 10:56:01         14.1                 0
+47 2025-11-15 10:57:01         14.1                 0
+48 2025-11-15 10:58:01         14.1                 0
+49 2025-11-15 10:59:01         14.1                 0
+50 2025-11-15 11:00:01         14.1                 0
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.23 °C
+Gemiddeld aantal vrije fietsen: 0
+Gemiddeld aantal fietsen overdag (7-19u): 0
+Gemiddeld aantal fietsen ’s nachts (19-7u): 0
+Correlatie: 0.00
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+🔹 Markdown rapport...
+/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+🔹 PDF rapport...
+/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+📁 Professioneel PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
+🔹 Git commit & push...
