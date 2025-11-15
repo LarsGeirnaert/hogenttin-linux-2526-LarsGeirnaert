@@ -2,35 +2,38 @@
 import pandas as pd
 from pathlib import Path
 from reportlab.lib.pagesizes import A4
-from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, Table, TableStyle
-)
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.units import cm
 
-# Paden
+# --- Paden ---
 base_dir = Path.home() / "projects/data-workflow"
 data_file = base_dir / "transformed_data/combined.csv"
 weekday_file = base_dir / "reports/weekday_stats.csv"
 report_dir = base_dir / "reports"
+report_dir.mkdir(exist_ok=True)
 pdf_file = report_dir / "report.pdf"
 
-# Data
+# --- Data ---
 df = pd.read_csv(data_file)
 weekday_stats = pd.read_csv(weekday_file)
 
-# Algemene statistieken
-mean_temp = df["temperature"].mean()
-mean_bikes = round(df["total_free_bikes"].mean())
+df["timestamp"] = pd.to_datetime(df["timestamp"])
+df["hour"] = df["timestamp"].dt.hour
 
-# Gemiddeld aantal fietsen overdag/nacht
-day_avg_bikes = round(df[(pd.to_datetime(df['timestamp']).dt.hour >= 7) & 
-                         (pd.to_datetime(df['timestamp']).dt.hour < 19)]['total_free_bikes'].mean())
-night_avg_bikes = round(df[(pd.to_datetime(df['timestamp']).dt.hour < 7) | 
-                           (pd.to_datetime(df['timestamp']).dt.hour >= 19)]['total_free_bikes'].mean())
+# Algemene statistieken (veilig)
+mean_temp = df["temperature"].mean() if not df.empty else 0
+mean_bikes = round(df["total_free_bikes"].mean()) if not df.empty else 0
+
+day_data = df[(df["hour"] >= 7) & (df["hour"] < 19)]
+day_avg_bikes = round(day_data["total_free_bikes"].mean()) if not day_data.empty else 0
+
+night_data = df[(df["hour"] < 7) | (df["hour"] >= 19)]
+night_avg_bikes = round(night_data["total_free_bikes"].mean()) if not night_data.empty else 0
 
 corr = df["temperature"].corr(df["total_free_bikes"])
+corr = corr if not pd.isna(corr) else 0
 
 # Nederlandse weekdagen
 day_map = {
@@ -44,14 +47,10 @@ doc = SimpleDocTemplate(str(pdf_file), pagesize=A4,
                         rightMargin=2*cm, leftMargin=2*cm,
                         topMargin=2*cm, bottomMargin=2*cm)
 
-# Styles
 styles = getSampleStyleSheet()
-title_style = ParagraphStyle(
-    'TitleStyle', parent=styles['Title'], fontSize=24, alignment=1, spaceAfter=20)
-header_style = ParagraphStyle(
-    'HeaderStyle', parent=styles['Heading2'], fontSize=16, spaceAfter=12)
-normal_style = ParagraphStyle(
-    'NormalStyle', parent=styles['Normal'], fontSize=12, leading=16)
+title_style = ParagraphStyle('TitleStyle', parent=styles['Title'], fontSize=24, alignment=1, spaceAfter=20)
+header_style = ParagraphStyle('HeaderStyle', parent=styles['Heading2'], fontSize=16, spaceAfter=12)
+normal_style = ParagraphStyle('NormalStyle', parent=styles['Normal'], fontSize=12, leading=16)
 
 elements = []
 
@@ -92,11 +91,11 @@ elements.append(Spacer(1, 12))
 table_data = [["Weekdag", "Min", "Max", "Gemiddelde Fietsen", "Gemiddelde Temp (°C)"]]
 for _, row in weekday_stats.iterrows():
     table_data.append([
-        row["weekday"],
+        row["weekday"] if pd.notna(row["weekday"]) else "",
         int(row["Min"]) if not pd.isna(row["Min"]) else 0,
         int(row["Max"]) if not pd.isna(row["Max"]) else 0,
         int(row["Gemiddelde_fietsen"]) if not pd.isna(row["Gemiddelde_fietsen"]) else 0,
-        round(row["Gemiddelde_temp"], 2) if not pd.isna(row["Gemiddelde_temp"]) else 0
+        round(row["Gemiddelde_temp"],2) if not pd.isna(row["Gemiddelde_temp"]) else 0
     ])
 
 table = Table(table_data, hAlign='CENTER')
