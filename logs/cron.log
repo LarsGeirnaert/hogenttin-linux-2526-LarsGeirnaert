@@ -8009,3 +8009,83 @@ Correlatie: 0.07
 ✔ PDF rapport klaar
 🔹 Git commit & push...
 🔹 Git commit & push...
+============================
+============================
+Run start: Sat Nov 15 17:45:01 CET 2025
+Run start: Sat Nov 15 17:45:01 CET 2025
+🔹 Data ophalen...
+🔹 Data ophalen...
+🔹 CSV heropbouwen...
+🔹 CSV heropbouwen...
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+🔢 Samenvatting: totale weather-bestanden gevonden: 80; verwerkt: 80; overgeslagen (ongeldige temp): 0
+🔢 Samenvatting: totale weather-bestanden gevonden: 80; verwerkt: 80; overgeslagen (ongeldige temp): 0
+✔ CSV bijgewerkt
+✔ CSV bijgewerkt
+🔹 Analyses en grafieken...
+🔹 Analyses en grafieken...
+📊 Laatste 10 datapunten:
+             timestamp  temperature  total_free_bikes
+70 2025-11-15 15:30:01         14.9               532
+71 2025-11-15 15:45:01         14.6               529
+72 2025-11-15 16:00:01         14.4               523
+73 2025-11-15 16:15:01         13.7               533
+74 2025-11-15 16:30:01         13.7               526
+75 2025-11-15 16:45:01         13.8               524
+76 2025-11-15 17:00:01         13.8               523
+77 2025-11-15 17:15:02         14.4               525
+78 2025-11-15 17:30:01         14.4               525
+79 2025-11-15 17:45:01         14.2               537
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.57 °C
+Gemiddeld aantal vrije fietsen: 541
+Gemiddeld aantal fietsen overdag (7-19u): 539
+Gemiddeld aantal fietsen ’s nachts (19-7u): 547
+Correlatie: 0.07
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📊 Laatste 10 datapunten:
+             timestamp  temperature  total_free_bikes
+70 2025-11-15 15:30:01         14.9               532
+71 2025-11-15 15:45:01         14.6               529
+72 2025-11-15 16:00:01         14.4               523
+73 2025-11-15 16:15:01         13.7               533
+74 2025-11-15 16:30:01         13.7               526
+75 2025-11-15 16:45:01         13.8               524
+76 2025-11-15 17:00:01         13.8               523
+77 2025-11-15 17:15:02         14.4               525
+78 2025-11-15 17:30:01         14.4               525
+79 2025-11-15 17:45:01         14.2               537
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.57 °C
+Gemiddeld aantal vrije fietsen: 541
+Gemiddeld aantal fietsen overdag (7-19u): 539
+Gemiddeld aantal fietsen ’s nachts (19-7u): 547
+Correlatie: 0.07
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+✔ Analyses en grafieken afgerond
+✔ Analyses en grafieken afgerond
+🔹 Markdown rapport genereren...
+🔹 Markdown rapport genereren...
+✔ Markdown rapport klaar
+✔ Markdown rapport klaar
+🔹 PDF rapport genereren...
+🔹 PDF rapport genereren...
+✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
+✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
+✔ PDF rapport klaar
+✔ PDF rapport klaar
+🔹 Git commit & push...
+🔹 Git commit & push...
