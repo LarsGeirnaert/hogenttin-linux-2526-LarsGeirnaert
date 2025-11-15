@@ -123,7 +123,7 @@ wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en ra
 
 - **Markdown-rapport**: [reports/report.md](https://github.com/hogenttin/linux-2526-LARS/blob/main/reports/report.md)
 
-- **PDF-rapport**: [reports/report.pdf](https://github.com/hogenttin/linux-2526-LARS/blob/main/reports/report.pdf)
+- **PDF-rapport**: [reports/report.pdf](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/report.pdf)
 
 Opmerking: de workflow pusht automatisch nieuwe gegevens en rapporten naar GitHub, zodat alles online up-to-date blijft.
 
