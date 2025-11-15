@@ -2,10 +2,11 @@
 import pandas as pd
 from pathlib import Path
 from reportlab.lib.pagesizes import A4
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, Table, TableStyle, KeepTogether
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.units import cm
+from reportlab.pdfgen import canvas
 
 # --- Paden ---
 base_dir = Path.home() / "projects/data-workflow"
@@ -13,7 +14,7 @@ data_file = base_dir / "transformed_data/combined.csv"
 weekday_file = base_dir / "reports/weekday_stats.csv"
 report_dir = base_dir / "reports"
 report_dir.mkdir(exist_ok=True)
-pdf_file = report_dir / f"report_{pd.Timestamp.now().strftime('%Y-%m-%d_%H-%M')}.pdf"
+pdf_file = report_dir / "report.pdf"
 
 # --- Data ---
 df = pd.read_csv(data_file)
@@ -45,58 +46,28 @@ doc = SimpleDocTemplate(str(pdf_file), pagesize=A4,
 
 styles = getSampleStyleSheet()
 title_style = ParagraphStyle('TitleStyle', parent=styles['Title'], fontSize=26, alignment=1, textColor=colors.HexColor("#003366"), spaceAfter=30)
-subheader_style = ParagraphStyle('SubHeaderStyle', parent=styles['Heading2'], fontSize=16, textColor=colors.HexColor("#003366"), spaceAfter=15)
+header_style = ParagraphStyle('HeaderStyle', parent=styles['Heading2'], fontSize=18, textColor=colors.HexColor("#003366"), spaceAfter=15)
 normal_style = ParagraphStyle('NormalStyle', parent=styles['Normal'], fontSize=12, leading=16)
 
 elements = []
 
-# ---------- HEADER + FOOTER FUNCTIE ----------
-def add_header_footer(canvas_obj, doc_obj):
-    # Header
-    canvas_obj.setFont("Helvetica-Bold", 10)
-    canvas_obj.setFillColor(colors.HexColor("#003366"))
-    canvas_obj.drawString(2*cm, A4[1]-2*cm, "Data Workflow Rapport - Gent")
-    canvas_obj.drawRightString(A4[0]-2*cm, A4[1]-2*cm, pd.Timestamp.now().strftime('%d-%m-%Y'))
-    
-    # Footer met paginanummer
-    canvas_obj.setFont("Helvetica", 10)
+# ---------- PAGINANUMMER FUNCTIE ----------
+def add_page_number(canvas_obj, doc_obj):
+    page_num_text = f"Pagina {doc_obj.page}"
+    canvas_obj.setFont('Helvetica', 10)
     canvas_obj.setFillColor(colors.grey)
-    canvas_obj.drawRightString(A4[0]-2*cm, 1.5*cm, f"Pagina {doc_obj.page}")
+    canvas_obj.drawRightString(A4[0]-2*cm, 1.5*cm, page_num_text)
 
-# ---------- COVERPAGINA ----------
-elements.append(Spacer(1, 5*cm))
-elements.append(Paragraph("📊 Data Workflow Rapport", title_style))
-elements.append(Spacer(1, 1*cm))
-elements.append(Paragraph("Gent - Bachelor Toegepaste Informatica", subheader_style))
-elements.append(Spacer(1, 0.5*cm))
+# ---------- TITELPAGINA ----------
+elements.append(Paragraph("Data Workflow Rapport", title_style))
+elements.append(Paragraph("Temperatuur vs Aantal Vrije Fietsen in Gent", header_style))
+elements.append(Spacer(1, 20))
 elements.append(Paragraph(f"Gegenereerd op: {pd.Timestamp.now().strftime('%d-%m-%Y %H:%M')}", normal_style))
 elements.append(PageBreak())
 
-# ---------- SIDEBAR KERNCIJFERS ----------
-sidebar_data = [
-    ["Kerncijfers", ""],
-    ["Gem. temperatuur (°C)", f"{mean_temp:.2f}"],
-    ["Gem. vrije fietsen", f"{mean_bikes}"],
-    ["Daggemiddelde fietsen", f"{day_avg_bikes}"],
-    ["Nachtgemiddelde fietsen", f"{night_avg_bikes}"],
-    ["Correlatie temp ↔ fietsen", f"{corr:.2f}"]
-]
-sidebar_table = Table(sidebar_data, colWidths=[6*cm, 4*cm])
-sidebar_table.setStyle(TableStyle([
-    ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#003366")),
-    ("TEXTCOLOR", (0,0), (-1,0), colors.whitesmoke),
-    ("ALIGN", (0,1), (-1,-1), "LEFT"),
-    ("FONTNAME", (0,0), (-1,0), "Helvetica-Bold"),
-    ("FONTSIZE", (0,0), (-1,-1), 10),
-    ("BOX", (0,0), (-1,-1), 1, colors.grey),
-    ("INNERGRID", (0,0), (-1,-1), 0.5, colors.grey),
-    ("BACKGROUND", (0,1), (-1,-1), colors.HexColor("#e6f2ff"))
-]))
-elements.append(sidebar_table)
+# ---------- STATISTIEKEN ----------
+elements.append(Paragraph("📊 Statistische Samenvatting", header_style))
 elements.append(Spacer(1, 12))
-
-# ---------- STATISTIEKEN TABEL ----------
-elements.append(Paragraph("📊 Statistische Samenvatting", subheader_style))
 stats_table_data = [
     ["Statistiek", "Waarde"],
     ["Gemiddelde temperatuur (°C)", f"{mean_temp:.2f}"],
@@ -119,21 +90,21 @@ elements.append(stats_table)
 elements.append(PageBreak())
 
 # ---------- GRAFIEK 1 ----------
-elements.append(Paragraph("📈 Grafiek 1: Temperatuur vs Vrije Fietsen", subheader_style))
+elements.append(Paragraph("📈 Grafiek 1: Temperatuur vs Vrije Fietsen", header_style))
 elements.append(Spacer(1, 12))
 graph_path_1 = report_dir / "fiets_vs_temp.png"
-elements.append(Image(str(graph_path_1), width=16*cm, height=10*cm, hAlign='CENTER'))
+elements.append(Image(str(graph_path_1), width=16*cm, height=10*cm))
 elements.append(PageBreak())
 
 # ---------- GRAFIEK 2 ----------
-elements.append(Paragraph("📊 Grafiek 2: Aantal Fietsen per Uur", subheader_style))
+elements.append(Paragraph("📊 Grafiek 2: Aantal Fietsen per Uur", header_style))
 elements.append(Spacer(1, 12))
 graph_path_2 = report_dir / "fiets_vs_uur.png"
-elements.append(Image(str(graph_path_2), width=16*cm, height=10*cm, hAlign='CENTER'))
+elements.append(Image(str(graph_path_2), width=16*cm, height=10*cm))
 elements.append(PageBreak())
 
 # ---------- WEEKDAG TABEL ----------
-elements.append(Paragraph("📅 Vrije Fietsen per Weekdag", subheader_style))
+elements.append(Paragraph("📅 Tabel: Vrije Fietsen per Weekdag", header_style))
 elements.append(Spacer(1, 12))
 table_data = [["Weekdag", "Min", "Max", "Gemiddelde Fietsen", "Gemiddelde Temp (°C)"]]
 for _, row in weekday_stats.iterrows():
@@ -156,6 +127,6 @@ weekday_table.setStyle(TableStyle([
 ]))
 elements.append(weekday_table)
 
-# ---------- BUILD PDF ----------
-doc.build(elements, onFirstPage=add_header_footer, onLaterPages=add_header_footer)
+# ---------- BUILD PDF MET PAGINANUMMERS ----------
+doc.build(elements, onFirstPage=add_page_number, onLaterPages=add_page_number)
 print(f"✅ Professioneel PDF-rapport aangemaakt: {pdf_file}")
