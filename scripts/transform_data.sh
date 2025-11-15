@@ -58,7 +58,9 @@ for weather_file in "${weather_files[@]}"; do
     fi
 
     # zoek bijhorend bikes bestand
-    bikes_file="$BIKES_DIR/bikes_${stamp}.json"
+	bikes_file="$BIKES_DIR/bikes_$base.json"
+	[[ ! -f "$bikes_file" ]] && bikes_file="$BIKES_DIR/bikes-$base.json"
+
     if [[ -f "$bikes_file" ]]; then
         # gebruik jq met fallback naar 0 als add niets teruggeeft
         total_free=$(jq -r '([.network.stations[].free_bikes] | add) // 0' "$bikes_file" 2>/dev/null || echo "0")
