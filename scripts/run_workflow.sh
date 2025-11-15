@@ -7,8 +7,14 @@ set -o pipefail
 trap 'echo "❌ Fout bij run_workflow.sh op regel $LINENO"; exit 1' ERR
 
 LOG="$HOME/projects/data-workflow/logs/cron.log"
-echo "============================" >> "$LOG"
-echo "Run start: $(date)" >> "$LOG"
+
+# Functie om log + terminal output tegelijk te doen
+log_and_echo() {
+    echo "$1" | tee -a "$LOG"
+}
+
+log_and_echo "============================"
+log_and_echo "Run start: $(date)"
 
 export PATH="$HOME/projects/data-workflow/venv/bin:$PATH"
 export HOME="/home/larsg"
@@ -17,30 +23,38 @@ cd "$HOME/projects/data-workflow" || { echo "❌ Kan projectmap niet vinden"; ex
 
 # --- Stap 1: Data ophalen (optioneel) ---
 if [ "$1" != "skip-fetch" ]; then
-    echo "🔹 Data ophalen..." >> "$LOG"
-    bash scripts/fetch_data.sh >> "$LOG" 2>&1 || { echo "❌ fetch_data.sh mislukt"; exit 1; }
+    log_and_echo "🔹 Data ophalen..."
+    bash scripts/fetch_data.sh | tee -a "$LOG"
 else
-    echo "🔹 Data ophalen overgeslagen (handmatig run)" >> "$LOG"
+    log_and_echo "🔹 Data ophalen overgeslagen (handmatig run)"
 fi
 
-# --- Stap 2 t/m 6: rest van workflow ---
-echo "🔹 CSV heropbouwen..." >> "$LOG"
-bash scripts/transform_data.sh >> "$LOG" 2>&1 || { echo "❌ transform_data.sh mislukt"; exit 1; }
+# --- Stap 2: CSV heropbouwen ---
+log_and_echo "🔹 CSV heropbouwen..."
+bash scripts/transform_data.sh | tee -a "$LOG"
+log_and_echo "✔ CSV bijgewerkt"
 
-echo "🔹 Analyses en grafieken..." >> "$LOG"
-python scripts/analyze_data.py >> "$LOG" 2>&1 || { echo "❌ analyze_data.py mislukt"; exit 1; }
-python scripts/plot_bikes_vs_time.py >> "$LOG" 2>&1 || { echo "❌ plot_bikes_vs_time.py mislukt"; exit 1; }
+# --- Stap 3: Analyses + grafieken ---
+log_and_echo "🔹 Analyses en grafieken..."
+python scripts/analyze_data.py | tee -a "$LOG"
+python scripts/plot_bikes_vs_time.py | tee -a "$LOG"
+log_and_echo "✔ Analyses en grafieken afgerond"
 
-echo "🔹 Markdown rapport..." >> "$LOG"
-python scripts/generate_report.py >> "$LOG" 2>&1 || { echo "❌ generate_report.py mislukt"; exit 1; }
+# --- Stap 4: Markdown rapport genereren ---
+log_and_echo "🔹 Markdown rapport genereren..."
+python scripts/generate_report.py | tee -a "$LOG"
+log_and_echo "✔ Markdown rapport klaar"
 
-echo "🔹 PDF rapport..." >> "$LOG"
-python scripts/generate_pdf_report.py >> "$LOG" 2>&1 || { echo "❌ generate_pdf_report.py mislukt"; exit 1; }
+# --- Stap 5: PDF rapport genereren ---
+log_and_echo "🔹 PDF rapport genereren..."
+python scripts/generate_pdf_report.py | tee -a "$LOG"
+log_and_echo "✔ PDF rapport klaar"
 
-echo "🔹 Git commit & push..." >> "$LOG"
-git add -A >> "$LOG" 2>&1
-git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>> "$LOG" || echo "⚠️ Geen wijzigingen om te committen"
-git push origin main >> "$LOG" 2>&1 || echo "⚠️ Git push mislukt"
+# --- Stap 6: Automatische commit & push ---
+log_and_echo "🔹 Git commit & push..."
+git add -A
+git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>> "$LOG" || log_and_echo "⚠️ Geen wijzigingen om te committen"
+git push origin main >> "$LOG" 2>&1 || log_and_echo "⚠️ Git push mislukt"
 
-echo "Run eind: $(date)" >> "$LOG"
-echo "============================" >> "$LOG"
+log_and_echo "Run eind: $(date)"
+log_and_echo "============================"
