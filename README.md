@@ -95,7 +95,8 @@ Om de workflow handmatig uit te voeren zonder nieuwe data op te halen:
 
 ```
 cd ~/projects/data-workflow
-bash scripts/run_workflow.sh --no-fetch
+./scripts/run_workflow.sh skip-fetch
+
 ```
 
 Om enkel de CSV bij te werken (transformatie van ruwe data):
