@@ -1,7 +1,7 @@
 # Data Workflow: Temperatuur vs. Aantal Vrije Fietsen in Gent
 
 ## 0. Relevante links
-- GitHub repository: https://github.com/hogenttin/linux-2526-LARS
+- [GitHub repository](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert)
 - Panopto demo opname: [link hier]
 
 ---
@@ -117,7 +117,7 @@ wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en ra
 
 - **Grafiek 1 (Fietsgebruik vs temperatuur)**: [reports/fiets_vs_temp.png](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/fiets_vs_temp.png)
 
-- **Grafiek 2 (Fietsgebruik vs uur)**: [reports/fiets_vs_temp.png](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/fiets_vs_uur.png)
+- **Grafiek 2 (Fietsgebruik vs uur)**: [reports/fiets_vs_uur.png](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/fiets_vs_uur.png)
 
 - **Markdown-rapport**: [reports/report.md](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/report.md)
 
