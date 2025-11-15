@@ -6,6 +6,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Page
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.units import cm
+from reportlab.pdfgen import canvas
 
 # --- Paden ---
 base_dir = Path.home() / "projects/data-workflow"
@@ -46,10 +47,16 @@ doc = SimpleDocTemplate(str(pdf_file), pagesize=A4,
 styles = getSampleStyleSheet()
 title_style = ParagraphStyle('TitleStyle', parent=styles['Title'], fontSize=26, alignment=1, textColor=colors.HexColor("#003366"), spaceAfter=30)
 header_style = ParagraphStyle('HeaderStyle', parent=styles['Heading2'], fontSize=18, textColor=colors.HexColor("#003366"), spaceAfter=15)
-subheader_style = ParagraphStyle('SubHeaderStyle', parent=styles['Heading3'], fontSize=14, textColor=colors.HexColor("#0055A5"), spaceAfter=10)
 normal_style = ParagraphStyle('NormalStyle', parent=styles['Normal'], fontSize=12, leading=16)
 
 elements = []
+
+# ---------- PAGINANUMMER FUNCTIE ----------
+def add_page_number(canvas_obj, doc_obj):
+    page_num_text = f"Pagina {doc_obj.page}"
+    canvas_obj.setFont('Helvetica', 10)
+    canvas_obj.setFillColor(colors.grey)
+    canvas_obj.drawRightString(A4[0]-2*cm, 1.5*cm, page_num_text)
 
 # ---------- TITELPAGINA ----------
 elements.append(Paragraph("Data Workflow Rapport", title_style))
@@ -120,6 +127,6 @@ weekday_table.setStyle(TableStyle([
 ]))
 elements.append(weekday_table)
 
-# ---------- BUILD PDF ----------
-doc.build(elements)
+# ---------- BUILD PDF MET PAGINANUMMERS ----------
+doc.build(elements, onFirstPage=add_page_number, onLaterPages=add_page_number)
 print(f"✅ Professioneel PDF-rapport aangemaakt: {pdf_file}")
