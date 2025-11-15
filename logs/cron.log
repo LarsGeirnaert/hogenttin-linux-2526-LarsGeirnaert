@@ -5201,3 +5201,105 @@ Correlatie: 0.25
 🔹 PDF rapport...
 📁 Professioneel PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
 🔹 Git commit & push...
+[main caf7aa9] Automatische update 2025-11-15 11:15:11
+ 7 files changed, 118 insertions(+), 30 deletions(-)
+ create mode 100644 scripts/.transform_data.sh.swp
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   8568520..caf7aa9  main -> main
+Run eind: Sat Nov 15 11:15:13 CET 2025
+============================
+============================
+Run start: Sat Nov 15 11:16:01 CET 2025
+🔹 Data ophalen...
+🔹 CSV heropbouwen...
+🔢 Totaal weather-bestanden gevonden: 152
+❌ Fout bij transform_data.sh
+❌ transform_data.sh mislukt
+============================
+Run start: Sat Nov 15 11:17:01 CET 2025
+🔹 Data ophalen...
+🔹 CSV heropbouwen...
+🔢 Totaal weather-bestanden gevonden: 153
+❌ Fout bij transform_data.sh
+❌ transform_data.sh mislukt
+============================
+Run start: Sat Nov 15 11:18:01 CET 2025
+🔹 Data ophalen...
+🔹 CSV heropbouwen...
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251113-110002.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251113-120003.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251113-140001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251113-150002.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251113-170001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-130001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-141501.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-143001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-144501.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-150001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-151508.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-153002.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-154501.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-160001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-161501.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-163002.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-164501.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-170001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-171502.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-173003.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-174502.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-180002.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-181502.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-183002.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-184502.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-190002.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-191503.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-193002.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-194502.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-200003.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-201503.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-203003.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-204502.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-210002.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-211501.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-213001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-214501.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-220001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-221501.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-223001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-224501.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-230001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-231501.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-233001.json — overslaan
+⚠️ Ongeldige of ontbrekende temperatuur in /home/larsg/projects/data-workflow/raw_data/weather/weather_20251114-234501.json — overslaan
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+🔢 Samenvatting: totale weather-bestanden gevonden: 154; verwerkt: 109; overgeslagen (ongeldige temp): 45
+🔹 Analyses en grafieken...
+📊 Laatste 10 datapunten:
+              timestamp  temperature  total_free_bikes
+99  2025-11-15 11:09:01         14.1               556
+100 2025-11-15 11:10:01         14.1               552
+101 2025-11-15 11:11:01         14.1               552
+102 2025-11-15 11:12:01         14.1               552
+103 2025-11-15 11:13:01         14.1               550
+104 2025-11-15 11:14:01         14.1               550
+105 2025-11-15 11:15:01         14.3               550
+106 2025-11-15 11:16:01         14.3               547
+107 2025-11-15 11:17:01         14.1               547
+108 2025-11-15 11:18:01         14.1               547
+
+📈 Statistieken:
+Gemiddelde temperatuur: 14.16 °C
+Gemiddeld aantal vrije fietsen: 555
+Gemiddeld aantal fietsen overdag (7-19u): 555
+Gemiddeld aantal fietsen ’s nachts (19-7u): 557
+Correlatie: 0.19
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+🔹 Markdown rapport...
+🔹 PDF rapport...
+📁 Professioneel PDF-rapport opgeslagen in: /home/larsg/projects/data-workflow/reports/report.pdf
+🔹 Git commit & push...

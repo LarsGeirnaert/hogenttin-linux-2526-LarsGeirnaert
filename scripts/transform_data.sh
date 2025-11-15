@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # transform_data.sh — Alle weerdata in CSV, fietsdata optioneel (robust)
 set -euo pipefail
