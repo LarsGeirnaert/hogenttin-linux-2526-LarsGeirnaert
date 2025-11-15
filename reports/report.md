@@ -1,6 +1,6 @@
 # Data Workflow Rapport
 
-**Gegenereerd op:** 2025-11-15 14:15:07.972213
+**Gegenereerd op:** 2025-11-15 14:28:17.994616
 
 ## Grafiek: Vrije fietsen vs Temperatuur
 ![Fietsen vs Temp](fiets_vs_temp.png)
