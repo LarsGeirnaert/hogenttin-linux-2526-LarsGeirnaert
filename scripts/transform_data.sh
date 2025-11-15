@@ -1,5 +1,5 @@
 #!/bin/bash
-# transform_data.sh — Transformeer JSON naar CSV
+# transform_data.sh — Transformeer JSON naar CSV (veilig voor ontbrekende data)
 
 set -e
 set -o pipefail
@@ -19,12 +19,23 @@ for weather_file in "$WEATHER_DIR"/weather_*.json; do
     base=$(basename "$weather_file" | sed 's/weather_//' | sed 's/.json//')
     bikes_file="$BIKES_DIR/bikes_$base.json"
 
-    [[ -f "$bikes_file" ]] || { echo "⚠️ Bikes file ontbreekt: $bikes_file"; continue; }
-
     timestamp=$(date -d "${base:0:8} ${base:9:2}:${base:11:2}:${base:13:2}" --iso-8601=seconds 2>/dev/null || echo "$base")
 
-    temp=$(jq -r '.current_weather.temperature' "$weather_file") || { echo "⚠️ JSON fout $weather_file"; continue; }
-    total_free=$(jq '[.network.stations[].free_bikes] | add' "$bikes_file") || { echo "⚠️ JSON fout $bikes_file"; continue; }
+    # Weerdata
+    temp=$(jq -r '.current_weather.temperature' "$weather_file" 2>/dev/null)
+    if [[ -z "$temp" || "$temp" == "null" ]]; then
+        echo "⚠️ Weerdata ontbreekt of ongeldig in $weather_file, overslaan"
+        continue
+    fi
+
+    # Fietsdata, default 0 als bestand ontbreekt
+    if [[ -f "$bikes_file" ]]; then
+        total_free=$(jq '[.network.stations[].free_bikes] | add' "$bikes_file" 2>/dev/null)
+        total_free=${total_free:-0}
+    else
+        echo "⚠️ Bikes file ontbreekt: $bikes_file → gebruik 0"
+        total_free=0
+    fi
 
     echo "$timestamp,$temp,$total_free" >> "$OUTFILE"
 done
