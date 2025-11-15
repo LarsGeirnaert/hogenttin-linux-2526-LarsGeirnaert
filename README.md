@@ -1,7 +1,7 @@
 # Data Workflow: Temperatuur vs. Aantal Vrije Fietsen in Gent
 
 ## 0. Relevante links
-- GitHub repository: https://github.com/hogenttin/linux-2526-LARS
+- [GitHub repository](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert)
 - Panopto demo opname: [link hier]
 
 ---
