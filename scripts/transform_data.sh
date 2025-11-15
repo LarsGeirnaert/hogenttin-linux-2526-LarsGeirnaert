@@ -50,7 +50,7 @@ for weather_file in "${weather_files[@]}"; do
     fi
 
     # lees temperatuur (gebruik jq defaulting naar empty)
-    temp=$(jq -r '.current_weather.temperature // empty' "$weather_file" 2>/dev/null || echo "")
+    temp=$(jq -r '(.current_weather.temperature // .current.temperature_2m) // empty' "$weather_file" 2>/dev/null || echo "")
     if [[ -z "$temp" ]]; then
         echo "⚠️ Ongeldige of ontbrekende temperatuur in $weather_file — overslaan" >&2
         skipped=$((skipped + 1))
