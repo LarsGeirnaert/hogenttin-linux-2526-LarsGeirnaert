@@ -1,5 +1,5 @@
 #!/bin/bash
-# run_workflow.sh — volledige workflow (robust update)
+# run_workflow.sh — volledige workflow (robust update + Git push)
 
 set -e
 set -o pipefail
@@ -8,7 +8,7 @@ trap 'echo "❌ Fout bij run_workflow.sh op regel $LINENO"; exit 1' ERR
 # --- Logbestand ---
 LOG="$HOME/projects/data-workflow/logs/cron.log"
 echo "============================" >> "$LOG"
-echo "Run start: $(date)" >> "$LOG"
+echo "Run start: $(date '+%Y-%m-%d %H:%M:%S')" >> "$LOG"
 
 # --- Environment paths ---
 export PATH="$HOME/projects/data-workflow/venv/bin:$PATH"
@@ -43,10 +43,16 @@ python scripts/generate_pdf_report.py >> "$LOG" 2>&1 || { echo "❌ generate_pdf
 
 # --- Stap 6: Automatische commit & push ---
 echo "🔹 Git commit & push..." >> "$LOG"
+
+# Voeg alle gewijzigde en nieuwe bestanden toe
 git add -A >> "$LOG" 2>&1
-git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>> "$LOG" || echo "⚠️ Geen wijzigingen om te committen"
-git push origin main >> "$LOG" 2>&1 || echo "⚠️ Git push mislukt"
+
+# Commit met timestamp; faalt niet als er geen wijzigingen zijn
+git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>> "$LOG" || echo "⚠️ Geen wijzigingen om te committen" >> "$LOG"
+
+# Push naar GitHub; faalt niet als er problemen zijn
+git push origin main >> "$LOG" 2>&1 || echo "⚠️ Git push mislukt" >> "$LOG"
 
 # --- Einde run ---
-echo "Run eind: $(date)" >> "$LOG"
+echo "Run eind: $(date '+%Y-%m-%d %H:%M:%S')" >> "$LOG"
 echo "============================" >> "$LOG"
