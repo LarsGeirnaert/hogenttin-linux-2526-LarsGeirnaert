@@ -113,13 +113,15 @@ wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en ra
 
 ## 6. Resultaten bekijken
 
-- **Ruwe data**: raw_data/
+- **Verwerkte CSV**: [transformed_data/combined.csv](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/transformed_data/combined.csv)
 
-- **Verwerkte CSV**: transformed_data/combined.csv
+- **Grafiek 1 (Fietsgebruik vs temperatuur)**: [reports/fiets_vs_temp.png](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/fiets_vs_temp.png)
 
-- **Grafiek**: reports/fiets_vs_temp.png
+- **Grafiek 2 (Fietsgebruik vs uur)**: [reports/fiets_vs_temp.png](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/fiets_vs_uur.png)
 
-- **Markdown-rapport**: reports/report.md
+- **Markdown-rapport**: [reports/report.md](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/report.md)
+
+- **PDF-rapport**: [reports/report.pdf](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/report.pdf)
 
 Opmerking: de workflow pusht automatisch nieuwe gegevens en rapporten naar GitHub, zodat alles online up-to-date blijft.
 
