@@ -45,7 +45,8 @@ with open(report_file, "w") as f:
 
     f.write("## Grafiek: Vrije fietsen vs Temperatuur\n")
     if grafiek_file_1.exists():
-        f.write(f"![Fietsen vs Temp]({grafiek_file_1})\n\n")
+        # Verwijzen naar afbeelding in dezelfde map
+        f.write(f"![Fietsen vs Temp](fiets_vs_temp.png)\n\n")
     else:
         f.write("_Grafiek niet beschikbaar_\n\n")
 
@@ -71,6 +72,7 @@ with open(report_file, "w") as f:
 
     f.write("## Grafiek: Vrije fietsen per uur\n")
     if grafiek_file_2.exists():
-        f.write(f"![Fiets vs Uur]({grafiek_file_2})\n")
+        # Verwijzen naar afbeelding in dezelfde map
+        f.write(f"![Fiets vs Uur](fiets_vs_uur.png)\n")
     else:
         f.write("_Grafiek niet beschikbaar_\n")
