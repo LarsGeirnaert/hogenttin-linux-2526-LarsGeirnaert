@@ -1,6 +1,6 @@
 # Data Workflow Rapport
 
-**Gegenereerd op:** 2025-11-15 15:00:10.210737
+**Gegenereerd op:** 2025-11-15 15:15:06.882978
 
 ## Grafiek: Vrije fietsen vs Temperatuur
 ![Fietsen vs Temp](fiets_vs_temp.png)
@@ -21,7 +21,7 @@
 | Woensdag | 0 | 0 | 0 |
 | Donderdag | 525 | 550 | 535 |
 | Vrijdag | 535 | 557 | 545 |
-| Zaterdag | 522 | 560 | 543 |
+| Zaterdag | 522 | 560 | 542 |
 | Zondag | 0 | 0 | 0 |
 
 ---
