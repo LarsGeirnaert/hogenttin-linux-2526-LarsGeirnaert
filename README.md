@@ -119,7 +119,11 @@ wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en ra
 
 - **Grafiek**: reports/fiets_vs_temp.png
 
-- **Markdown-rapport**: reports/report.md
+- **Live rapport**: [https://hogenttin.github.io/linux-2526-LARS/](https://hogenttin.github.io/linux-2526-LARS/)
+
+- **Markdown-rapport**: [reports/report.md](https://github.com/hogenttin/linux-2526-LARS/blob/main/reports/report.md)
+
+- **PDF-rapport**: [reports/report.pdf](https://github.com/hogenttin/linux-2526-LARS/blob/main/reports/report.pdf)
 
 Opmerking: de workflow pusht automatisch nieuwe gegevens en rapporten naar GitHub, zodat alles online up-to-date blijft.
 
