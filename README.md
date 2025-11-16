@@ -51,19 +51,34 @@ Vanaf 13 november 2025, met een interval van 15 minuten (automatisch).
 
 ## 3. Directorystructuur
 
-```text
+```
 data-workflow/
-├─ scripts/              # Scripts voor alle fases
-│  ├─ fetch_data.sh      # Haalt JSON-data op
-│  ├─ transform_data.sh  # Zet raw JSON om naar CSV
-│  ├─ analyze_data.py    # Maakt grafiek en berekent statistieken
-│  ├─ generate_report.py # Genereert Markdown-rapport
-│  └─ run_workflow.sh    # Overkoepelend script dat alles uitvoert en pusht
-├─ raw_data/             # Ruwe JSON-bestanden (niet handmatig bewerken)
-├─ transformed_data/     # CSV-bestanden (combined.csv)
-├─ reports/              # Grafieken en Markdown-rapport
-├─ logs/                 # Logbestanden van fetches
-└─ README.md
+├── README.md
+├── logs/ # Automatische logbestanden per fetch-run
+│ ├── cron.log
+│ ├── cron_reboot.log
+│ ├── cron_test.log
+│ └── fetch-*.log
+├── raw_data/ # Ruwe JSON-data
+│ ├── bikes
+│ └── weather
+├── reports/ # Grafieken, Markdown en PDF-rapport
+│ ├── fiets_vs_temp.png
+│ ├── fiets_vs_uur.png
+│ ├── report.md
+│ ├── report.pdf
+│ └── weekday_stats.csv
+├── scripts/ # Workflow-scripts
+│ ├── analyze_data.py
+│ ├── fetch_data.sh
+│ ├── generate_pdf_report.py
+│ ├── generate_report.py
+│ ├── plot_bikes_vs_time.py
+│ ├── run_workflow.sh
+│ └── transform_data.sh
+├── transformed_data/ # Verwerkte CSV-bestanden
+│ └── combined.csv
+└── venv/ # Virtuele Python-omgeving
 ```
 
 ## 4. Dependencies
