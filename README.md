@@ -25,7 +25,7 @@ Deze workflow verzamelt automatisch gegevens over het weer (temperatuur) en het 
    Aanmaken van Markdown-rapport (`report.md`) en professioneel PDF-rapport (`report.pdf`) met grafieken en tabellen.
 
 5. **Automatisering**  
-   Alles kan automatisch draaien via een cron-job of GitHub Actions en wordt naar GitHub gepusht.
+   Alles kan automatisch draaien via een cron-job en wordt naar GitHub gepusht.
 
 ---
 
