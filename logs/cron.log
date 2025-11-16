@@ -11568,3 +11568,46 @@ To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
    e812dde..4defc8c  main -> main
 Run eind: Sun Nov 16 23:00:17 CET 2025
 ============================
+============================
+Run start: Sun Nov 16 23:45:01 CET 2025
+Project Data Workflow v1.0
+🔹 Data ophalen...
+🔹 Data ophalen...
+🔹 CSV heropbouwen...
+🔹 CSV heropbouwen...
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+🔢 Samenvatting: totale weather-bestanden gevonden: 151; verwerkt: 151; overgeslagen (ongeldige temp): 0
+🔹 Analyses en grafieken genereren...
+🔹 Analyses en grafieken genereren...
+📊 Laatste 10 datapunten:
+              timestamp  temperature  total_free_bikes
+141 2025-11-16 21:00:04          6.7               552
+142 2025-11-16 21:15:03          7.1               550
+143 2025-11-16 21:30:02          6.9               546
+144 2025-11-16 21:45:01          6.8               545
+145 2025-11-16 22:00:01          6.6               544
+146 2025-11-16 22:15:01          6.5               547
+147 2025-11-16 22:30:01          6.6               551
+148 2025-11-16 22:45:01          6.6               554
+149 2025-11-16 23:00:01          6.5               552
+150 2025-11-16 23:45:01          6.4               555
+
+📈 Statistieken:
+Gemiddelde temperatuur: 12.32 °C
+Gemiddeld aantal vrije fietsen: 542
+Gemiddeld aantal fietsen overdag (7-19u): 540
+Gemiddeld aantal fietsen ’s nachts (19-7u): 544
+Correlatie: -0.29
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+🔹 Markdown rapport genereren...
+🔹 Markdown rapport genereren...
+🔹 PDF rapport genereren...
+🔹 PDF rapport genereren...
+✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
+🔹 Git commit & push...
+🔹 Git commit & push...
