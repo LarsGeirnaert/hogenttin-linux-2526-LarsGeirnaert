@@ -10141,3 +10141,52 @@ Correlatie: 0.05
 ✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
 🔹 Git commit & push...
 🔹 Git commit & push...
+[main 17559ab] Automatische update 2025-11-16 15:45:12
+ 6 files changed, 83 insertions(+), 33 deletions(-)
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   3b2a92b..17559ab  main -> main
+Run eind: Sun Nov 16 15:45:14 CET 2025
+============================
+============================
+Run start: Sun Nov 16 16:00:04 CET 2025
+Project Data Workflow v1.0
+🔹 Data ophalen...
+🔹 Data ophalen...
+🔹 CSV heropbouwen...
+🔹 CSV heropbouwen...
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+🔢 Samenvatting: totale weather-bestanden gevonden: 122; verwerkt: 122; overgeslagen (ongeldige temp): 0
+🔹 Analyses en grafieken genereren...
+🔹 Analyses en grafieken genereren...
+📊 Laatste 10 datapunten:
+              timestamp  temperature  total_free_bikes
+112 2025-11-16 13:45:04         10.0               540
+113 2025-11-16 14:00:04         10.1               539
+114 2025-11-16 14:15:04          9.1               538
+115 2025-11-16 14:30:04          9.1               541
+116 2025-11-16 14:45:03          9.1               538
+117 2025-11-16 15:00:04          9.1               545
+118 2025-11-16 15:15:03          9.1               543
+119 2025-11-16 15:30:05          9.1               541
+120 2025-11-16 15:45:02          9.1               543
+121 2025-11-16 16:00:04          9.0               545
+
+📈 Statistieken:
+Gemiddelde temperatuur: 13.40 °C
+Gemiddeld aantal vrije fietsen: 540
+Gemiddeld aantal fietsen overdag (7-19u): 539
+Gemiddeld aantal fietsen ’s nachts (19-7u): 542
+Correlatie: 0.04
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+🔹 Markdown rapport genereren...
+🔹 Markdown rapport genereren...
+🔹 PDF rapport genereren...
+🔹 PDF rapport genereren...
+✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
+🔹 Git commit & push...
+🔹 Git commit & push...
