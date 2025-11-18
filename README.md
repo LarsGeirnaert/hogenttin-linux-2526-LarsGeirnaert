@@ -150,7 +150,7 @@ Statistieken (correlatie, gemiddelden) worden berekend op de volledige 15-minute
 Grafieken gebruiken uurgemiddelden (berekend via ```resample('H').mean())``` om overplotting tegen te gaan en de trends per uur duidelijk zichtbaar te maken. Dit zorgt voor een professioneel en leesbaar resultaat.
 
 ### 7.2 Extra grafiek: aantal vrije fietsen per uur
-Een bijkomende visualisatie werd toegevoegd: fietsen vs. uur van de dag → reports/fiets_vs_uur.png
+Een bijkomende visualisatie werd toegevoegd: fietsen vs. uur van de dag → [reports/fiets_vs_uur.png](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/fiets_vs_uur.png)
 
 Deze grafiek toont hoe het totaal aantal vrije fietsen in Gent varieert per uur van de dag. Ze geeft inzichten zoals:
 
