@@ -14207,3 +14207,174 @@ Correlatie: 0.26
 🔹 PDF rapport genereren...
 ✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
 🔹 Git commit & push...
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   e6cd73e..43af567  main -> main
+Run eind: Tue Nov 18 14:20:28 CET 2025
+============================
+============================
+Run start: Tue Nov 18 14:30:01 CET 2025
+Project Data Workflow v1.0
+🔹 Data ophalen...
+🔹 Data ophalen...
+❌ fetch_data.sh mislukt
+============================
+Run start: Tue Nov 18 14:43:40 CET 2025
+Project Data Workflow v1.0
+⚡ Data ophalen overgeslagen (skip-fetch)
+🔹 CSV heropbouwen...
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+🔢 Samenvatting: totale weather-bestanden gevonden: 194; verwerkt: 194; overgeslagen: 0
+🔹 Analyses en grafieken genereren...
+/home/larsg/projects/data-workflow/scripts/analyze_data.py:63: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
+  df_hourly = df.set_index('timestamp').resample('H').mean().dropna().reset_index()
+📊 Laatste 10 datapunten (Originele 15-min data):
+              timestamp  temperature  total_free_bikes
+184 2025-11-17 22:45:01          2.8               540
+185 2025-11-17 23:00:01          2.7               546
+186 2025-11-17 23:15:01          2.8               545
+187 2025-11-18 10:45:01          6.0               513
+188 2025-11-18 12:00:01          6.7               506
+189 2025-11-18 12:15:01          6.7               508
+190 2025-11-18 12:30:01          6.8               504
+191 2025-11-18 13:45:01          6.7               501
+192 2025-11-18 14:00:02          6.6               507
+193 2025-11-18 14:15:01          6.3               504
+
+📈 Statistieken (Gebaseerd op werkelijke metingen):
+Gemiddelde temperatuur: 10.86 °C
+Gemiddeld aantal vrije fietsen: 537
+Gemiddeld aantal fietsen overdag (7-19u): 534
+Gemiddeld aantal fietsen ’s nachts (19-7u): 542
+Correlatie: 0.26
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 1944, in _agg_py_fallback
+    res_values = self._grouper.agg_series(ser, alt, preserve_dtype=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/groupby/ops.py", line 873, in agg_series
+    result = self._aggregate_series_pure_python(obj, func)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/groupby/ops.py", line 894, in _aggregate_series_pure_python
+    res = func(group)
+          ^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 2461, in <lambda>
+    alt=lambda x: Series(x, copy=False).mean(numeric_only=numeric_only),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/series.py", line 6570, in mean
+    return NDFrame.mean(self, axis, skipna, numeric_only, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 12485, in mean
+    return self._stat_function(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 12442, in _stat_function
+    return self._reduce(
+           ^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/series.py", line 6478, in _reduce
+    return op(delegate, skipna=skipna, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/nanops.py", line 147, in f
+    result = alt(values, axis=axis, skipna=skipna, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/nanops.py", line 404, in new_func
+    result = func(values, axis=axis, skipna=skipna, mask=mask, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/nanops.py", line 720, in nanmean
+    the_sum = _ensure_numeric(the_sum)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/nanops.py", line 1701, in _ensure_numeric
+    raise TypeError(f"Could not convert string '{x}' to numeric")
+TypeError: Could not convert string 'Thursday' to numeric
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/larsg/projects/data-workflow/scripts/analyze_data.py", line 63, in <module>
+    df_hourly = df.set_index('timestamp').resample('H').mean().dropna().reset_index()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/resample.py", line 1384, in mean
+    return self._downsample("mean", numeric_only=numeric_only)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/resample.py", line 1782, in _downsample
+    result = obj.groupby(self._grouper).aggregate(how, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/groupby/generic.py", line 1432, in aggregate
+    result = op.agg()
+             ^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/apply.py", line 187, in agg
+    return self.apply_str()
+           ^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/apply.py", line 603, in apply_str
+    return self._apply_str(obj, func, *self.args, **self.kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/apply.py", line 693, in _apply_str
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 2459, in mean
+    result = self._cython_agg_general(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 2005, in _cython_agg_general
+    new_mgr = data.grouped_reduce(array_func)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 1488, in grouped_reduce
+    applied = sb.apply(func)
+              ^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 395, in apply
+    result = func(self.values, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 2002, in array_func
+    result = self._agg_py_fallback(how, values, ndim=data.ndim, alt=alt)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/larsg/projects/data-workflow/venv/lib/python3.12/site-packages/pandas/core/groupby/groupby.py", line 1948, in _agg_py_fallback
+    raise type(err)(msg) from err
+TypeError: agg function failed [how->mean,dtype->object]
+============================
+Run start: Tue Nov 18 14:44:58 CET 2025
+Project Data Workflow v1.0
+⚡ Data ophalen overgeslagen (skip-fetch)
+🔹 CSV heropbouwen...
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+🔢 Samenvatting: totale weather-bestanden gevonden: 194; verwerkt: 194; overgeslagen: 0
+🔹 Analyses en grafieken genereren...
+============================
+Run start: Tue Nov 18 14:45:01 CET 2025
+Project Data Workflow v1.0
+🔹 Data ophalen...
+🔹 Data ophalen...
+/home/larsg/projects/data-workflow/scripts/analyze_data.py:62: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
+  df_hourly = df.set_index('timestamp').resample('H').mean(numeric_only=True).dropna().reset_index()
+📊 Laatste 10 datapunten (Originele 15-min data):
+              timestamp  temperature  total_free_bikes
+184 2025-11-17 22:45:01          2.8               540
+185 2025-11-17 23:00:01          2.7               546
+186 2025-11-17 23:15:01          2.8               545
+187 2025-11-18 10:45:01          6.0               513
+188 2025-11-18 12:00:01          6.7               506
+189 2025-11-18 12:15:01          6.7               508
+190 2025-11-18 12:30:01          6.8               504
+191 2025-11-18 13:45:01          6.7               501
+192 2025-11-18 14:00:02          6.6               507
+193 2025-11-18 14:15:01          6.3               504
+
+📈 Statistieken (Gebaseerd op werkelijke metingen):
+Gemiddelde temperatuur: 10.86 °C
+Gemiddeld aantal vrije fietsen: 537
+Gemiddeld aantal fietsen overdag (7-19u): 534
+Gemiddeld aantal fietsen ’s nachts (19-7u): 542
+Correlatie: 0.26
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+🔹 CSV heropbouwen...
+🔹 CSV heropbouwen...
+/home/larsg/projects/data-workflow/scripts/plot_bikes_vs_time.py:32: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
+  df_hourly = df.set_index('timestamp').resample('H').mean().dropna().reset_index()
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+🔹 Markdown rapport genereren...
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+🔢 Samenvatting: totale weather-bestanden gevonden: 195; verwerkt: 195; overgeslagen: 0
+🔹 Analyses en grafieken genereren...
+🔹 Analyses en grafieken genereren...
+🔹 PDF rapport genereren...
+✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
+🔹 Git commit & push...
