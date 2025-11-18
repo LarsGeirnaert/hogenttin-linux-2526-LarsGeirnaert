@@ -154,13 +154,13 @@ Een bijkomende visualisatie werd toegevoegd: fietsen vs. uur van de dag → [rep
 
 Deze grafiek toont hoe het totaal aantal vrije fietsen in Gent varieert per uur van de dag. Ze geeft inzichten zoals:
 
-op welke momenten er typisch meer of minder fietsen beschikbaar zijn
+- op welke momenten er typisch meer of minder fietsen beschikbaar zijn
 
-piekmomenten rond ochtend- en avondspits
+- piekmomenten rond ochtend- en avondspits
 
-eventuele trends in gebruiksdrukte tijdens weekends of koude dagen
+- eventuele trends in gebruiksdrukte tijdens weekends of koude dagen
 
-hoe de beschikbaarheid doorheen de dag evolueert
+- hoe de beschikbaarheid doorheen de dag evolueert
 
 Deze grafiek is aanvullend op de temperatuur-analyse en helpt om te bepalen of variaties te wijten zijn aan dagelijks ritme in plaats van aan weersomstandigheden.
 
@@ -171,18 +171,18 @@ Naast het Markdown-rapport wordt er automatisch ook een PDF-bestand gegenereerd:
 
 Dit PDF-rapport bevat:
 
-een overzicht van de workflow
+- een overzicht van de workflow
 
-de statistieken van de dataset
+- de statistieken van de dataset
 
-de twee grafieken:
+- de twee grafieken:
 
-Temperatuur vs. aantal vrije fietsen
+-  Temperatuur vs. aantal vrije fietsen
 
-Aantal vrije fietsen per uur
+-  Aantal vrije fietsen per uur
 
-begeleidende uitleg bij elke visualisatie
+- begeleidende uitleg bij elke visualisatie
 
-automatische titelpagina, consistente layout en uniforme opmaak
+- automatische titelpagina, consistente layout en uniforme opmaak
 
 Het PDF-bestand wordt automatisch vernieuwd bij elk run van de workflow.
