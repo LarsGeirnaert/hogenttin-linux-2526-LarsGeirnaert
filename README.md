@@ -85,6 +85,10 @@ data-workflow/
 
 - Python 3.11
 
+- jq (voor JSON parsing in bash)
+
+- curl (voor data ophalen via API)
+
 - pandas
 
 - matplotlib
@@ -92,10 +96,6 @@ data-workflow/
 - scikit-learn
 
 - reportlab
-
-- jq (voor JSON parsing in bash)
-
-- curl (voor data ophalen via API)
 
 ## 5. Gebruiksaanwijzing
 ### 5.1 Automatisch uitvoeren (elk kwartier)
