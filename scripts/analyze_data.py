@@ -41,7 +41,7 @@ print(f"Gemiddeld aantal fietsen overdag (7-19u): {day_avg_bikes}")
 print(f"Gemiddeld aantal fietsen ’s nachts (19-7u): {night_avg_bikes}")
 print(f"Correlatie: {corr:.2f}")
 
-# Weekdag tabel (aanmaken is nodig voor statistieken)
+# Weekdag tabel
 df["weekday"] = df["timestamp"].dt.day_name()
 weekday_stats = df.groupby("weekday").agg(
     Min=("total_free_bikes", "min"),
@@ -52,6 +52,13 @@ weekday_stats = df.groupby("weekday").agg(
     "Monday", "Tuesday", "Wednesday", "Thursday",
     "Friday", "Saturday", "Sunday"
 ])
+
+# NIEUWE CODE: Zet de fiets-kolommen om naar nullable integers (Int64)
+# Dit verwijdert de .0 en handelt NaN/lege groepen correct af.
+bike_cols = ["Min", "Max", "Gemiddelde_fietsen"]
+for col in bike_cols:
+    # Round is nodig omdat 'min' en 'max' floats teruggeven, daarna converteren naar integer
+    weekday_stats[col] = weekday_stats[col].round(0).astype('Int64')
 
 weekday_csv = report_dir / "weekday_stats.csv"
 weekday_stats.to_csv(weekday_csv)
