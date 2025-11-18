@@ -53,11 +53,9 @@ weekday_stats = df.groupby("weekday").agg(
     "Friday", "Saturday", "Sunday"
 ])
 
-# NIEUWE CODE: Zet de fiets-kolommen om naar nullable integers (Int64)
-# Dit verwijdert de .0 en handelt NaN/lege groepen correct af.
+# Zet de fiets-kolommen om naar nullable integers (Int64)
 bike_cols = ["Min", "Max", "Gemiddelde_fietsen"]
 for col in bike_cols:
-    # Round is nodig omdat 'min' en 'max' floats teruggeven, daarna converteren naar integer
     weekday_stats[col] = weekday_stats[col].round(0).astype('Int64')
 
 weekday_csv = report_dir / "weekday_stats.csv"
@@ -76,34 +74,19 @@ model.fit(X, y)
 y_pred = model.predict(X)
 mse = mean_squared_error(y, y_pred)
 
-
-# --- 4. Grafiek 1: Temperatuur vs. Vrije Fietsen (Uurgemiddelden) ---
-plt.style.use('seaborn-v0_8-darkgrid') # Betere stijl
-fig, ax = plt.subplots(figsize=(10, 6)) # Grotere figuur
-
+# Grafiek 1: Temp vs Fietsen
+plt.figure(figsize=(8,5))
 # Plot de GEAGGREGEERDE punten
-ax.scatter(df_hourly["temperature"], df_hourly["total_free_bikes"], 
-           label="Uurgemiddelden", alpha=0.6, s=50, color='#1f77b4') # Grotere punten, mooie kleur
-
+plt.scatter(df_hourly["temperature"], df_hourly["total_free_bikes"], label="Uurgemiddelden", alpha=0.7)
 # Plot de trendlijn (die is getraind op de ruwe data)
-ax.plot(df["temperature"], y_pred, color='#d62728', linewidth=2.5, label="Trendlijn (ruwe data)") # Rode lijn
+plt.plot(df["temperature"], y_pred, color="red", linewidth=2, label="Trendlijn (ruwe data)")
 
-ax.set_title("Relatie tussen temperatuur en aantal vrije fietsen (Gent)", fontsize=16, fontweight='bold')
-ax.set_xlabel("Temperatuur (°C)", fontsize=12)
-ax.set_ylabel("Vrije fietsen", fontsize=12)
-ax.grid(True, linestyle='--', alpha=0.7) # Duidelijker grid
-ax.legend(fontsize=10, loc='upper left') # Legend op logische plek
-
-# Verwijder top en rechter spine voor een cleaner look
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-
-# Voeg tekst toe voor de correlatiecoëfficiënt
-ax.text(0.05, 0.95, f'Correlatie: {corr:.2f}', transform=ax.transAxes, 
-        fontsize=10, verticalalignment='top', bbox=dict(boxstyle='round,pad=0.5', fc='white', alpha=0.7))
-
-
+plt.title("Relatie tussen temperatuur en aantal vrije fietsen (Gent) - Uurgemiddelden")
+plt.xlabel("Temperatuur (°C)")
+plt.ylabel("Vrije fietsen")
+plt.grid(True)
+plt.legend()
 plot_path = report_dir / "fiets_vs_temp.png"
-plt.savefig(plot_path, dpi=300, bbox_inches='tight') # Hogere resolutie, geen witruimte
+plt.savefig(plot_path)
 plt.close()
 print(f"📁 Grafiek opgeslagen in: {plot_path}")

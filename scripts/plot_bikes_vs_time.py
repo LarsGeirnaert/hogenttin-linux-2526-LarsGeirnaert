@@ -31,34 +31,25 @@ df_hourly = df.set_index('timestamp').resample('H').mean(numeric_only=True).drop
 df_hourly['hour'] = df_hourly['timestamp'].dt.hour + df_hourly['timestamp'].dt.minute/60
 
 
-# --- 3. Grafiek maken (met GEAGGREGEERDE punten en verbeterde stijl) ---
-plt.style.use('seaborn-v0_8-darkgrid') # Consistentie in stijl
-fig, ax = plt.subplots(figsize=(12, 6)) # Breder figuur voor uren-as
+# --- 3. Grafiek maken (met GEAGGREGEERDE punten) ---
+plt.figure(figsize=(10,5))
 
 # Plot de GEAGGREGEERDE punten (elk punt is nu het uurgemiddelde)
-ax.scatter(df_hourly['hour'], df_hourly['total_free_bikes'], 
-           color='#2ca02c', label='Uurgemiddelden', alpha=0.7, s=50) # Mooie groene kleur, grotere punten
+plt.scatter(df_hourly['hour'], df_hourly['total_free_bikes'], color='blue', label='Uurgemiddelden')
 
 # Plot de trendlijn (gebruik de originele 'hour' kolom voor de X-range van de lijn)
-ax.plot(df['hour'], y_pred, color='#ff7f0e', linewidth=2.5, label='Trendlijn (lineaire regressie)') # Oranje lijn
+plt.plot(df['hour'], y_pred, color='red', linewidth=2, label='Trendlijn (linear regression)')
 
-ax.set_xlabel('Uur van de dag', fontsize=12)
-ax.set_ylabel('Aantal vrije fietsen', fontsize=12)
-ax.set_title('Aantal vrije fietsen door de dag (Gent) - Uurgemiddelden', fontsize=16, fontweight='bold')
-ax.set_xticks(range(0,25, 2)) # uren 0-24, elke 2 uur een label
-ax.grid(True, linestyle='--', alpha=0.7)
-ax.legend(fontsize=10, loc='upper left')
+plt.xlabel('Uur van de dag')
+plt.ylabel('Aantal vrije fietsen')
+plt.title('Aantal vrije fietsen door de dag (Gent) - Uurgemiddelden')
+plt.xticks(range(0,25)) # uren 0-24
+plt.grid(True)
+plt.legend()
+plt.text(min(df['hour']), max(df['total_free_bikes'])*0.9, f"MSE: {mse:.2f}", color='black')
 
-# Verwijder top en rechter spine
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-
-# Voeg tekst toe voor de MSE
-ax.text(0.05, 0.95, f'MSE: {mse:.2f}', transform=ax.transAxes, 
-        fontsize=10, verticalalignment='top', bbox=dict(boxstyle='round,pad=0.5', fc='white', alpha=0.7))
-
-
+# Opslaan
 plot_path = report_dir / "fiets_vs_uur.png"
-plt.savefig(plot_path, dpi=300, bbox_inches='tight') # Hogere resolutie, geen witruimte
+plt.savefig(plot_path)
 plt.close()
 print(f"📁 Grafiek opgeslagen in: {plot_path}")
