@@ -142,42 +142,47 @@ wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en ra
 Opmerking: de workflow pusht automatisch nieuwe gegevens en rapporten naar GitHub, zodat alles online up-to-date blijft.
 
 ## 7. Extra visualisaties en PDF-rapport
+### 7.1 Data Aggregatie voor Visualisatie
+De ruwe data wordt elke 15 minuten verzameld. Om de grafieken helder en leesbaar te houden, past de analysefase een aggregatietechniek toe:
 
-Naast de basisgrafiek (vrije fietsen vs. temperatuur) bevat de workflow een tweede grafiek die een ander aspect van de dataset verduidelijkt.
+Statistieken (correlatie, gemiddelden) worden berekend op de volledige 15-minuten dataset om maximale nauwkeurigheid te garanderen.
 
-### 7.1 Extra grafiek: aantal vrije fietsen per uur
+Grafieken gebruiken uurgemiddelden (berekend via resample('H').mean()) om overplotting tegen te gaan en de trends per uur duidelijk zichtbaar te maken. Dit zorgt voor een professioneel en leesbaar resultaat.
 
-Een bijkomende visualisatie werd toegevoegd:
-fietsen vs. uur van de dag → reports/fiets_vs_uur.png
+### 7.2 Extra grafiek: aantal vrije fietsen per uur
+Een bijkomende visualisatie werd toegevoegd: fietsen vs. uur van de dag → reports/fiets_vs_uur.png
 
-Deze grafiek toont hoe het totaal aantal vrije fietsen in Gent varieert per uur van de dag.
-Ze geeft inzichten zoals:
+Deze grafiek toont hoe het totaal aantal vrije fietsen in Gent varieert per uur van de dag. Ze geeft inzichten zoals:
 
-- op welke momenten er typisch meer of minder fietsen beschikbaar zijn
+op welke momenten er typisch meer of minder fietsen beschikbaar zijn
 
-- piekmomenten rond ochtend- en avondspits
+piekmomenten rond ochtend- en avondspits
 
-- eventuele trends in gebruiksdrukte tijdens weekends of koude dagen
+eventuele trends in gebruiksdrukte tijdens weekends of koude dagen
 
-- hoe de beschikbaarheid doorheen de dag evolueert
+hoe de beschikbaarheid doorheen de dag evolueert
 
 Deze grafiek is aanvullend op de temperatuur-analyse en helpt om te bepalen of variaties te wijten zijn aan dagelijks ritme in plaats van aan weersomstandigheden.
 
-### 7.2 PDF-rapport met beide grafieken
-
+### 7.3 PDF-rapport met beide grafieken
 Naast het Markdown-rapport wordt er automatisch ook een PDF-bestand gegenereerd:
 
 📄 reports/report.pdf
 
 Dit PDF-rapport bevat:
 
-- een overzicht van de workflow
-- de statistieken van de dataset
-- de twee grafieken:
-    - Temperatuur vs. aantal vrije fietsen
-    - Aantal vrije fietsen per uur
-- begeleidende uitleg bij elke visualisatie
-- automatische titelpagina, consistente layout en uniforme opmaak
+een overzicht van de workflow
 
+de statistieken van de dataset
 
-Het PDF-bestand wordt automatisch vernieuwd bij elk run van de workflow (behalve wanneer --no-fetch wordt gebruikt).
+de twee grafieken:
+
+Temperatuur vs. aantal vrije fietsen
+
+Aantal vrije fietsen per uur
+
+begeleidende uitleg bij elke visualisatie
+
+automatische titelpagina, consistente layout en uniforme opmaak
+
+Het PDF-bestand wordt automatisch vernieuwd bij elk run van de workflow.
