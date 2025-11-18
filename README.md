@@ -147,7 +147,7 @@ De ruwe data wordt elke 15 minuten verzameld. Om de grafieken helder en leesbaar
 
 Statistieken (correlatie, gemiddelden) worden berekend op de volledige 15-minuten dataset om maximale nauwkeurigheid te garanderen.
 
-Grafieken gebruiken uurgemiddelden (berekend via resample('H').mean()) om overplotting tegen te gaan en de trends per uur duidelijk zichtbaar te maken. Dit zorgt voor een professioneel en leesbaar resultaat.
+Grafieken gebruiken uurgemiddelden (berekend via ```resample('H').mean())``` om overplotting tegen te gaan en de trends per uur duidelijk zichtbaar te maken. Dit zorgt voor een professioneel en leesbaar resultaat.
 
 ### 7.2 Extra grafiek: aantal vrije fietsen per uur
 Een bijkomende visualisatie werd toegevoegd: fietsen vs. uur van de dag → reports/fiets_vs_uur.png
