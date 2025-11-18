@@ -17,7 +17,6 @@ df = pd.read_csv(data_file)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 
 # --- 1. Lineaire Regressie (op RUWE data) ---
-# Uur van de dag (incl. minuten) voor nauwkeurige regressie
 df['hour'] = df['timestamp'].dt.hour + df['timestamp'].dt.minute/60 
 X = df['hour'].values.reshape(-1, 1)
 y = df['total_free_bikes'].values
@@ -28,30 +27,38 @@ y_pred = model.predict(X)
 mse = mean_squared_error(y, y_pred)
 
 # --- 2. Data Aggregatie (VOOR GRAFIEK) ---
-# Groepeer de 15-minuten data per uur
-df_hourly = df.set_index('timestamp').resample('H').mean().dropna().reset_index()
+df_hourly = df.set_index('timestamp').resample('H').mean(numeric_only=True).dropna().reset_index()
 df_hourly['hour'] = df_hourly['timestamp'].dt.hour + df_hourly['timestamp'].dt.minute/60
 
 
-# --- 3. Grafiek maken (met GEAGGREGEERDE punten) ---
-plt.figure(figsize=(10,5))
+# --- 3. Grafiek maken (met GEAGGREGEERDE punten en verbeterde stijl) ---
+plt.style.use('seaborn-v0_8-darkgrid') # Consistentie in stijl
+fig, ax = plt.subplots(figsize=(12, 6)) # Breder figuur voor uren-as
 
 # Plot de GEAGGREGEERDE punten (elk punt is nu het uurgemiddelde)
-plt.scatter(df_hourly['hour'], df_hourly['total_free_bikes'], color='blue', label='Uurgemiddelden')
+ax.scatter(df_hourly['hour'], df_hourly['total_free_bikes'], 
+           color='#2ca02c', label='Uurgemiddelden', alpha=0.7, s=50) # Mooie groene kleur, grotere punten
 
 # Plot de trendlijn (gebruik de originele 'hour' kolom voor de X-range van de lijn)
-plt.plot(df['hour'], y_pred, color='red', linewidth=2, label='Trendlijn (linear regression)')
+ax.plot(df['hour'], y_pred, color='#ff7f0e', linewidth=2.5, label='Trendlijn (lineaire regressie)') # Oranje lijn
 
-plt.xlabel('Uur van de dag')
-plt.ylabel('Aantal vrije fietsen')
-plt.title('Aantal vrije fietsen door de dag (Gent) - Uurgemiddelden')
-plt.xticks(range(0,25)) # uren 0-24
-plt.grid(True)
-plt.legend()
-plt.text(min(df['hour']), max(df['total_free_bikes'])*0.9, f"MSE: {mse:.2f}", color='black')
+ax.set_xlabel('Uur van de dag', fontsize=12)
+ax.set_ylabel('Aantal vrije fietsen', fontsize=12)
+ax.set_title('Aantal vrije fietsen door de dag (Gent) - Uurgemiddelden', fontsize=16, fontweight='bold')
+ax.set_xticks(range(0,25, 2)) # uren 0-24, elke 2 uur een label
+ax.grid(True, linestyle='--', alpha=0.7)
+ax.legend(fontsize=10, loc='upper left')
 
-# Opslaan
+# Verwijder top en rechter spine
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+
+# Voeg tekst toe voor de MSE
+ax.text(0.05, 0.95, f'MSE: {mse:.2f}', transform=ax.transAxes, 
+        fontsize=10, verticalalignment='top', bbox=dict(boxstyle='round,pad=0.5', fc='white', alpha=0.7))
+
+
 plot_path = report_dir / "fiets_vs_uur.png"
-plt.savefig(plot_path)
+plt.savefig(plot_path, dpi=300, bbox_inches='tight') # Hogere resolutie, geen witruimte
 plt.close()
 print(f"📁 Grafiek opgeslagen in: {plot_path}")
