@@ -13572,3 +13572,50 @@ Correlatie: 0.20
 🔹 PDF rapport genereren...
 ✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
 🔹 Git commit & push...
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   4058a52..451b634  main -> main
+Run eind: Tue Nov 18 11:33:19 CET 2025
+============================
+============================
+Run start: Tue Nov 18 11:36:01 CET 2025
+Project Data Workflow v1.0
+🔹 Data ophalen...
+🔹 Data ophalen...
+🔹 CSV heropbouwen...
+🔹 CSV heropbouwen...
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+🔢 Samenvatting: totale weather-bestanden gevonden: 189; verwerkt: 189; overgeslagen (ongeldige temp): 0
+🔹 Analyses en grafieken genereren...
+🔹 Analyses en grafieken genereren...
+📊 Laatste 10 datapunten:
+              timestamp  temperature  total_free_bikes
+179 2025-11-17 21:30:01          3.7               537
+180 2025-11-17 21:45:01          3.5               535
+181 2025-11-17 22:00:01          3.4               541
+182 2025-11-17 22:15:01          3.3               541
+183 2025-11-17 22:30:01          3.2               541
+184 2025-11-17 22:45:01          2.8               540
+185 2025-11-17 23:00:01          2.7               546
+186 2025-11-17 23:15:01          2.8               545
+187 2025-11-18 10:45:01          6.0               513
+188 2025-11-18 11:36:01          6.6               506
+
+📈 Statistieken:
+Gemiddelde temperatuur: 10.97 °C
+Gemiddeld aantal vrije fietsen: 538
+Gemiddeld aantal fietsen overdag (7-19u): 535
+Gemiddeld aantal fietsen ’s nachts (19-7u): 542
+Correlatie: 0.21
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+🔹 Markdown rapport genereren...
+🔹 Markdown rapport genereren...
+🔹 PDF rapport genereren...
+🔹 PDF rapport genereren...
+✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
+🔹 Git commit & push...
+🔹 Git commit & push...
