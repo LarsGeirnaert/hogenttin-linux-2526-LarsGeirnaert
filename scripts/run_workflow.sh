@@ -5,19 +5,30 @@ set -e
 set -o pipefail
 trap 'echo "❌ Fout op regel $LINENO"; exit 1' ERR
 
-LOG="$HOME/projects/data-workflow/logs/cron.log"
+# Dynamisch pad bepalen (maakt het script portable voor docenten)
+PROJECT_DIR="$HOME/projects/data-workflow"
+LOG_DIR="$PROJECT_DIR/logs"
+mkdir -p "$LOG_DIR"
+
+LOG="$LOG_DIR/cron.log"
+
 echo "============================" >> "$LOG"
 echo "Run start: $(date)" >> "$LOG"
 echo "Project Data Workflow v1.0" >> "$LOG"
 
-# --- Environment paths ---
-export PATH="$HOME/projects/data-workflow/venv/bin:$PATH"
-export HOME="/home/larsg"
+# --- Environment setup ---
+# We voegen de venv bin toe aan PATH
+export PATH="$PROJECT_DIR/venv/bin:$PATH"
 
 # Activeer virtuele omgeving
-source "$HOME/projects/data-workflow/venv/bin/activate"
+if [ -f "$PROJECT_DIR/venv/bin/activate" ]; then
+    source "$PROJECT_DIR/venv/bin/activate"
+else
+    echo "❌ Virtual environment niet gevonden op $PROJECT_DIR/venv" | tee -a "$LOG"
+    exit 1
+fi
 
-cd "$HOME/projects/data-workflow" || { echo "❌ Kan projectmap niet vinden"; exit 1; }
+cd "$PROJECT_DIR" || { echo "❌ Kan projectmap niet vinden"; exit 1; }
 
 # --- Data ophalen (optioneel) ---
 if [ "$1" != "skip-fetch" ]; then
@@ -45,10 +56,15 @@ echo "🔹 PDF rapport genereren..." | tee -a "$LOG"
 python scripts/generate_pdf_report.py >> "$LOG" 2>&1 || { echo "❌ generate_pdf_report.py mislukt"; exit 1; }
 
 # --- Git commit & push ---
-echo "🔹 Git commit & push..." | tee -a "$LOG"
-git add -A >> "$LOG" 2>&1
-git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>> "$LOG" || echo "⚠️ Geen wijzigingen om te committen"
-git push origin main >> "$LOG" 2>&1 || echo "⚠️ Git push mislukt"
+# Alleen uitvoeren als git geconfigureerd is
+if [ -d ".git" ]; then
+    echo "🔹 Git commit & push..." | tee -a "$LOG"
+    git add -A >> "$LOG" 2>&1
+    git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>> "$LOG" || echo "⚠️ Geen wijzigingen om te committen" >> "$LOG"
+    git push origin main >> "$LOG" 2>&1 || echo "⚠️ Git push mislukt (check netwerk/credentials)" >> "$LOG"
+else
+    echo "⚠️ Geen git repository gevonden, slaat commit over." >> "$LOG"
+fi
 
 echo "Run eind: $(date)" >> "$LOG"
 echo "============================" >> "$LOG"
