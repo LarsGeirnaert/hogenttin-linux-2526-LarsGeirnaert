@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 from pathlib import Path
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
@@ -11,101 +10,79 @@ import numpy as np
 base_dir = Path.home() / "projects/data-workflow"
 data_file = base_dir / "transformed_data/combined.csv"
 report_dir = base_dir / "reports"
-report_dir.mkdir(exist_ok=True) # Zorg dat de map bestaat
+report_dir.mkdir(exist_ok=True)
 
-# --- Kleurdefinitie voor Modern Design ---
-TEAL = "#008080"
-DARK_GREY = "#333333"
-LIGHT_GREY = "#CCCCCC"
-SOFT_BLUE = "#66B2FF" # Nieuwe kleur voor scatter punten
-RED_ACCENT = "#FF6347" # Nieuwe kleur voor trendlijn (iets zachter)
+# --- Kleuren & Stijl ---
+DARK_BLUE = "#004C99"  # Donkerder blauw voor duidelijkheid
+ACCENT_RED = "#D62728" # Diep rood voor trendlijn
+TEXT_COLOR = "#333333"
 
 # --- Data inlezen ---
 df = pd.read_csv(data_file)
-df["timestamp"] = pd.to_datetime(df["timestamp"])
+df['timestamp'] = pd.to_datetime(df['timestamp'])
 
-# --- Aggregatie naar Uurgemiddelden ---
-# Zorg dat 'timestamp' de index is voor resample
+# --- 1. Lineaire Regressie (op VOLLE 0-24u data) ---
+df['hour'] = df['timestamp'].dt.hour + df['timestamp'].dt.minute/60 
+X = df['hour'].values.reshape(-1, 1)
+y = df['total_free_bikes'].values
+
+model = LinearRegression()
+model.fit(X, y)
+y_pred = model.predict(X)
+mse = mean_squared_error(y, y_pred)
+
+# --- 2. X-AS VERSCHUIVING (VOOR GRAFIEK) ---
+# Uren 0, 1, 2 AM worden verschoven met +24, zodat de X-as van 3 tot 27 loopt
+df['hour_shifted'] = df['hour'].apply(lambda h: h + 24 if h < 3 else h)
+
+# --- 3. Data Aggregatie ---
 df_hourly = df.set_index('timestamp').resample('H').mean(numeric_only=True).dropna().reset_index()
+df_hourly['hour'] = df_hourly['timestamp'].dt.hour + df_hourly['timestamp'].dt.minute/60
+df_hourly['hour_shifted'] = df_hourly['hour'].apply(lambda h: h + 24 if h < 3 else h)
 
-# --- X-as voorbereiding: Uur van de dag met verschuiving ---
-# We willen de uren weergeven, maar de 'dag' laten starten om 3:00 uur 's nachts
-# zodat de piek rond de spits niet wordt gesplitst.
-# Creëer een 'time_of_day' kolom die de dag om 3:00 uur laat beginnen.
-# Dit is de numerieke weergave van de uren, met 00:00 = 21.0, 03:00 = 0.0, etc.
-df_hourly['shifted_hour'] = df_hourly['timestamp'].dt.hour + df_hourly['timestamp'].dt.minute / 60
-df_hourly['shifted_hour'] = (df_hourly['shifted_hour'] - 3) % 24
+# --- 4. Grafiek maken (MODERN DESIGN) ---
+plt.style.use('seaborn-v0_8-darkgrid') # Moderne basis
 
-# --- Lineaire regressie op shifted_hour ---
-# Gebruik de geaggregeerde data voor de regressie (Uur vs Fietsen)
-X_hourly = df_hourly["shifted_hour"].values.reshape(-1, 1)
-y_hourly = df_hourly["total_free_bikes"].values
+fig, ax = plt.subplots(figsize=(12, 7))
 
-model_hourly = LinearRegression()
-model_hourly.fit(X_hourly, y_hourly)
-y_pred_hourly = model_hourly.predict(X_hourly)
-mse_hourly = mean_squared_error(y_hourly, y_pred_hourly)
-
-# --- Plotten: Aantal Fietsen per Uur (NU ECHT PRACHTIG!) ---
-plt.style.use('seaborn-v0_8-darkgrid') # Basis voor een modern grid
-
-fig, ax = plt.subplots(figsize=(12, 7)) # Grotere figuur voor impact
-
-# Scatter plot van de uurgemiddelden
-ax.scatter(df_hourly["shifted_hour"], df_hourly["total_free_bikes"], 
-           label="Uurgemiddelden", 
-           color=SOFT_BLUE, # Zachte blauwe punten
-           alpha=0.7,      # Iets transparant voor overlap
-           s=80,           # Grotere punten
-           edgecolors='white', # Witte rand voor betere definitie
-           linewidth=0.5)
+# Punten: Donkerder blauw, iets groter, witte rand voor contrast
+ax.scatter(df_hourly['hour_shifted'], df_hourly['total_free_bikes'], 
+           color=DARK_BLUE, 
+           label='Uurgemiddelden', 
+           alpha=0.85,      # Minder transparant = donkerder
+           s=70,            # Iets groter
+           edgecolors='white', 
+           linewidth=0.8)
 
 # Trendlijn
-# Sorteer de data op shifted_hour om een vloeiende lijn te garanderen
-sorted_indices = np.argsort(X_hourly.flatten())
-ax.plot(X_hourly[sorted_indices], y_pred_hourly[sorted_indices], 
-        color=RED_ACCENT, # Opvallende rode lijn
-        linewidth=2.5,   # Dikke lijn
-        label=f"Trendlijn (MSE: {mse_hourly:.2f})") # MSE direct in de legend
+X_shifted = df['hour_shifted'].values.reshape(-1, 1)
+y_pred_shifted = model.predict(X_shifted)
+ax.plot(df['hour_shifted'], y_pred_shifted, 
+        color=ACCENT_RED, 
+        linewidth=3, 
+        label=f'Trendlijn (MSE: {mse:.2f})')
 
-# Titel en Labels
-ax.set_title("Aantal Vrije Fietsen per Uur (Gent)", 
-             fontsize=20, 
-             color=DARK_GREY, 
-             pad=20) # Ruimte boven de titel
-ax.set_xlabel("Uur van de dag (Start 03:00)", 
-              fontsize=14, 
-              color=DARK_GREY, 
-              labelpad=15)
-ax.set_ylabel("Totaal aantal Vrije Fietsen", 
-              fontsize=14, 
-              color=DARK_GREY, 
-              labelpad=15)
+# Labels & Titel
+ax.set_title('Aantal Vrije Fietsen per Uur (Gent)', fontsize=18, fontweight='bold', color=TEXT_COLOR, pad=20)
+ax.set_xlabel('Uur van de dag (Start 03:00)', fontsize=13, color=TEXT_COLOR)
+ax.set_ylabel('Aantal Vrije Fietsen', fontsize=13, color=TEXT_COLOR)
 
-# X-as Ticks (met labels die duidelijk de verschuiving communiceren)
-ax.set_xticks(np.arange(0, 24, 2)) # Elke 2 uur een tick
-# Aangepaste labels om 0:00 en 2:00 te tonen, en de 3:00 start
-x_tick_labels = [(f"{int((hour + 3) % 24):02d}:00") for hour in np.arange(0, 24, 2)]
-ax.set_xticklabels(x_tick_labels, fontsize=12, color=DARK_GREY)
+# X-As Ticks (Om de 2 uur, even uren)
+tick_positions = np.arange(4, 28, 2) 
+tick_labels = [f"{int(t % 24)}:00" for t in tick_positions] 
+ax.set_xticks(tick_positions)
+ax.set_xticklabels(tick_labels, fontsize=11)
+ax.set_xlim(3, 27)
 
-# Y-as Ticks
-ax.tick_params(axis='y', labelsize=12, colors=DARK_GREY)
+# Grid & Legend
+ax.grid(True, linestyle='--', alpha=0.6)
+ax.legend(fontsize=11, frameon=True, facecolor='white', framealpha=0.9, loc='upper left')
 
-# Grid (lichter en subtieler)
-ax.grid(True, linestyle='--', alpha=0.6, color=LIGHT_GREY) # Lichtere, gestippelde grid
-
-# Legend
-ax.legend(fontsize=11, frameon=True, fancybox=True, shadow=True, 
-          edgecolor='lightgrey', facecolor='white', loc='upper left')
-
-# Layout aanpassingen
-plt.tight_layout(rect=[0, 0.03, 1, 0.95]) # Meer ruimte voor titel en onderkant
-plt.gca().set_facecolor('white') # Achtergrond van het plotgebied wit maken
-fig.patch.set_facecolor('white') # Achtergrond van de hele figuur wit maken
+# Layout
+plt.tight_layout()
 
 # Opslaan
 plot_path = report_dir / "fiets_vs_uur.png"
-plt.savefig(plot_path, dpi=300, bbox_inches='tight') # Hoge resolutie, trimt witruimte
+plt.savefig(plot_path, dpi=300) # 300 DPI voor scherpe PDF
 plt.close()
-
-print(f"📁 Prachtige grafiek opgeslagen in: {plot_path}")
+print(f"📁 Prachtige tijd-grafiek opgeslagen in: {plot_path}")
