@@ -20,6 +20,9 @@ print("📊 Laatste 10 datapunten (Originele 15-min data):")
 print(df.tail(10))
 
 # --- 1. Statistieken berekenen (OP ALLE RUWE DATA) ---
+# Bereken de numerieke uurwaarde (0.0 tot 24.0) voor correlatie
+df['hour'] = df['timestamp'].dt.hour + df['timestamp'].dt.minute/60
+
 mean_temp = df["temperature"].mean()
 mean_bikes = round(df["total_free_bikes"].mean())
 
@@ -30,16 +33,21 @@ day_avg_bikes = round(day_data['total_free_bikes'].mean()) if not day_data.empty
 night_data = df[(df['timestamp'].dt.hour < 7) | (df['timestamp'].dt.hour >= 19)]
 night_avg_bikes = round(night_data['total_free_bikes'].mean()) if not night_data.empty else 0
 
-# Correlatie (veilig)
-corr = df["temperature"].corr(df["total_free_bikes"])
-corr = corr if not pd.isna(corr) else 0
+# Correlatie temperatuur vs. fietsen
+corr_temp_bikes = df["temperature"].corr(df["total_free_bikes"])
+corr_temp_bikes = corr_temp_bikes if not pd.isna(corr_temp_bikes) else 0
+
+# NIEUWE CORRELATIE: Uur vs. fietsen
+corr_hour_bikes = df["hour"].corr(df["total_free_bikes"])
+corr_hour_bikes = corr_hour_bikes if not pd.isna(corr_hour_bikes) else 0
 
 print("\n📈 Statistieken (Gebaseerd op werkelijke metingen):")
 print(f"Gemiddelde temperatuur: {mean_temp:.2f} °C")
 print(f"Gemiddeld aantal vrije fietsen: {mean_bikes}")
 print(f"Gemiddeld aantal fietsen overdag (7-19u): {day_avg_bikes}")
 print(f"Gemiddeld aantal fietsen ’s nachts (19-7u): {night_avg_bikes}")
-print(f"Correlatie: {corr:.2f}")
+print(f"Correlatie Temp ↔ Fietsen: {corr_temp_bikes:.2f}")
+print(f"Correlatie Uur ↔ Fietsen: {corr_hour_bikes:.2f}") # NIEUW PRINT
 
 # Weekdag tabel
 df["weekday"] = df["timestamp"].dt.day_name()
