@@ -16,47 +16,57 @@ report_dir.mkdir(exist_ok=True)
 df = pd.read_csv(data_file)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 
-# --- 1. FILTEREN VOOR ACTIEVE UREN (3u00 tot 2u59) ---
-# Filter de uren 0, 1 en 2 uit, want die zijn niet representatief voor het gebruik.
-inactive_hours = [0, 1, 2]
-df_active = df[~df['timestamp'].dt.hour.isin(inactive_hours)].copy()
+# --- 1. Lineaire Regressie (op VOLLE 0-24u data) ---
+# De uren voor de regressie (0.0 t/m 24.0)
+df['hour'] = df['timestamp'].dt.hour + df['timestamp'].dt.minute/60 
+X = df['hour'].values.reshape(-1, 1)
+y = df['total_free_bikes'].values
 
-
-# --- 2. Lineaire Regressie (op GEFILTERDE data) ---
-df_active['hour'] = df_active['timestamp'].dt.hour + df_active['timestamp'].dt.minute/60 
-X_active = df_active['hour'].values.reshape(-1, 1)
-y_active = df_active['total_free_bikes'].values
-
+# Model getraind op ALLE data
 model = LinearRegression()
-model.fit(X_active, y_active)
-y_pred_active = model.predict(X_active)
-mse_active = mean_squared_error(y_active, y_pred_active)
+model.fit(X, y)
+y_pred = model.predict(X)
+mse = mean_squared_error(y, y_pred) # MSE is berekend over de VOLLE 24u cyclus
 
 
-# --- 3. Data Aggregatie (VOOR GRAFIEK) ---
-# Aggregatie alleen op de actieve data
-df_hourly_active = df_active.set_index('timestamp').resample('H').mean(numeric_only=True).dropna().reset_index()
-df_hourly_active['hour'] = df_hourly_active['timestamp'].dt.hour + df_hourly_active['timestamp'].dt.minute/60
+# --- 2. X-AS VERSCHUIVING (VOOR GRAFIEK) ---
+# Uren 0, 1, 2 AM worden verschoven met +24, zodat de X-as van 3 tot 27 loopt
+df['hour_shifted'] = df['hour'].apply(lambda h: h + 24 if h < 3 else h)
+
+# --- 3. Data Aggregatie (Gebruikt de verschoven tijd) ---
+df_hourly = df.set_index('timestamp').resample('H').mean(numeric_only=True).dropna().reset_index()
+# De uurkolom opnieuw berekenen en de shift toepassen op de geaggregeerde data
+df_hourly['hour'] = df_hourly['timestamp'].dt.hour + df_hourly['timestamp'].dt.minute/60
+df_hourly['hour_shifted'] = df_hourly['hour'].apply(lambda h: h + 24 if h < 3 else h)
 
 
-# --- 4. Grafiek maken (met GEAGGREGEERDE en GEFILTERDE punten) ---
-plt.figure(figsize=(10,5))
+# --- 4. Grafiek maken (met verschoven as) ---
+plt.figure(figsize=(10,6))
 
-# Plot de GEAGGREGEERDE punten (uurgemiddelden van de actieve uren)
-plt.scatter(df_hourly_active['hour'], df_hourly_active['total_free_bikes'], color='blue', label='Uurgemiddelden (3u-2u)')
+# Plot de GEAGGREGEERDE punten tegen de verschoven X-as
+plt.scatter(df_hourly['hour_shifted'], df_hourly['total_free_bikes'], color='blue', label='Uurgemiddelden')
 
-# Plot de trendlijn (gebruik de actieve data)
-plt.plot(df_active['hour'], y_pred_active, color='red', linewidth=2, label='Trendlijn (linear regression)')
+# Plot de trendlijn: we moeten de trendlijn predicties opnieuw berekenen voor de verschoven X-waarden
+X_shifted = df['hour_shifted'].values.reshape(-1, 1)
+y_pred_shifted = model.predict(X_shifted)
+plt.plot(df['hour_shifted'], y_pred_shifted, color='red', linewidth=2, label='Trendlijn (linear regression)')
 
-plt.xlabel('Uur van de dag (3:00 t/m 2:59)')
-plt.ylabel('Aantal vrije fietsen')
-plt.title('Aantal vrije fietsen tijdens actieve uren (Gent)')
-plt.xticks(range(0,25, 3)) # Toon de uren 0, 3, 6, 9, etc.
+
+plt.xlabel('Uur van de dag (Start 3:00)', fontsize=12)
+plt.ylabel('Aantal vrije fietsen', fontsize=12)
+plt.title('Aantal vrije fietsen per uur (Volledige Dataset, X-as verschoven)', fontsize=14)
+
+# Bepaal de ticks en labels voor de verschoven as (3, 6, 9, ..., 24+2=26)
+tick_positions = np.arange(3, 27, 3) # Vanaf 3 tot 27, stappen van 3
+tick_labels = [f"{t % 24:.0f}u" for t in tick_positions] # Zorgt dat 24u = 0u en 27u = 3u
+plt.xticks(tick_positions, tick_labels)
+plt.xlim(3, 27) # Zet de grenzen van de X-as
+
 plt.grid(True)
 plt.legend()
 
-# Toon de nieuwe, lagere MSE
-plt.text(min(df_active['hour']), max(df_active['total_free_bikes'])*0.9, f"MSE (Actieve Uren): {mse_active:.2f}", color='black')
+# Toon de MSE van de volledige dataset
+plt.text(0.05, 0.95, f"MSE (Volle Dataset): {mse:.2f}", transform=plt.gca().transAxes, color='black')
 
 # Opslaan
 plot_path = report_dir / "fiets_vs_uur.png"
