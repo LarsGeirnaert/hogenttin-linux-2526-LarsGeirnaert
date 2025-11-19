@@ -19,14 +19,20 @@ GRID_COLOR = "#999999"
 # --- Data inlezen ---
 df = pd.read_csv(weekday_file)
 
-# --- Sorteren op weekdag (zodat Maandag eerst komt, niet alfabetisch) ---
-# We mappen de Engelse namen (die in de CSV staan als index of kolom) naar een sorteervolgorde
-# Eerst zorgen dat we de Engelse namen hebben om te sorteren
-days_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+# --- VERTALING & SORTEREN (HIER ZAT DE FOUT) ---
+# 1. Definieer de vertaling van Engels (uit CSV) naar Nederlands (voor Grafiek)
+day_map = {
+    "Monday": "Maandag", "Tuesday": "Dinsdag", "Wednesday": "Woensdag",
+    "Thursday": "Donderdag", "Friday": "Vrijdag", "Saturday": "Zaterdag", "Sunday": "Zondag"
+}
 
-# Omdat je CSV nu Nederlandse namen kan bevatten (afhankelijk van analyze_data.py output), 
-# maken we een mapping. Als je CSV al Nederlands is:
+# 2. Pas de vertaling toe. Als de CSV al Nederlands is, doet dit niets (veilig).
+df['weekday'] = df['weekday'].map(day_map).fillna(df['weekday'])
+
+# 3. Definieer de Nederlandse volgorde
 dutch_order = ["Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag"]
+
+# 4. Zet om naar Categorical type voor juiste sortering
 df['weekday'] = pd.Categorical(df['weekday'], categories=dutch_order, ordered=True)
 df = df.sort_values('weekday')
 
@@ -68,9 +74,11 @@ ax.errorbar(df['weekday'], df['Gemiddelde_fietsen'], yerr=y_err,
 # Waarde labels bovenop de staven
 for bar in bars:
     height = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2., height + 3,
-            f'{int(height)}',
-            ha='center', va='bottom', fontsize=11, fontweight='bold', color=TEXT_COLOR)
+    # Check op NaN om errors te voorkomen als data leeg is
+    if not np.isnan(height):
+        ax.text(bar.get_x() + bar.get_width()/2., height + 3,
+                f'{int(height)}',
+                ha='center', va='bottom', fontsize=11, fontweight='bold', color=TEXT_COLOR)
 
 # Labels & Titel
 ax.set_title("Vrije Fietsen per Weekdag (Gemiddelde & Bereik)", fontsize=18, fontweight='bold', color=TEXT_COLOR, pad=20)
@@ -78,9 +86,11 @@ ax.set_xlabel("Weekdag", fontsize=13, color=TEXT_COLOR)
 ax.set_ylabel("Aantal Vrije Fietsen", fontsize=13, color=TEXT_COLOR)
 
 # Y-as limieten iets ruimer zetten zodat labels passen
-y_min_limit = df['Min'].min() - 20
-y_max_limit = df['Max'].max() + 20
-ax.set_ylim(bottom=y_min_limit, top=y_max_limit)
+# Veiligheidscheck voor lege data
+if not df.empty:
+    y_min_limit = df['Min'].min() - 20
+    y_max_limit = df['Max'].max() + 20
+    ax.set_ylim(bottom=y_min_limit, top=y_max_limit)
 
 # Legend
 ax.legend(fontsize=11, frameon=True, facecolor='white', edgecolor=GRID_COLOR, framealpha=1, loc='upper right')
