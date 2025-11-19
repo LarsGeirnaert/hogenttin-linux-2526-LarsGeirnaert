@@ -1,12 +1,12 @@
 # Data Workflow Rapport
 
-**Gegenereerd op:** 2025-11-19 23:21:51.105381
+**Gegenereerd op:** 2025-11-19 23:22:17.455218
 
 ## Grafiek: Vrije fietsen vs Temperatuur
 ![Fietsen vs Temp](fiets_vs_temp.png)
 
 ## Basisstatistieken
-- Gemiddelde temperatuur: 9.26 °C
+- Gemiddelde temperatuur: 9.24 °C
 - Gemiddeld aantal vrije fietsen: 537
 - Gemiddeld aantal fietsen overdag (07-19u): 532
 - Gemiddeld aantal fietsen ’s nachts (19-07u): 545
