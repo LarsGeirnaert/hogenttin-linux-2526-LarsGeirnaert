@@ -3,7 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
 import numpy as np
 
 # --- Paden ---
@@ -16,39 +15,43 @@ report_dir.mkdir(exist_ok=True)
 DARK_BLUE = "#004C99"
 ACCENT_RED = "#D62728"
 TEXT_COLOR = "#333333"
-GRID_COLOR = "#999999" # Duidelijk grijs voor de lijnen
+GRID_COLOR = "#999999"
 
 # --- Data inlezen ---
 df = pd.read_csv(data_file)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 
-# --- 1. Lineaire Regressie ---
+# --- 1. Voorbereiding & Correlatie ---
 df['hour'] = df['timestamp'].dt.hour + df['timestamp'].dt.minute/60 
+
+# BEREKEN DE CORRELATIE (Nieuw)
+correlation = df['hour'].corr(df['total_free_bikes'])
+
+# --- 2. Lineaire Regressie ---
 X = df['hour'].values.reshape(-1, 1)
 y = df['total_free_bikes'].values
 
 model = LinearRegression()
 model.fit(X, y)
-y_pred = model.predict(X)
-mse = mean_squared_error(y, y_pred)
 
-# --- 2. X-AS VERSCHUIVING ---
+# --- 3. X-AS VERSCHUIVING ---
+# Uren 0, 1, 2 AM worden verschoven met +24, zodat de X-as van 3 tot 27 loopt
 df['hour_shifted'] = df['hour'].apply(lambda h: h + 24 if h < 3 else h)
 
-# --- 3. Data Aggregatie ---
+# --- 4. Data Aggregatie (voor de blauwe punten) ---
 df_hourly = df.set_index('timestamp').resample('H').mean(numeric_only=True).dropna().reset_index()
 df_hourly['hour'] = df_hourly['timestamp'].dt.hour + df_hourly['timestamp'].dt.minute/60
 df_hourly['hour_shifted'] = df_hourly['hour'].apply(lambda h: h + 24 if h < 3 else h)
 
-# --- 4. Grafiek maken (HOOG CONTRAST GRID) ---
-plt.style.use('seaborn-v0_8-whitegrid') # Witte achtergrond voor beter contrast
+# --- 5. Grafiek maken ---
+plt.style.use('seaborn-v0_8-whitegrid')
 
 fig, ax = plt.subplots(figsize=(12, 7))
 
-# Het Rooster (Grid) - Nu veel duidelijker
+# Het Rooster (Grid)
 ax.grid(True, which='major', color=GRID_COLOR, linestyle='-', linewidth=0.8, alpha=0.5, zorder=0)
 
-# Punten
+# Punten (Uurgemiddelden)
 ax.scatter(df_hourly['hour_shifted'], df_hourly['total_free_bikes'], 
            color=DARK_BLUE, 
            label='Uurgemiddelden', 
@@ -56,15 +59,17 @@ ax.scatter(df_hourly['hour_shifted'], df_hourly['total_free_bikes'],
            s=70, 
            edgecolors='white', 
            linewidth=0.8,
-           zorder=3) # zorder=3 zorgt dat punten BOVEN op de lijnen liggen
+           zorder=3)
 
-# Trendlijn
+# Trendlijn (Linear Regression)
+# We moeten voorspellen op basis van de verschoven X-waarden
 X_shifted = df['hour_shifted'].values.reshape(-1, 1)
 y_pred_shifted = model.predict(X_shifted)
+
 ax.plot(df['hour_shifted'], y_pred_shifted, 
         color=ACCENT_RED, 
         linewidth=3, 
-        label=f'Trendlijn (MSE: {mse:.2f})',
+        label=f'Trendlijn (Correlatie: {correlation:.2f})', # <--- AANGEPAST
         zorder=4)
 
 # Labels & Titel
@@ -72,19 +77,20 @@ ax.set_title('Aantal Vrije Fietsen per Uur (Gent)', fontsize=18, fontweight='bol
 ax.set_xlabel('Uur van de dag (Start 03:00)', fontsize=13, color=TEXT_COLOR)
 ax.set_ylabel('Aantal Vrije Fietsen', fontsize=13, color=TEXT_COLOR)
 
-# X-As Ticks
+# X-As Ticks (Om de 2 uur)
 tick_positions = np.arange(4, 28, 2) 
 tick_labels = [f"{int(t % 24)}:00" for t in tick_positions] 
 ax.set_xticks(tick_positions)
 ax.set_xticklabels(tick_labels, fontsize=11)
 ax.set_xlim(3, 27)
 
-# Legend (met kader)
+# Legend
 ax.legend(fontsize=11, frameon=True, facecolor='white', edgecolor=GRID_COLOR, framealpha=1, loc='upper left')
 
 plt.tight_layout()
 
+# Opslaan
 plot_path = report_dir / "fiets_vs_uur.png"
 plt.savefig(plot_path, dpi=300)
 plt.close()
-print(f"📁 Grafiek met duidelijk raster opgeslagen in: {plot_path}")
+print(f"📁 Grafiek met correlatie opgeslagen in: {plot_path}")
