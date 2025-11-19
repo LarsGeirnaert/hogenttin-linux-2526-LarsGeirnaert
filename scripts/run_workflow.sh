@@ -17,7 +17,6 @@ echo "Run start: $(date)" >> "$LOG"
 echo "Project Data Workflow v1.0" >> "$LOG"
 
 # --- Environment setup ---
-# We voegen de venv bin toe aan PATH
 export PATH="$PROJECT_DIR/venv/bin:$PATH"
 
 # Activeer virtuele omgeving
@@ -46,6 +45,8 @@ bash scripts/transform_data.sh >> "$LOG" 2>&1 || { echo "❌ transform_data.sh m
 echo "🔹 Analyses en grafieken genereren..." | tee -a "$LOG"
 python scripts/analyze_data.py >> "$LOG" 2>&1 || { echo "❌ analyze_data.py mislukt"; exit 1; }
 python scripts/plot_bikes_vs_time.py >> "$LOG" 2>&1 || { echo "❌ plot_bikes_vs_time.py mislukt"; exit 1; }
+# NIEUW: Weekdag grafiek
+python scripts/plot_weekday_stats.py >> "$LOG" 2>&1 || { echo "❌ plot_weekday_stats.py mislukt"; exit 1; }
 
 # --- Markdown rapport ---
 echo "🔹 Markdown rapport genereren..." | tee -a "$LOG"
@@ -56,7 +57,6 @@ echo "🔹 PDF rapport genereren..." | tee -a "$LOG"
 python scripts/generate_pdf_report.py >> "$LOG" 2>&1 || { echo "❌ generate_pdf_report.py mislukt"; exit 1; }
 
 # --- Git commit & push ---
-# Alleen uitvoeren als git geconfigureerd is
 if [ -d ".git" ]; then
     echo "🔹 Git commit & push..." | tee -a "$LOG"
     git add -A >> "$LOG" 2>&1

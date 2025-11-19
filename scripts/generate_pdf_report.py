@@ -43,12 +43,15 @@ corr_temp_bikes = corr_temp_bikes if not pd.isna(corr_temp_bikes) else 0
 corr_hour_bikes = df["hour"].corr(df["total_free_bikes"])
 corr_hour_bikes = corr_hour_bikes if not pd.isna(corr_hour_bikes) else 0
 
-# Nederlandse weekdagen
+# Nederlandse weekdagen mapping
 day_map = {
     "Monday": "Maandag", "Tuesday": "Dinsdag", "Wednesday": "Woensdag",
     "Thursday": "Donderdag", "Friday": "Vrijdag", "Saturday": "Zaterdag", "Sunday": "Zondag"
 }
-weekday_stats["weekday"] = weekday_stats["weekday"].map(day_map)
+# Check of mapping nodig is (als data al NL is, doet map niks of geeft NaN, dus wees voorzichtig)
+# We gaan er hier vanuit dat de input CSV nog Engelse keys kan bevatten of al NL is.
+# Voor veiligheid: als het al NL is, laten we het zo.
+# (In plot_weekday_stats.py hebben we het al gesorteerd, maar hier lezen we opnieuw in)
 
 # --- PDF Setup ---
 doc = SimpleDocTemplate(str(pdf_file), pagesize=A4,
@@ -58,18 +61,12 @@ doc = SimpleDocTemplate(str(pdf_file), pagesize=A4,
 styles = getSampleStyleSheet()
 
 # --- Custom Styles ---
-# Titelblad styles
 title_main_style = ParagraphStyle('MainTitle', parent=styles['Title'], fontSize=34, leading=42, alignment=TA_CENTER, textColor=TEAL, spaceAfter=20)
 title_sub_style = ParagraphStyle('SubTitle', parent=styles['Normal'], fontSize=18, leading=24, alignment=TA_CENTER, textColor=DARK_GREY)
-
-# Auteur blok styles
 label_style = ParagraphStyle('Label', parent=styles['Normal'], fontSize=12, leading=14, alignment=TA_CENTER, textColor=colors.grey)
-# HIER OPGELOST: fontName='Helvetica-Bold' zorgt voor vetgedrukt zonder sterretjes **
 name_style = ParagraphStyle('Name', parent=styles['Normal'], fontSize=26, leading=32, alignment=TA_CENTER, textColor=DARK_GREY, fontName='Helvetica-Bold')
 class_style = ParagraphStyle('Class', parent=styles['Normal'], fontSize=16, leading=20, alignment=TA_CENTER, textColor=TEAL)
 date_style = ParagraphStyle('Date', parent=styles['Normal'], fontSize=10, alignment=TA_CENTER, textColor=colors.grey)
-
-# Content styles
 header_style = ParagraphStyle('HeaderStyle', parent=styles['Heading2'], fontSize=20, textColor=DARK_GREY, spaceAfter=15, spaceBefore=20)
 
 elements = []
@@ -83,49 +80,33 @@ def add_page_number(canvas_obj, doc_obj):
     canvas_obj.setFillColor(colors.grey)
     canvas_obj.drawRightString(A4[0]-2*cm, 1.5*cm, page_num_text)
 
-# ---------- TITELPAGINA (FIXED) ----------
+# ---------- TITELPAGINA ----------
 def create_title_page():
-    # 1. Ruimte bovenaan
     elements.append(Spacer(1, 6*cm))
-    
-    # 2. Hoofdtitel & Subtitel
     elements.append(Paragraph("DATA WORKFLOW RAPPORT", title_main_style))
     elements.append(Paragraph("Temperatuur vs Aantal Vrije Fietsen in Gent", title_sub_style))
-    
-    # 3. Visuele scheiding
     elements.append(Spacer(1, 5*cm))
     
-    # 4. Auteur Blok in een TABEL
-    # Tabelstructuur voorkomt overlap. Elke tekst zit in zijn eigen 'cel'.
     author_data = [
         [Paragraph("Opgesteld door:", label_style)],
-        [Paragraph("Lars Geirnaert", name_style)],  # Geen sterretjes, stijl doet het werk
+        [Paragraph("Lars Geirnaert", name_style)],
         [Paragraph("Klas: 2E2", class_style)]
     ]
-    
     author_table = Table(author_data, colWidths=[14*cm])
-    
-    # HIER OPGELOST: BOTTOMPADDING zorgt voor witruimte tussen de regels
     author_table.setStyle(TableStyle([
         ('ALIGN', (0,0), (-1,-1), 'CENTER'),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-        ('BOTTOMPADDING', (0,0), (-1,0), 12), # 12pt ruimte onder "Opgesteld door"
-        ('BOTTOMPADDING', (0,1), (-1,1), 12), # 12pt ruimte onder Naam
+        ('BOTTOMPADDING', (0,0), (-1,0), 12),
+        ('BOTTOMPADDING', (0,1), (-1,1), 12),
     ]))
     elements.append(author_table)
-    
-    # 5. Datum onderaan (via Spacer naar beneden duwen)
     elements.append(Spacer(1, 3*cm))
     elements.append(Paragraph(f"Gegenereerd op: {pd.Timestamp.now().strftime('%d-%m-%Y %H:%M')}", date_style))
-    
     elements.append(PageBreak())
 
-# Voeg titelpagina toe
 create_title_page()
 
-# ---------- START INHOUD (Pagina 2) ----------
-
-# Statistieken
+# ---------- STATISTIEKEN ----------
 elements.append(Paragraph("📊 Statistische Samenvatting", header_style))
 elements.append(Spacer(1, 10))
 
@@ -155,7 +136,7 @@ stats_table.setStyle(TableStyle([
 elements.append(stats_table)
 elements.append(PageBreak())
 
-# Grafiek 1
+# ---------- GRAFIEK 1 ----------
 elements.append(Paragraph("📈 Grafiek 1: Temperatuur vs Vrije Fietsen", header_style))
 elements.append(Spacer(1, 10))
 graph_path_1 = report_dir / "fiets_vs_temp.png"
@@ -163,7 +144,7 @@ if graph_path_1.exists():
     elements.append(Image(str(graph_path_1), width=16*cm, height=9*cm))
 elements.append(PageBreak())
 
-# Grafiek 2
+# ---------- GRAFIEK 2 ----------
 elements.append(Paragraph("📊 Grafiek 2: Aantal Fietsen per Uur", header_style))
 elements.append(Spacer(1, 10))
 graph_path_2 = report_dir / "fiets_vs_uur.png"
@@ -171,10 +152,17 @@ if graph_path_2.exists():
     elements.append(Image(str(graph_path_2), width=16*cm, height=9*cm))
 elements.append(PageBreak())
 
-# Weekdag Tabel
-elements.append(Paragraph("📅 Tabel: Vrije Fietsen per Weekdag", header_style))
+# ---------- WEEKDAG ANALYSE (NIEUW) ----------
+elements.append(Paragraph("📅 Analyse per Weekdag", header_style))
 elements.append(Spacer(1, 10))
 
+# 1. De Grafiek (Bovenaan)
+graph_path_3 = report_dir / "weekday_bars.png"
+if graph_path_3.exists():
+    elements.append(Image(str(graph_path_3), width=16*cm, height=9*cm))
+    elements.append(Spacer(1, 15))
+
+# 2. De Tabel (Onderaan)
 table_data = [["Weekdag", "Min", "Max", "Gem. Fietsen", "Gem. Temp (°C)"]]
 for _, row in weekday_stats.iterrows():
     table_data.append([
