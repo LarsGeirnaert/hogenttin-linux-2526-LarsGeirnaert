@@ -66,18 +66,20 @@ data-workflow/
 ├── raw_data/ # Ruwe JSON-data
 │ ├── bikes
 │ └── weather
-├── reports/ # Grafieken, Markdown en PDF-rapport
+├── reports/
 │ ├── fiets_vs_temp.png
 │ ├── fiets_vs_uur.png
+│ ├── weekday_bars.png
 │ ├── report.md
 │ ├── report.pdf
 │ └── weekday_stats.csv
-├── scripts/ # Workflow-scripts
+├── scripts/
 │ ├── analyze_data.py
 │ ├── fetch_data.sh
 │ ├── generate_pdf_report.py
 │ ├── generate_report.py
 │ ├── plot_bikes_vs_time.py
+│ ├── plot_weekday_stats.py
 │ ├── run_workflow.sh
 │ └── transform_data.sh
 ├── transformed_data/ # Verwerkte CSV-bestanden
@@ -142,6 +144,8 @@ wordt geen nieuwe data opgehaald. Alleen de verwerkte bestanden, grafieken en ra
 
 - **Grafiek 2 (Fietsgebruik vs uur)**: [reports/fiets_vs_uur.png](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/fiets_vs_uur.png)
 
+- **Grafiek 3 (Weekdag analyse)**: [reports/weekday_bars.png](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/weekday_bars.png)
+
 - **Markdown-rapport**: [reports/report.md](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/report.md)
 
 - **PDF-rapport**: [reports/report.pdf](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert/blob/main/reports/report.pdf)
@@ -174,7 +178,19 @@ Deze grafiek toont hoe het totaal aantal vrije fietsen in Gent varieert per uur 
 
 Deze grafiek is aanvullend op de temperatuur-analyse en helpt om te bepalen of variaties te wijten zijn aan dagelijks ritme in plaats van aan weersomstandigheden.
 
-### 7.3 PDF-rapport met beide grafieken
+### 7.3 Extra grafiek: Weekdag-analyse met spreiding (Error Bars)
+
+Een derde visualisatie werd toegevoegd via het script plot_weekday_stats.py: Vrije fietsen per weekdag → reports/weekday_bars.png
+
+Deze staafgrafiek toont niet enkel het gemiddelde aantal fietsen per dag, maar visualiseert ook de spreiding van de data met behulp van 'Error Bars' (de rode lijnen):
+
+De blauwe staaf: Het gemiddeld aantal vrije fietsen.
+
+De rode lijn: Het bereik tussen het minimum en maximum aantal gemeten fietsen op die dag.
+
+Meerwaarde: Dit maakt in één oogopslag duidelijk of een dag stabiel is (korte rode lijn) of dat er grote schommelingen zijn (lange rode lijn), wat waardevolle context biedt die een simpel gemiddelde verbergt.
+
+### 7.4 PDF-rapport met beide grafieken
 
 Naast het Markdown-rapport wordt er automatisch ook een PDF-bestand gegenereerd: [reports/report.pdf](reports/report.pdf)
 
@@ -185,6 +201,7 @@ Dit PDF-rapport bevat:
 - de twee grafieken:
   - Temperatuur vs. aantal vrije fietsen
   - Aantal vrije fietsen per uur
+  - Weekdag-analyse met min/max bereik
 - begeleidende uitleg bij elke visualisatie
 - automatische titelpagina, consistente layout en uniforme opmaak
 
