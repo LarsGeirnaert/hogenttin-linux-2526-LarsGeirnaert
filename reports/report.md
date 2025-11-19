@@ -1,29 +1,46 @@
-# Data Workflow Rapport
+# DATA WORKFLOW RAPPORT
+### Temperatuur vs Aantal Vrije Fietsen in Gent
 
-**Gegenereerd op:** 2025-11-19 23:45:35.826219
-
-## Grafiek: Vrije fietsen vs Temperatuur
-![Fietsen vs Temp](fiets_vs_temp.png)
-
-## Basisstatistieken
-- Gemiddelde temperatuur: 9.21 °C
-- Gemiddeld aantal vrije fietsen: 538
-- Gemiddeld aantal fietsen overdag (07-19u): 532
-- Gemiddeld aantal fietsen ’s nachts (19-07u): 546
-- Correlatie: 0.08
-
-## Vrije fietsen per weekdag
-
-| Weekdag | Min | Max | Gemiddelde |
-|---------|-----|-----|------------|
-| Maandag | 500 | 556 | 526 |
-| Dinsdag | 501 | 566 | 532 |
-| Woensdag | 508 | 562 | 538 |
-| Donderdag | 525 | 550 | 535 |
-| Vrijdag | 535 | 557 | 545 |
-| Zaterdag | 522 | 560 | 537 |
-| Zondag | 535 | 555 | 545 |
+**Opgesteld door:** Lars Geirnaert (Klas: 2E2)  
+**Gegenereerd op:** 19-11-2025 23:48
 
 ---
-## Grafiek: Vrije fietsen per uur
-![Fiets vs Uur](fiets_vs_uur.png)
+
+## 📊 Statistische Samenvatting
+
+| Statistiek | Waarde |
+| :--- | ---: |
+| Gemiddelde temperatuur | 9.21 °C |
+| Gemiddeld aantal vrije fietsen | 538 |
+| Gemiddeld aantal fietsen overdag (07-19u) | 532 |
+| Gemiddeld aantal fietsen 's nachts (19-07u) | 546 |
+| Correlatie temperatuur ↔ vrije fietsen | 0.08 |
+| Correlatie uur ↔ vrije fietsen | 0.34 |
+
+---
+
+## 📈 Grafiek 1: Temperatuur vs Vrije Fietsen
+
+![Temperatuur Grafiek](fiets_vs_temp.png)
+
+---
+
+## 📊 Grafiek 2: Aantal Fietsen per Uur
+
+![Tijd Grafiek](fiets_vs_uur.png)
+
+---
+
+## 📅 Analyse per Weekdag
+
+![Weekdag Grafiek](weekday_bars.png)
+
+| Weekdag | Min | Max | Gem. Fietsen | Gem. Temp (°C) |
+| :--- | --: | --: | --: | --: |
+| Maandag | 500 | 556 | 526 | 5.54 |
+| Dinsdag | 501 | 566 | 532 | 5.41 |
+| Woensdag | 508 | 562 | 538 | 5.94 |
+| Donderdag | 525 | 550 | 535 | 14.24 |
+| Vrijdag | 535 | 557 | 545 | 14.59 |
+| Zaterdag | 522 | 560 | 537 | 13.99 |
+| Zondag | 535 | 555 | 545 | 8.35 |
