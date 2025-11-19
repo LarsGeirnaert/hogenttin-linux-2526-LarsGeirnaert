@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 import pandas as pd
 from pathlib import Path
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.pagesizes import A4, landscape
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
+from reportlab.lib.enums import TA_CENTER
 
 # --- Kleurdefinitie voor Modern Design ---
 TEAL = colors.HexColor("#008080")
@@ -58,8 +59,7 @@ doc = SimpleDocTemplate(str(pdf_file), pagesize=A4,
                         topMargin=2*cm, bottomMargin=2*cm)
 
 styles = getSampleStyleSheet()
-# MODERNE STIJL: Grotere titel, Teal kleur
-title_style = ParagraphStyle('TitleStyle', parent=styles['Title'], fontSize=32, alignment=1, textColor=TEAL, spaceAfter=40)
+title_style = ParagraphStyle('TitleStyle', parent=styles['Title'], fontSize=32, alignment=TA_CENTER, textColor=TEAL, spaceAfter=40)
 header_style = ParagraphStyle('HeaderStyle', parent=styles['Heading2'], fontSize=20, textColor=DARK_GREY, spaceAfter=15)
 normal_style = ParagraphStyle('NormalStyle', parent=styles['Normal'], fontSize=12, leading=16, textColor=DARK_GREY)
 
@@ -67,17 +67,50 @@ elements = []
 
 # ---------- PAGINANUMMER FUNCTIE ----------
 def add_page_number(canvas_obj, doc_obj):
-    page_num_text = f"Pagina {doc_obj.page}"
+    # Voorkom paginanummer op de titelpagina (pagina 1)
+    if doc_obj.page == 1:
+        return
+        
+    page_num_text = f"Pagina {doc_obj.page - 1}" # Aftrekken van 1 zodat de inhoud begint bij Pagina 1
     canvas_obj.setFont('Helvetica', 10)
     canvas_obj.setFillColor(colors.grey)
     canvas_obj.drawRightString(A4[0]-2*cm, 1.5*cm, page_num_text)
 
-# ---------- TITELPAGINA ----------
-elements.append(Paragraph("Data Workflow Rapport", title_style))
-elements.append(Paragraph("Temperatuur vs Aantal Vrije Fietsen in Gent", header_style))
-elements.append(Spacer(1, 20))
-elements.append(Paragraph(f"Gegenereerd op: {pd.Timestamp.now().strftime('%d-%m-%Y %H:%M')}", normal_style))
-elements.append(PageBreak())
+# ---------- NIEUWE TITELPAGINA INHOUD ----------
+def title_page_content():
+    # Style voor gecentreerde tekst op de titelpagina
+    centered_style = ParagraphStyle(
+        'CenteredTitle',
+        parent=styles['Normal'],
+        alignment=TA_CENTER,
+        fontSize=20,
+        textColor=DARK_GREY
+    )
+    
+    # Grote titel in het midden van de pagina
+    elements.append(Spacer(1, 8*cm))
+    elements.append(Paragraph("Data Workflow Rapport", title_style))
+    elements.append(Paragraph("Temperatuur vs Aantal Vrije Fietsen in Gent", centered_style))
+    elements.append(Spacer(1, 4*cm))
+    
+    # Naam en klas
+    elements.append(Paragraph(f"Opgesteld door:", centered_style))
+    elements.append(Spacer(1, 0.5*cm))
+    elements.append(Paragraph(f"**Lars Geirnaert**", ParagraphStyle('NameStyle', parent=centered_style, fontSize=24, textColor=TEAL)))
+    elements.append(Paragraph(f"Klas: 2E2", centered_style))
+    elements.append(Spacer(1, 4*cm))
+    
+    # Datum onderaan
+    elements.append(Paragraph(f"Gegenereerd op: {pd.Timestamp.now().strftime('%d-%m-%Y %H:%M')}", centered_style))
+    elements.append(PageBreak())
+
+# Roep de titelpagina functie aan
+title_page_content()
+
+# ---------- Vroegere TITELPAGINA is nu de start van de INHOUD ----------
+elements.append(Paragraph("📜 Inhoudsopgave", header_style))
+elements.append(Spacer(1, 12))
+# (Je zou hier een echte inhoudsopgave kunnen toevoegen, maar dit is de start van de inhoud)
 
 # ---------- STATISTIEKEN ----------
 elements.append(Paragraph("📊 Statistische Samenvatting", header_style))
@@ -92,12 +125,11 @@ stats_table_data = [
     ["Correlatie uur ↔ vrije fietsen", f"{corr_hour_bikes:.2f}"],
 ]
 stats_table = Table(stats_table_data, colWidths=[10*cm, 6*cm])
-# MODERNE STIJL: Teal header, dunne lijnen, numerieke waarden rechts uitgelijnd
 stats_table.setStyle(TableStyle([
     ("BACKGROUND", (0,0), (-1,0), TEAL),
     ("TEXTCOLOR", (0,0), (-1,0), colors.whitesmoke),
-    ("ALIGN", (1,1), (-1,-1), "RIGHT"), # Waarden rechts uitlijnen
-    ("ALIGN", (0,0), (0,-1), "LEFT"), # Statistische namen links uitlijnen
+    ("ALIGN", (1,1), (-1,-1), "RIGHT"),
+    ("ALIGN", (0,0), (0,-1), "LEFT"),
     ("ALIGN", (0,0), (-1,0), "CENTER"),
     ("FONTNAME", (0,0), (-1,0), "Helvetica-Bold"),
     ("FONTSIZE", (0,0), (-1,-1), 11),
@@ -137,11 +169,10 @@ for _, row in weekday_stats.iterrows():
     ])
 weekday_table = Table(table_data, hAlign='CENTER', 
                       colWidths=[3.2*cm, 2.5*cm, 2.5*cm, 3.8*cm, 3.8*cm])
-# MODERNE STIJL: Teal header, numerieke waarden rechts uitgelijnd
 weekday_table.setStyle(TableStyle([
     ("BACKGROUND", (0,0), (-1,0), TEAL),
     ("TEXTCOLOR", (0,0), (-1,0), colors.whitesmoke),
-    ("ALIGN", (1,1), (-1,-1), "RIGHT"), # Alle numerieke waarden rechts
+    ("ALIGN", (1,1), (-1,-1), "RIGHT"),
     ("ALIGN", (0,0), (-1,0), "CENTER"),
     ("FONTNAME", (0,0), (-1,0), "Helvetica-Bold"),
     ("FONTSIZE", (0,0), (-1,-1), 10),
@@ -151,5 +182,6 @@ weekday_table.setStyle(TableStyle([
 elements.append(weekday_table)
 
 # ---------- BUILD PDF MET PAGINANUMMERS ----------
+# De functie 'add_page_number' wordt nu gebruikt om paginanummers te tonen vanaf Pagina 2 van de PDF (Pagina 1 van de inhoud).
 doc.build(elements, onFirstPage=add_page_number, onLaterPages=add_page_number)
 print(f"✅ Professioneel PDF-rapport aangemaakt: {pdf_file}")
