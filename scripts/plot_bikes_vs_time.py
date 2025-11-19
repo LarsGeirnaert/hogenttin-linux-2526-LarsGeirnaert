@@ -57,9 +57,9 @@ plt.ylabel('Aantal vrije fietsen', fontsize=12)
 plt.title('Aantal vrije fietsen per uur (Volledige Dataset, X-as verschoven)', fontsize=14)
 
 
-# --- AANGEPASTE CODE VOOR 2-UURLIJKS TICK LABELS ---
-# Bepaal posities om de 2 uur, startend bij 3u
-tick_positions = np.arange(3, 27, 2) 
+# --- AANGEPASTE CODE VOOR 2-UURLIJKS EVEN TICK LABELS ---
+# Bepaal posities om de 2 uur, startend bij 4u
+tick_positions = np.arange(4, 28, 2) 
 # Labels tonen HH:00 formaat (zorgt dat 24 = 0, 26 = 2, etc.)
 tick_labels = [f"{int(t % 24)}:00" for t in tick_positions] 
 plt.xticks(tick_positions, tick_labels) # Geen rotatie meer nodig
