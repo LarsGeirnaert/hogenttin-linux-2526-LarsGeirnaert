@@ -8,6 +8,12 @@ from reportlab.lib import colors
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
 
+# --- Kleurdefinitie voor Modern Design ---
+TEAL = colors.HexColor("#008080")
+DARK_GREY = colors.HexColor("#333333")
+LIGHT_GREY = colors.HexColor("#EEEEEE")
+
+
 # --- Paden ---
 base_dir = Path.home() / "projects/data-workflow"
 data_file = base_dir / "transformed_data/combined.csv"
@@ -36,7 +42,7 @@ night_avg_bikes = round(night_data["total_free_bikes"].mean()) if not night_data
 corr_temp_bikes = df["temperature"].corr(df["total_free_bikes"])
 corr_temp_bikes = corr_temp_bikes if not pd.isna(corr_temp_bikes) else 0
 
-corr_hour_bikes = df["hour"].corr(df["total_free_bikes"]) # NIEUWE BEREKENING
+corr_hour_bikes = df["hour"].corr(df["total_free_bikes"])
 corr_hour_bikes = corr_hour_bikes if not pd.isna(corr_hour_bikes) else 0
 
 # Nederlandse weekdagen
@@ -52,9 +58,10 @@ doc = SimpleDocTemplate(str(pdf_file), pagesize=A4,
                         topMargin=2*cm, bottomMargin=2*cm)
 
 styles = getSampleStyleSheet()
-title_style = ParagraphStyle('TitleStyle', parent=styles['Title'], fontSize=26, alignment=1, textColor=colors.HexColor("#003366"), spaceAfter=30)
-header_style = ParagraphStyle('HeaderStyle', parent=styles['Heading2'], fontSize=18, textColor=colors.HexColor("#003366"), spaceAfter=15)
-normal_style = ParagraphStyle('NormalStyle', parent=styles['Normal'], fontSize=12, leading=16)
+# MODERNE STIJL: Grotere titel, Teal kleur
+title_style = ParagraphStyle('TitleStyle', parent=styles['Title'], fontSize=32, alignment=1, textColor=TEAL, spaceAfter=40)
+header_style = ParagraphStyle('HeaderStyle', parent=styles['Heading2'], fontSize=20, textColor=DARK_GREY, spaceAfter=15)
+normal_style = ParagraphStyle('NormalStyle', parent=styles['Normal'], fontSize=12, leading=16, textColor=DARK_GREY)
 
 elements = []
 
@@ -85,14 +92,17 @@ stats_table_data = [
     ["Correlatie uur ↔ vrije fietsen", f"{corr_hour_bikes:.2f}"],
 ]
 stats_table = Table(stats_table_data, colWidths=[10*cm, 6*cm])
+# MODERNE STIJL: Teal header, dunne lijnen, numerieke waarden rechts uitgelijnd
 stats_table.setStyle(TableStyle([
-    ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#003366")),
+    ("BACKGROUND", (0,0), (-1,0), TEAL),
     ("TEXTCOLOR", (0,0), (-1,0), colors.whitesmoke),
-    ("ALIGN", (0,0), (-1,-1), "CENTER"),
+    ("ALIGN", (1,1), (-1,-1), "RIGHT"), # Waarden rechts uitlijnen
+    ("ALIGN", (0,0), (0,-1), "LEFT"), # Statistische namen links uitlijnen
+    ("ALIGN", (0,0), (-1,0), "CENTER"),
     ("FONTNAME", (0,0), (-1,0), "Helvetica-Bold"),
-    ("FONTSIZE", (0,0), (-1,-1), 12),
-    ("INNERGRID", (0,0), (-1,-1), 0.5, colors.grey),
-    ("BOX", (0,0), (-1,-1), 1, colors.grey)
+    ("FONTSIZE", (0,0), (-1,-1), 11),
+    ("INNERGRID", (0,0), (-1,-1), 0.25, DARK_GREY),
+    ("BOX", (0,0), (-1,-1), 1, DARK_GREY)
 ]))
 elements.append(stats_table)
 elements.append(PageBreak())
@@ -111,11 +121,11 @@ graph_path_2 = report_dir / "fiets_vs_uur.png"
 elements.append(Image(str(graph_path_2), width=16*cm, height=10*cm))
 elements.append(PageBreak())
 
-# ---------- WEEKDAG TABEL (AANGEPAST) ----------
+# ---------- WEEKDAG TABEL ----------
 elements.append(Paragraph("📅 Tabel: Vrije Fietsen per Weekdag", header_style))
 elements.append(Spacer(1, 12))
 table_data = [
-    ["Weekdag", "Min", "Max", "Gem. Fietsen", "Gem. Temp (°C)"] # Inge korte titels
+    ["Weekdag", "Min", "Max", "Gem. Fietsen", "Gem. Temp (°C)"]
 ]
 for _, row in weekday_stats.iterrows():
     table_data.append([
@@ -126,15 +136,17 @@ for _, row in weekday_stats.iterrows():
         round(row["Gemiddelde_temp"],2) if pd.notna(row["Gemiddelde_temp"]) else 0
     ])
 weekday_table = Table(table_data, hAlign='CENTER', 
-                      colWidths=[3.2*cm, 2.5*cm, 2.5*cm, 3.8*cm, 3.8*cm]) # Breedte aangepast
+                      colWidths=[3.2*cm, 2.5*cm, 2.5*cm, 3.8*cm, 3.8*cm])
+# MODERNE STIJL: Teal header, numerieke waarden rechts uitgelijnd
 weekday_table.setStyle(TableStyle([
-    ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#0055A5")),
+    ("BACKGROUND", (0,0), (-1,0), TEAL),
     ("TEXTCOLOR", (0,0), (-1,0), colors.whitesmoke),
-    ("ALIGN", (1,1), (-1,-1), "CENTER"),
+    ("ALIGN", (1,1), (-1,-1), "RIGHT"), # Alle numerieke waarden rechts
+    ("ALIGN", (0,0), (-1,0), "CENTER"),
     ("FONTNAME", (0,0), (-1,0), "Helvetica-Bold"),
-    ("FONTSIZE", (0,0), (-1,-1), 11),
-    ("INNERGRID", (0,0), (-1,-1), 0.5, colors.grey),
-    ("BOX", (0,0), (-1,-1), 1, colors.grey)
+    ("FONTSIZE", (0,0), (-1,-1), 10),
+    ("INNERGRID", (0,0), (-1,-1), 0.25, DARK_GREY),
+    ("BOX", (0,0), (-1,-1), 1, DARK_GREY)
 ]))
 elements.append(weekday_table)
 
