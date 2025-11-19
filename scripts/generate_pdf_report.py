@@ -71,48 +71,39 @@ def add_page_number(canvas_obj, doc_obj):
     if doc_obj.page == 1:
         return
         
-    page_num_text = f"Pagina {doc_obj.page - 1}" # Aftrekken van 1 zodat de inhoud begint bij Pagina 1
+    # Aftrekken van 1 zodat de inhoud begint bij Pagina 1 van de inhoud
+    page_num_text = f"Pagina {doc_obj.page - 1}" 
     canvas_obj.setFont('Helvetica', 10)
     canvas_obj.setFillColor(colors.grey)
     canvas_obj.drawRightString(A4[0]-2*cm, 1.5*cm, page_num_text)
 
-# ---------- NIEUWE TITELPAGINA INHOUD ----------
-def title_page_content():
-    # Style voor gecentreerde tekst op de titelpagina
-    centered_style = ParagraphStyle(
-        'CenteredTitle',
-        parent=styles['Normal'],
-        alignment=TA_CENTER,
-        fontSize=20,
-        textColor=DARK_GREY
-    )
+# ---------- TITELPAGINA INHOUD (OPGESCHOOND) ----------
+# Style voor gecentreerde tekst op de titelpagina
+centered_style = ParagraphStyle(
+    'CenteredTitle',
+    parent=styles['Normal'],
+    alignment=TA_CENTER,
+    fontSize=20,
+    textColor=DARK_GREY
+)
     
-    # Grote titel in het midden van de pagina
-    elements.append(Spacer(1, 8*cm))
-    elements.append(Paragraph("Data Workflow Rapport", title_style))
-    elements.append(Paragraph("Temperatuur vs Aantal Vrije Fietsen in Gent", centered_style))
-    elements.append(Spacer(1, 4*cm))
+# Grote titel in het midden van de pagina
+elements.append(Spacer(1, 6*cm)) # Meer witruimte bovenaan
+elements.append(Paragraph("DATA WORKFLOW RAPPORT", title_style))
+elements.append(Paragraph("Temperatuur vs Aantal Vrije Fietsen in Gent", centered_style))
+elements.append(Spacer(1, 8*cm)) # Grote centrale ruimte
     
-    # Naam en klas
-    elements.append(Paragraph(f"Opgesteld door:", centered_style))
-    elements.append(Spacer(1, 0.5*cm))
-    elements.append(Paragraph(f"**Lars Geirnaert**", ParagraphStyle('NameStyle', parent=centered_style, fontSize=24, textColor=TEAL)))
-    elements.append(Paragraph(f"Klas: 2E2", centered_style))
-    elements.append(Spacer(1, 4*cm))
-    
-    # Datum onderaan
-    elements.append(Paragraph(f"Gegenereerd op: {pd.Timestamp.now().strftime('%d-%m-%Y %H:%M')}", centered_style))
-    elements.append(PageBreak())
+# Naam en klas
+elements.append(Paragraph(f"Opgesteld door:", centered_style))
+elements.append(Spacer(1, 0.5*cm))
+elements.append(Paragraph(f"**Lars Geirnaert**", ParagraphStyle('NameStyle', parent=centered_style, fontSize=24, textColor=TEAL)))
+elements.append(Paragraph(f"Klas: 2E2", centered_style))
+elements.append(Spacer(1, 4*cm))
 
-# Roep de titelpagina functie aan
-title_page_content()
+# Datum is verwijderd voor een cleanere look
+elements.append(PageBreak())
 
-# ---------- Vroegere TITELPAGINA is nu de start van de INHOUD ----------
-elements.append(Paragraph("📜 Inhoudsopgave", header_style))
-elements.append(Spacer(1, 12))
-# (Je zou hier een echte inhoudsopgave kunnen toevoegen, maar dit is de start van de inhoud)
-
-# ---------- STATISTIEKEN ----------
+# ---------- STATISTIEKEN (START INHOUD) ----------
 elements.append(Paragraph("📊 Statistische Samenvatting", header_style))
 elements.append(Spacer(1, 12))
 stats_table_data = [
@@ -182,6 +173,5 @@ weekday_table.setStyle(TableStyle([
 elements.append(weekday_table)
 
 # ---------- BUILD PDF MET PAGINANUMMERS ----------
-# De functie 'add_page_number' wordt nu gebruikt om paginanummers te tonen vanaf Pagina 2 van de PDF (Pagina 1 van de inhoud).
 doc.build(elements, onFirstPage=add_page_number, onLaterPages=add_page_number)
 print(f"✅ Professioneel PDF-rapport aangemaakt: {pdf_file}")
