@@ -19806,3 +19806,47 @@ Correlatie Uur ↔ Fietsen: 0.34
 🔹 PDF rapport genereren...
 ✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
 🔹 Git commit & push...
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+   483a7e7..78dd77e  main -> main
+Run eind: Wed Nov 19 23:33:52 CET 2025
+============================
+============================
+Run start: Wed Nov 19 23:35:11 CET 2025
+Project Data Workflow v1.0
+⚡ Data ophalen overgeslagen (skip-fetch)
+🔹 CSV heropbouwen...
+✅ CSV volledig herbouwd: /home/larsg/projects/data-workflow/transformed_data/combined.csv
+🔢 Samenvatting: totale weather-bestanden gevonden: 283; verwerkt: 283; overgeslagen: 0
+🔹 Analyses en grafieken genereren...
+/home/larsg/projects/data-workflow/scripts/analyze_data.py:74: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
+  df_hourly = df.set_index('timestamp').resample('H').mean(numeric_only=True).dropna().reset_index()
+📊 Laatste 10 datapunten (Originele 15-min data):
+              timestamp  temperature  total_free_bikes
+273 2025-11-19 21:30:02          5.4               552
+274 2025-11-19 21:45:01          5.3               556
+275 2025-11-19 22:00:01          5.2               555
+276 2025-11-19 22:15:01          4.5               559
+277 2025-11-19 22:30:01          4.5               558
+278 2025-11-19 22:45:02          4.5               556
+279 2025-11-19 23:00:01          4.5               552
+280 2025-11-19 23:15:02          5.0               558
+281 2025-11-19 23:22:11          5.0               557
+282 2025-11-19 23:30:01          5.0               558
+
+📈 Statistieken (Gebaseerd op werkelijke metingen):
+Gemiddelde temperatuur: 9.23 °C
+Gemiddeld aantal vrije fietsen: 537
+Gemiddeld aantal fietsen overdag (7-19u): 532
+Gemiddeld aantal fietsen ’s nachts (19-7u): 546
+Correlatie Temp ↔ Fietsen: 0.08
+Correlatie Uur ↔ Fietsen: 0.34
+
+📁 Weekdag-statistieken opgeslagen in: /home/larsg/projects/data-workflow/reports/weekday_stats.csv
+📁 Grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_temp.png
+/home/larsg/projects/data-workflow/scripts/plot_bikes_vs_time.py:29: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
+  df_hourly = df.set_index('timestamp').resample('H').mean(numeric_only=True).dropna().reset_index()
+📁 Prachtige grafiek opgeslagen in: /home/larsg/projects/data-workflow/reports/fiets_vs_uur.png
+🔹 Markdown rapport genereren...
+🔹 PDF rapport genereren...
+✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
+🔹 Git commit & push...
