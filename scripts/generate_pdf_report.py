@@ -77,7 +77,7 @@ def add_page_number(canvas_obj, doc_obj):
     canvas_obj.setFillColor(colors.grey)
     canvas_obj.drawRightString(A4[0]-2*cm, 1.5*cm, page_num_text)
 
-# ---------- TITELPAGINA INHOUD (OPGESCHOOND) ----------
+# ---------- TITELPAGINA INHOUD (OPGESCHOOND en BETER) ----------
 # Style voor gecentreerde tekst op de titelpagina
 centered_style = ParagraphStyle(
     'CenteredTitle',
@@ -88,19 +88,22 @@ centered_style = ParagraphStyle(
 )
     
 # Grote titel in het midden van de pagina
-elements.append(Spacer(1, 6*cm)) # Meer witruimte bovenaan
+elements.append(Spacer(1, 6*cm)) 
 elements.append(Paragraph("DATA WORKFLOW RAPPORT", title_style))
 elements.append(Paragraph("Temperatuur vs Aantal Vrije Fietsen in Gent", centered_style))
-elements.append(Spacer(1, 8*cm)) # Grote centrale ruimte
+elements.append(Spacer(1, 4*cm)) # Scheiding tussen Project en Auteur
     
-# Naam en klas
+# Auteur en Klas (Clean Blok)
 elements.append(Paragraph(f"Opgesteld door:", centered_style))
 elements.append(Spacer(1, 0.5*cm))
-elements.append(Paragraph(f"**Lars Geirnaert**", ParagraphStyle('NameStyle', parent=centered_style, fontSize=24, textColor=TEAL)))
-elements.append(Paragraph(f"Klas: 2E2", centered_style))
-elements.append(Spacer(1, 4*cm))
+elements.append(Paragraph(f"**Lars Geirnaert**", ParagraphStyle('NameStyle', parent=centered_style, fontSize=28, textColor=TEAL)))
+elements.append(Paragraph(f"Klas: 2E2", ParagraphStyle('ClassStyle', parent=centered_style, fontSize=18, textColor=DARK_GREY)))
 
-# Datum is verwijderd voor een cleanere look
+# Datum subtiel onderaan
+elements.append(Spacer(1, 7*cm)) # Schuift de datum naar de onderkant
+elements.append(Paragraph(f"Gegenereerd op: {pd.Timestamp.now().strftime('%d-%m-%Y %H:%M')}", ParagraphStyle('DateStyle', parent=centered_style, fontSize=10, textColor=colors.grey)))
+
+
 elements.append(PageBreak())
 
 # ---------- STATISTIEKEN (START INHOUD) ----------
