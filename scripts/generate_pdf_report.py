@@ -20,7 +20,9 @@ pdf_file = report_dir / "report.pdf"
 df = pd.read_csv(data_file)
 weekday_stats = pd.read_csv(weekday_file)
 df["timestamp"] = pd.to_datetime(df["timestamp"])
-df["hour"] = df["timestamp"].dt.hour
+
+# Bereken de numerieke uurwaarde (0.0 tot 24.0)
+df['hour'] = df['timestamp'].dt.hour + df['timestamp'].dt.minute/60
 
 # Algemene statistieken
 mean_temp = df["temperature"].mean() if not df.empty else 0
@@ -29,8 +31,13 @@ day_data = df[(df["hour"] >= 7) & (df["hour"] < 19)]
 day_avg_bikes = round(day_data["total_free_bikes"].mean()) if not day_data.empty else 0
 night_data = df[(df["hour"] < 7) | (df["hour"] >= 19)]
 night_avg_bikes = round(night_data["total_free_bikes"].mean()) if not night_data.empty else 0
-corr = df["temperature"].corr(df["total_free_bikes"])
-corr = corr if not pd.isna(corr) else 0
+
+# Correlaties
+corr_temp_bikes = df["temperature"].corr(df["total_free_bikes"])
+corr_temp_bikes = corr_temp_bikes if not pd.isna(corr_temp_bikes) else 0
+
+corr_hour_bikes = df["hour"].corr(df["total_free_bikes"]) # NIEUWE BEREKENING
+corr_hour_bikes = corr_hour_bikes if not pd.isna(corr_hour_bikes) else 0
 
 # Nederlandse weekdagen
 day_map = {
@@ -74,7 +81,8 @@ stats_table_data = [
     ["Gemiddeld aantal vrije fietsen", f"{mean_bikes}"],
     ["Gemiddeld aantal fietsen overdag (07-19u)", f"{day_avg_bikes}"],
     ["Gemiddeld aantal fietsen ’s nachts (19-07u)", f"{night_avg_bikes}"],
-    ["Correlatie temperatuur ↔ vrije fietsen", f"{corr:.2f}"],
+    ["Correlatie temperatuur ↔ vrije fietsen", f"{corr_temp_bikes:.2f}"],
+    ["Correlatie uur ↔ vrije fietsen", f"{corr_hour_bikes:.2f}"], # NIEUWE RIJ
 ]
 stats_table = Table(stats_table_data, colWidths=[10*cm, 6*cm])
 stats_table.setStyle(TableStyle([
@@ -108,12 +116,13 @@ elements.append(Paragraph("📅 Tabel: Vrije Fietsen per Weekdag", header_style)
 elements.append(Spacer(1, 12))
 table_data = [["Weekdag", "Min", "Max", "Gemiddelde Fietsen", "Gemiddelde Temp (°C)"]]
 for _, row in weekday_stats.iterrows():
+    # Zorgt dat de kolomnamen uit de CSV-header worden gebruikt
     table_data.append([
         row["weekday"] if pd.notna(row["weekday"]) else "",
-        int(row["Min"]) if not pd.isna(row["Min"]) else 0,
-        int(row["Max"]) if not pd.isna(row["Max"]) else 0,
-        int(row["Gemiddelde_fietsen"]) if not pd.isna(row["Gemiddelde_fietsen"]) else 0,
-        round(row["Gemiddelde_temp"],2) if not pd.isna(row["Gemiddelde_temp"]) else 0
+        int(row["Min"]) if pd.notna(row["Min"]) else 0, # Gebruik int() omdat Min/Max/Gemiddelde_fietsen nu Int64 zijn
+        int(row["Max"]) if pd.notna(row["Max"]) else 0,
+        int(row["Gemiddelde_fietsen"]) if pd.notna(row["Gemiddelde_fietsen"]) else 0,
+        round(row["Gemiddelde_temp"],2) if pd.notna(row["Gemiddelde_temp"]) else 0
     ])
 weekday_table = Table(table_data, hAlign='CENTER', colWidths=[3*cm, 2.5*cm, 2.5*cm, 3*cm, 3*cm])
 weekday_table.setStyle(TableStyle([
