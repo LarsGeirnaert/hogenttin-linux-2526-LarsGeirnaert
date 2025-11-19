@@ -82,7 +82,7 @@ stats_table_data = [
     ["Gemiddeld aantal fietsen overdag (07-19u)", f"{day_avg_bikes}"],
     ["Gemiddeld aantal fietsen ’s nachts (19-07u)", f"{night_avg_bikes}"],
     ["Correlatie temperatuur ↔ vrije fietsen", f"{corr_temp_bikes:.2f}"],
-    ["Correlatie uur ↔ vrije fietsen", f"{corr_hour_bikes:.2f}"], # NIEUWE RIJ
+    ["Correlatie uur ↔ vrije fietsen", f"{corr_hour_bikes:.2f}"],
 ]
 stats_table = Table(stats_table_data, colWidths=[10*cm, 6*cm])
 stats_table.setStyle(TableStyle([
@@ -111,20 +111,22 @@ graph_path_2 = report_dir / "fiets_vs_uur.png"
 elements.append(Image(str(graph_path_2), width=16*cm, height=10*cm))
 elements.append(PageBreak())
 
-# ---------- WEEKDAG TABEL ----------
+# ---------- WEEKDAG TABEL (AANGEPAST) ----------
 elements.append(Paragraph("📅 Tabel: Vrije Fietsen per Weekdag", header_style))
 elements.append(Spacer(1, 12))
-table_data = [["Weekdag", "Min", "Max", "Gemiddelde Fietsen", "Gemiddelde Temp (°C)"]]
+table_data = [
+    ["Weekdag", "Min", "Max", "Gem. Fietsen", "Gem. Temp (°C)"] # Inge korte titels
+]
 for _, row in weekday_stats.iterrows():
-    # Zorgt dat de kolomnamen uit de CSV-header worden gebruikt
     table_data.append([
         row["weekday"] if pd.notna(row["weekday"]) else "",
-        int(row["Min"]) if pd.notna(row["Min"]) else 0, # Gebruik int() omdat Min/Max/Gemiddelde_fietsen nu Int64 zijn
+        int(row["Min"]) if pd.notna(row["Min"]) else 0,
         int(row["Max"]) if pd.notna(row["Max"]) else 0,
         int(row["Gemiddelde_fietsen"]) if pd.notna(row["Gemiddelde_fietsen"]) else 0,
         round(row["Gemiddelde_temp"],2) if pd.notna(row["Gemiddelde_temp"]) else 0
     ])
-weekday_table = Table(table_data, hAlign='CENTER', colWidths=[3*cm, 2.5*cm, 2.5*cm, 3*cm, 3*cm])
+weekday_table = Table(table_data, hAlign='CENTER', 
+                      colWidths=[3.2*cm, 2.5*cm, 2.5*cm, 3.8*cm, 3.8*cm]) # Breedte aangepast
 weekday_table.setStyle(TableStyle([
     ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#0055A5")),
     ("TEXTCOLOR", (0,0), (-1,0), colors.whitesmoke),
