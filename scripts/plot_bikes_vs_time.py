@@ -41,7 +41,7 @@ df_hourly['hour_shifted'] = df_hourly['hour'].apply(lambda h: h + 24 if h < 3 el
 
 
 # --- 4. Grafiek maken (met verschoven as) ---
-plt.figure(figsize=(10,6))
+plt.figure(figsize=(12,6)) # Grotere breedte om labels te vermijden
 
 # Plot de GEAGGREGEERDE punten tegen de verschoven X-as
 plt.scatter(df_hourly['hour_shifted'], df_hourly['total_free_bikes'], color='blue', label='Uurgemiddelden')
@@ -56,11 +56,15 @@ plt.xlabel('Uur van de dag (Start 3:00)', fontsize=12)
 plt.ylabel('Aantal vrije fietsen', fontsize=12)
 plt.title('Aantal vrije fietsen per uur (Volledige Dataset, X-as verschoven)', fontsize=14)
 
-# Bepaal de ticks en labels voor de verschoven as (3, 6, 9, ..., 24+2=26)
-tick_positions = np.arange(3, 27, 3) # Vanaf 3 tot 27, stappen van 3
-tick_labels = [f"{t % 24:.0f}u" for t in tick_positions] # Zorgt dat 24u = 0u en 27u = 3u
-plt.xticks(tick_positions, tick_labels)
+
+# --- AANGEPASTE CODE VOOR 24 TICK LABELS ---
+# Vanaf 3u tot 26u (27 is de grens van de plot, 26 is 2u 's nachts)
+tick_positions = np.arange(3, 27, 1) 
+# De labels moeten de modulaire tijd weergeven (zorgt dat 24 = 0, 25 = 1, etc.)
+tick_labels = [f"{t % 24:.0f}u" for t in tick_positions] 
+plt.xticks(tick_positions, tick_labels, rotation=45, ha='right') # Roteer labels voor leesbaarheid
 plt.xlim(3, 27) # Zet de grenzen van de X-as
+# ------------------------------------------
 
 plt.grid(True)
 plt.legend()
@@ -70,6 +74,6 @@ plt.text(0.05, 0.95, f"MSE (Volle Dataset): {mse:.2f}", transform=plt.gca().tran
 
 # Opslaan
 plot_path = report_dir / "fiets_vs_uur.png"
-plt.savefig(plot_path)
+plt.savefig(plot_path, bbox_inches='tight') # Gebruik bbox_inches om labels niet af te snijden
 plt.close()
 print(f"📁 Grafiek opgeslagen in: {plot_path}")
