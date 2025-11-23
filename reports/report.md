@@ -2,7 +2,7 @@
 ### Temperatuur vs Aantal Vrije Fietsen in Gent
 
 **Opgesteld door:** Lars Geirnaert (Klas: 2E2)  
-**Gegenereerd op:** 23-11-2025 19:45
+**Gegenereerd op:** 23-11-2025 20:00
 
 ---
 
@@ -10,11 +10,11 @@
 
 | Statistiek | Waarde |
 | :--- | ---: |
-| Gemiddelde temperatuur | 7.70 °C |
+| Gemiddelde temperatuur | 7.69 °C |
 | Gemiddeld aantal vrije fietsen | 540 |
 | Gemiddeld aantal fietsen overdag (07-19u) | 535 |
 | Gemiddeld aantal fietsen 's nachts (19-07u) | 549 |
-| Correlatie temperatuur ↔ vrije fietsen | -0.14 |
+| Correlatie temperatuur ↔ vrije fietsen | -0.15 |
 | Correlatie uur ↔ vrije fietsen | 0.23 |
 
 ---
@@ -43,4 +43,4 @@
 | Donderdag | 511 | 574 | 541 | 3.92 |
 | Vrijdag | 535 | 580 | 548 | 11.14 |
 | Zaterdag | 522 | 562 | 542 | 9.83 |
-| Zondag | 535 | 555 | 546 | 8.05 |
+| Zondag | 535 | 559 | 546 | 7.97 |
