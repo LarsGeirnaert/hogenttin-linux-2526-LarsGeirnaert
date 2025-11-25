@@ -2,7 +2,7 @@
 ### Temperatuur vs Aantal Vrije Fietsen in Gent
 
 **Opgesteld door:** Lars Geirnaert (Klas: 2E2)  
-**Gegenereerd op:** 25-11-2025 11:00
+**Gegenereerd op:** 25-11-2025 11:15
 
 ---
 
@@ -38,7 +38,7 @@
 | Weekdag | Min | Max | Gem. Fietsen | Gem. Temp (°C) |
 | :--- | --: | --: | --: | --: |
 | Maandag | 500 | 556 | 524 | 5.61 |
-| Dinsdag | 501 | 566 | 532 | 5.47 |
+| Dinsdag | 501 | 566 | 531 | 5.51 |
 | Woensdag | 508 | 562 | 538 | 5.94 |
 | Donderdag | 511 | 574 | 541 | 3.92 |
 | Vrijdag | 535 | 580 | 548 | 11.14 |
