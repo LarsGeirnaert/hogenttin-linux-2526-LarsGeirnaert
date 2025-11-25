@@ -5,7 +5,7 @@ set -e
 set -o pipefail
 trap 'echo "❌ Fout op regel $LINENO"; exit 1' ERR
 
-# Dynamisch pad bepalen (maakt het script portable voor docenten)
+# Dynamisch pad bepalen
 PROJECT_DIR="$HOME/projects/data-workflow"
 LOG_DIR="$PROJECT_DIR/logs"
 mkdir -p "$LOG_DIR"
@@ -43,9 +43,17 @@ bash scripts/transform_data.sh >> "$LOG" 2>&1 || { echo "❌ transform_data.sh m
 
 # --- Analyses en grafieken ---
 echo "🔹 Analyses en grafieken genereren..." | tee -a "$LOG"
+
+# 1. Berekeningen & Tabel
 python scripts/analyze_data.py >> "$LOG" 2>&1 || { echo "❌ analyze_data.py mislukt"; exit 1; }
+
+# 2. Grafiek: Temp vs Fietsen (NIEUW APART SCRIPT)
+python scripts/plot_bikes_vs_temp.py >> "$LOG" 2>&1 || { echo "❌ plot_bikes_vs_temp.py mislukt"; exit 1; }
+
+# 3. Grafiek: Tijd vs Fietsen
 python scripts/plot_bikes_vs_time.py >> "$LOG" 2>&1 || { echo "❌ plot_bikes_vs_time.py mislukt"; exit 1; }
-# NIEUW: Weekdag grafiek
+
+# 4. Grafiek: Weekdag statistieken
 python scripts/plot_weekday_stats.py >> "$LOG" 2>&1 || { echo "❌ plot_weekday_stats.py mislukt"; exit 1; }
 
 # --- Markdown rapport ---
