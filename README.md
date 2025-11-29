@@ -3,7 +3,6 @@
 ## 0. Relevante links
 
 - [GitHub repository](https://github.com/LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert)
-- Panopto demo opname: [link hier]
 
 ---
 
