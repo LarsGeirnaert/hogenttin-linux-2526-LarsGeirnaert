@@ -37,7 +37,7 @@ Deze workflow verzamelt automatisch gegevens over het weer (temperatuur) en het 
 
 ### Periode
 
-Vanaf 13 november 2025, met een interval van 15 minuten (automatisch).
+Van 13 november 2025 tot 27 november 2025, met een interval van 15 minuten (automatisch).
 
 ### Bestandsindeling
 
