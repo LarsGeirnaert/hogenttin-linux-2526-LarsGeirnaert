@@ -3,7 +3,7 @@
 
 set -e
 set -o pipefail
-trap 'echo "❌ Fout op regel $LINENO"; exit 1' ERR
+trap 'echo "Fout op regel $LINENO"; exit 1' ERR
 
 # Dynamisch pad bepalen
 PROJECT_DIR="$HOME/projects/data-workflow"
@@ -23,55 +23,55 @@ export PATH="$PROJECT_DIR/venv/bin:$PATH"
 if [ -f "$PROJECT_DIR/venv/bin/activate" ]; then
     source "$PROJECT_DIR/venv/bin/activate"
 else
-    echo "❌ Virtual environment niet gevonden op $PROJECT_DIR/venv" | tee -a "$LOG"
+    echo "Virtual environment niet gevonden op $PROJECT_DIR/venv" | tee -a "$LOG"
     exit 1
 fi
 
-cd "$PROJECT_DIR" || { echo "❌ Kan projectmap niet vinden"; exit 1; }
+cd "$PROJECT_DIR" || { echo "Kan projectmap niet vinden"; exit 1; }
 
 # --- Data ophalen (optioneel) ---
 if [ "$1" != "skip-fetch" ]; then
     echo "🔹 Data ophalen..." | tee -a "$LOG"
-    bash scripts/fetch_data.sh >> "$LOG" 2>&1 || { echo "❌ fetch_data.sh mislukt"; exit 1; }
+    bash scripts/fetch_data.sh >> "$LOG" 2>&1 || { echo "fetch_data.sh mislukt"; exit 1; }
 else
-    echo "⚡ Data ophalen overgeslagen (skip-fetch)" | tee -a "$LOG"
+    echo "Data ophalen overgeslagen (skip-fetch)" | tee -a "$LOG"
 fi
 
 # --- CSV heropbouwen ---
 echo "🔹 CSV heropbouwen..." | tee -a "$LOG"
-bash scripts/transform_data.sh >> "$LOG" 2>&1 || { echo "❌ transform_data.sh mislukt"; exit 1; }
+bash scripts/transform_data.sh >> "$LOG" 2>&1 || { echo "transform_data.sh mislukt"; exit 1; }
 
 # --- Analyses en grafieken ---
 echo "🔹 Analyses en grafieken genereren..." | tee -a "$LOG"
 
 # 1. Berekeningen & Tabel
-python scripts/analyze_data.py >> "$LOG" 2>&1 || { echo "❌ analyze_data.py mislukt"; exit 1; }
+python scripts/analyze_data.py >> "$LOG" 2>&1 || { echo "analyze_data.py mislukt"; exit 1; }
 
 # 2. Grafiek: Temp vs Fietsen (NIEUW APART SCRIPT)
-python scripts/plot_bikes_vs_temp.py >> "$LOG" 2>&1 || { echo "❌ plot_bikes_vs_temp.py mislukt"; exit 1; }
+python scripts/plot_bikes_vs_temp.py >> "$LOG" 2>&1 || { echo "plot_bikes_vs_temp.py mislukt"; exit 1; }
 
 # 3. Grafiek: Tijd vs Fietsen
-python scripts/plot_bikes_vs_time.py >> "$LOG" 2>&1 || { echo "❌ plot_bikes_vs_time.py mislukt"; exit 1; }
+python scripts/plot_bikes_vs_time.py >> "$LOG" 2>&1 || { echo "plot_bikes_vs_time.py mislukt"; exit 1; }
 
 # 4. Grafiek: Weekdag statistieken
-python scripts/plot_weekday_stats.py >> "$LOG" 2>&1 || { echo "❌ plot_weekday_stats.py mislukt"; exit 1; }
+python scripts/plot_weekday_stats.py >> "$LOG" 2>&1 || { echo "plot_weekday_stats.py mislukt"; exit 1; }
 
 # --- Markdown rapport ---
 echo "🔹 Markdown rapport genereren..." | tee -a "$LOG"
-python scripts/generate_report.py >> "$LOG" 2>&1 || { echo "❌ generate_report.py mislukt"; exit 1; }
+python scripts/generate_report.py >> "$LOG" 2>&1 || { echo "generate_report.py mislukt"; exit 1; }
 
 # --- Professioneel PDF rapport ---
 echo "🔹 PDF rapport genereren..." | tee -a "$LOG"
-python scripts/generate_pdf_report.py >> "$LOG" 2>&1 || { echo "❌ generate_pdf_report.py mislukt"; exit 1; }
+python scripts/generate_pdf_report.py >> "$LOG" 2>&1 || { echo "generate_pdf_report.py mislukt"; exit 1; }
 
 # --- Git commit & push ---
 if [ -d ".git" ]; then
     echo "🔹 Git commit & push..." | tee -a "$LOG"
     git add -A >> "$LOG" 2>&1
-    git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>> "$LOG" || echo "⚠️ Geen wijzigingen om te committen" >> "$LOG"
-    git push origin main >> "$LOG" 2>&1 || echo "⚠️ Git push mislukt (check netwerk/credentials)" >> "$LOG"
+    git commit -m "Automatische update $(date '+%Y-%m-%d %H:%M:%S')" 2>> "$LOG" || echo "Geen wijzigingen om te committen" >> "$LOG"
+    git push origin main >> "$LOG" 2>&1 || echo "Git push mislukt (check netwerk/credentials)" >> "$LOG"
 else
-    echo "⚠️ Geen git repository gevonden, slaat commit over." >> "$LOG"
+    echo "Geen git repository gevonden, slaat commit over." >> "$LOG"
 fi
 
 echo "Run eind: $(date)" >> "$LOG"

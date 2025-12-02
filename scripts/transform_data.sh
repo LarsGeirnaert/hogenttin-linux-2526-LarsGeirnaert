@@ -1,7 +1,7 @@
 #!/bin/bash
 # transform_data.sh — Alleen datapunten met zowel weer als fietsdata
 set -euo pipefail
-trap 'echo "❌ Fout bij transform_data.sh op regel $LINENO"; exit 1' ERR
+trap 'echo "Fout bij transform_data.sh op regel $LINENO"; exit 1' ERR
 
 WEATHER_DIR="$HOME/projects/data-workflow/raw_data/weather"
 BIKES_DIR="$HOME/projects/data-workflow/raw_data/bikes"
@@ -57,7 +57,7 @@ for weather_file in "${weather_files[@]}"; do
 
     # ✅ Alleen toevoegen als total_free > 0
     if [[ "$total_free" -eq 0 ]]; then
-        echo "⚠️ Geen fietsdata voor $stamp — overslaan" >&2
+        echo "Geen fietsdata voor $stamp — overslaan" >&2
         skipped=$((skipped + 1))
         continue
     fi

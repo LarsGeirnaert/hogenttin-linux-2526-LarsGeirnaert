@@ -3,7 +3,7 @@
 
 set -e
 set -o pipefail
-trap 'echo "❌ Fout bij fetch_data.sh"; exit 1' ERR
+trap 'echo "Fout bij fetch_data.sh"; exit 1' ERR
 
 # --- Directories ---
 RAWDIR="$HOME/projects/data-workflow/raw_data"
@@ -32,7 +32,7 @@ BIKES_FILE="$BIKES_DIR/bikes_$TIMESTAMP.json"
     echo "Ophalen weerdata..."
     if ! curl -s "https://api.open-meteo.com/v1/forecast?latitude=$LAT&longitude=$LON&current_weather=true" \
         -o "$WEATHER_FILE"; then
-        echo "❌ Fout bij ophalen weerdata" >&2
+        echo "Fout bij ophalen weerdata" >&2
         exit 1
     fi
     echo "Weerdata opgeslagen in $WEATHER_FILE"
@@ -41,14 +41,14 @@ BIKES_FILE="$BIKES_DIR/bikes_$TIMESTAMP.json"
     echo "Ophalen fietsdata..."
     if ! curl -s "https://api.citybik.es/v2/networks/donkey-gh" \
         -o "$BIKES_FILE"; then
-        echo "❌ Fout bij ophalen fietsdata" >&2
+        echo "Fout bij ophalen fietsdata" >&2
         exit 1
     fi
     echo "Fietsdata opgeslagen in $BIKES_FILE"
 
     # --- Check bestanden ---
-    [[ -f "$WEATHER_FILE" ]] || { echo "❌ Weather file ontbreekt!"; exit 1; }
-    [[ -f "$BIKES_FILE" ]] || { echo "❌ Bikes file ontbreekt!"; exit 1; }
+    [[ -f "$WEATHER_FILE" ]] || { echo "Weather file ontbreekt!"; exit 1; }
+    [[ -f "$BIKES_FILE" ]] || { echo "Bikes file ontbreekt!"; exit 1; }
 
     echo "[$(date)] Klaar met ophalen data."
 } >> "$LOGFILE" 2>&1
