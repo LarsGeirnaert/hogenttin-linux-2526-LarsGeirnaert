@@ -25267,3 +25267,14 @@ Correlatie Uur ↔ Fietsen: 0.27
 🔹 PDF rapport genereren...
 ✅ Professioneel PDF-rapport aangemaakt: /home/larsg/projects/data-workflow/reports/report.pdf
 🔹 Git commit & push...
+To github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'github.com:LarsGeirnaert/hogenttin-linux-2526-LarsGeirnaert.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+Git push mislukt (check netwerk/credentials)
+Run eind: Tue Dec  2 12:05:10 CET 2025
+============================
